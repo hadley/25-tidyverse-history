@@ -1,0 +1,344 @@
+# A brief history of the tidyverse
+
+Unlike our universe, the tidyverse did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I'll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I'll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.
+
+```{r}
+#| include: false
+library(tidyverse)
+core_pkgs <- tidyverse:::core
+tidy_pkgs <- setdiff(tidyverse:::tidyverse_packages(), core_pkgs)
+db_pkgs <- c("DBI", "RMySQL", "RPostgres", "RSQLite", "odbc")
+pkgs <- c(tidy_pkgs, db_pkgs, core_pkgs)
+
+type <- bind_rows(
+  tibble(package = db_pkgs, type = "db"),
+  tibble(package = tidy_pkgs, type = "tidy"),
+  tibble(package = core_pkgs, type = "tidy-core")
+)
+releases_raw <- map_dfr(pkgs, pkgsearch::cran_package_history)
+
+releases <- releases_raw %>%
+  select(package = Package, version = Version, date = date, maintainer = Maintainer) %>%
+  separate_wider_delim(
+    version,
+    delim = ".",
+    names = c("major", "minor", "patch"),
+    too_few = "align_start",
+    too_many = "merge",
+    cols_remove = FALSE
+  ) %>%
+  replace_na(list(patch = "0")) %>%
+  mutate(
+    date = as.Date(date),
+    year = year(date),
+    release = case_when(
+      minor == "0" & patch == "0" ~ "major",
+      patch == "0" ~ "minor",
+      TRUE ~ "patch"
+    ),
+    maintainer = str_remove(maintainer, " <.*?>"),
+  ) |>
+  select(-(major:patch)) |>
+  left_join(type)
+
+releases
+releases |>
+  filter(date == min(date), .by = package) |>
+  arrange(date) |>
+  select(package, version, year, maintainer) |>
+  print(n = Inf)
+releases %>% count(maintainer, sort = TRUE)
+releases %>% count(package)
+releases %>% count(year(date))
+releases %>% count(release)
+releases %>% filter(release == "major") |> arrange(date)
+```
+
+<!--
+
+Some sources to consult:
+
+* https://www.quora.com/How-is-Hadley-Wickham-able-to-contribute-so-much-to-R-particularly-in-the-form-of-packages
+* https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/
+
+-->
+
+## Before the tidyverse
+
+While the tidyverse itself was named in 2016, the work that lead to it started much earlier, and its inextricably connected to the course of my career.
+
+### Growing up
+
+I was lucky that my dad, Brian Wickham, had access to a laptop for work, so always around computers. I gained an interest in MS Access and developed quite a few. That gave me an appreciation for databases.
+
+From my mum I learned that you can choose to make a different in any area of life.
+
+After high school, I immediately entered medical school. At the time in New Zealand, this consisted of two three year degrees and you were admitted directly from high school.
+
+During my undergarduate degree I also got into web development and that was my part time job. That ability to create websites has had a big impact on my ability to promote my work online.
+
+I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user.
+
+### PhD (2004-2008)
+
+The inspiration for the tidyverse started during my PhD at Iowa State. I was lucky enough to get a consulting assistanceship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work lead me to two insights that remain with me today: the biggest challenge was almost never fitting the right statistical model; the biggest challenge was typically getting the collected data into a form that made sense to me for analysis. This challenge lead to the creation of the reshape pacakge which made it easier to work with a variety of input datasets by first converting to a "molten" form which you could then "cast" into the desired form.
+
+(I took a brief detour through multi-dimensional arrays as a way of storing data, as they have some particularly elegant properties and can use much less memory than data frames. But they only work well for certain experimental designs and my experiences trying to teach the manipulation of even 4D arrays lead me to abandon this approach. You can see related work in https://juliasilge.github.io/widyr/ and https://github.com/hadley/cubelyr. Also a lot of work in plyr for converting between data frames, arrays, and lists. This work fell by the wayside once I decided that it was better to standardise on data frames, making it possible to focus tools around a single form. More on that below when we talk about tidy data.)
+
+I also often found it hard to translate the plots that I could imagine in my head to code using either base or lattice (CITE) graphics. At the time I was reading the grammar of graphics (CITE) and really wanted to be able to use those tools. But the only implementation available at the time was very expensive, so I decided I'd have a go at creating my own in R. That lead to ggplot. I was very lucky to get the opportunity to meet Lee Wilkinson who was tremendously supportive on my work. (I also remember a throw away comment he made to me about data reshaping that lead to a vastly more performative implementation that become the heart of reshape2.)
+
+This work wouldn't have been possible without the support of my PhD advisors Di Cook and Heike Hoffman, who let me work on what I thought was most important, regardless of whether or not it fit the mold of a traditional statistics PhD. They also provided aircover for me when I let my disdane for the utility of theoretical statistics shine a little too clearly.
+
+(At this time I was also working with ggobi, a tool for interactively exploring high-dimensional data. Lead to a number of R packages including clusterfly and classify that used the rggobi package to get your data from R and into ggobi. This was really cool stuff, but unfortunately it's hard to use it today because of the challenges of maintaining GUI tools across multiple decades. You can see the continuation of this work in the work of Di Cook and students.)
+
+This work culminated in my PhD thesis: "Practical tools for exploring data and models". <http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf>.
+
+### Rice University (2008-2012)
+
+The next major formative experience for the tidyverse was teaching Stat405 "Introduction to data analysis" at Rice. I taught this class four times (2009-2012) and you can still find my final class website at <http://stat405.had.co.nz>. Repeatedly teaching a mixed class of 60 grads and undergrads was an extremely useful experience as it allowed me to discover specific pain points and then in the following year attempt to solve them with better packages. This lead to the creation of the stringr (2009) and lubridate (2010) packages as I discovered that many students struggled to master the many intricacies of string and date-time manipulation provided by base R.
+
+luridate with Garrett, part of his PhD thesis.
+https://www.jstatsoft.org/article/view/v040i03
+
+This also catalysed my work on tidy data. Although the paper wasn't published until 2014, I developed and taught the principles of tidy data in 2012. This was a big improvement over my previous attempts to teach reshape2 because reshape2 didn't declare any form of data more or less useful. But it was very clear to me that there was one form that was substantially easier to work with for most R packages, and that was what we now call tidy data.
+
+My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. I initially provided tools to solve these challenges using the plyr package, but because the plyr package was fundamentally about functional programming, this required that students first mastered functional programming before they could perform what seemed like relatively simple operations. This is what drove the development of the dplyr package.
+
+(It was around this time that I kicked off another major parallel work stream: tooling for package development. I was developing enough packages that investing in tooling made sense, and this lead to  devtools (2011), testthat (2009), roxygen2 (2011) taking over from Peter Danenberg (who created it as a Google Summer of Code project in 2008?), pkgdown (2012).)
+
+In 2012, started working with Winston Chang. Garret and Winston were the first external contributors to packages that are now in the tidyverse and I'm still lucky enough to have them as my colleagues.
+
+### RStudio
+
+In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers.
+
+Started work on dplyr.
+
+Tidyverse adjacent were the database Took over maintenance of DBI and RSQLite in 2013 from Seth Falcon. RMySQL (2014? Jeroen?). bigquery (2015). RPostgres (2015) (forked from RPostgresSQL which was mostly unmaintined). odbc (2016, Jim Hester). Worked with Jeroem Ooms and Kirill Muller. Funded by the R consortium. Much of this work was done in concert with Kiril Mueller, who now maintains this ecosystem of tools.
+
+tidyr (2014), update of reshape2, based around principles of tidy data. Will talk more about that later.
+
+dplyr (2014). (with Romain Francois)
+
+This gave me the time to learn C++, thanks to the mentorship of my new boss, JJ Allaire. This lead to a quantatitive shift in the type of problems I was able to solve. Around this time I also realised that one of the major challenges was just getting data into R. This lead to the development of rvest (2014), readr (2015), readxl (2015), haven (2015), and xml2 (2015).
+
+Also purrr (2015). Because the data frame side of plyr was handled by dplyr, and I had found arrays to not be that useful, extract out the list handling code into purrr.
+
+(2015 was a very busy year!)
+
+```{r}
+releases |>
+  count(year) |>
+  ggplot(aes(year, n)) +
+  geom_col()
+
+
+releases |>
+  filter(year > 2012) |>
+  count(year = year(date), maintainer) |>
+  ggplot(aes(year, n, fill = maintainer == "Hadley Wickham")) +
+  geom_col() +
+  labs(fill = "Is Hadley?") +
+  theme(legend.position = "bottom")
+
+NULL
+
+```
+
+## Early years of the tidyverse
+
+As the collection of packages I had developed grew, the community needed some name to collectively refer to them, and many people started calling them the "Hadleyverse" (e.g. https://github.com/imanuelcostigan/hadleyverse). I found this name unappealing because by this point the packages weren't just my work, and I found it overweeningly arrogant to refer to my own oeuvre as the "Hadleyverse" (a name I still can't say or write without making a face).
+
+So I started the process of coming up with an official name that I could live with.
+Unfortunately I can no longer find the discussion, but alternatives included the sleekverse, the dapperverse, and the deftverse. Given the success of tidy data, I eventually decided that the tidyverse was the most natural name, and announced this to the world at useR 2016, June 29.
+
+Shortly afterwards (in September), I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). Two goals: make it easy to install all the dependencies and make it easy to load the most common packages. Core packgaes: ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr. tidyverse 2.0.0 (March 2023) added lubridate.
+
+```{r}
+releases %>%
+  filter(year > 2016) |>
+  arrange(desc(release)) |>
+  ggplot(aes(date, fct_reorder(package, date, min))) +
+  geom_point(aes(size = release, colour = release)) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  scale_size_manual(values = c(4, 4, 1)) +
+  # scale_colour_brewer(palette = "BuPu", direction = -1) +
+  labs(x = NULL, y = NULL)
+
+releases %>%
+  # filter(year > 2016) |>
+  arrange(desc(release)) |>
+  ggplot(aes(date, fct_reorder(package, date, min))) +
+  geom_point(aes(colour = maintainer == "Hadley Wickham")) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  # scale_colour_brewer(palette = "BuPu", direction = -1) +
+  labs(
+    x = NULL,
+    y = NULL
+  )
+```
+
+
+
+### R for data science
+
+
+R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.
+
+Incredibly successful book.
+
+Many translations. I'm particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).
+
+## What is the tidyverse?
+
+Giving the tidyverse a name created a bigger question. What exactly is the tidyverse? What are the unifying principles the underlie all packages in the tidyverse?
+
+The goal was always to provide composable "lego blocks" that allowed you to build up the unique analysis toolkit that you needed. Learning one part of the tidyverse should help you to learn the next because of shared conventions.
+
+> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system.
+> --- Hal Abelson
+
+* Uniform data structures
+* Uniform APIs
+* Support referential transparency
+
+By December refined to
+
+* Share data structures
+* Compose simple pieces.
+* Embrace FP.
+* Write for humans.
+
+And that has since become:
+The tidyverse has four guiding principles:
+
+* It is **human centered**, i.e. the tidyverse is designed specifically to support the activities of a human data analyst.
+
+* It is **consistent**, so that what you learn about one function or package can be applied to another, and the number of special cases that you need to remember is as small as possible.
+
+* It is **composable**, allowing you to solve complex problems by breaking them down into small pieces, supporting a rapid cycle of exploratory iteration to find the best solution.
+
+* It is **inclusive**, because the tidyverse is not just the collection of packages, but it is also the community of people who use them.
+
+https://design.tidyverse.org/unifying.html
+
+### Tidy data + tibbles
+
+https://www.jstatsoft.org/article/view/v059i10
+
+tibble (2016). Better for larger data sets. Makes data frames a little safer. Contentious choice for formatting decimal places.
+
+### The pipe
+
+Excellent history at http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/ which I've summarised below, along with some personal colour.
+
+https://www.r-statistics.com/2014/08/simpler-r-coding-with-pipes-the-present-and-future-of-the-magrittr-package/
+
+Called the pipe and pronounced then.
+
+First pipe operator introduced in dplyr in Oct 2013, `%.%`. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better `%>%` (can hold down shift the whole time) and more comprehensive, so switched to magrittr and deprecated the dplyr equivalent.
+
+"Finally, at the end of 2020, |> was born"
+
+Thanks to the efforts of Romain Francois, Lionel Henry, Jim Hester  and the R core team, the pipe (called the base pipe for clarity) was added to R 4.1. Took a few iterations to get a placeholder syntax (`_` in 4.2) and the ability to pipe into functions like `$` (in 4.3).
+
+Final major magrittr release (https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to
+
+As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to `+` in ggplot2. You can try out ggplot at <https://github.com/hadley/ggplot1> and learn why ggplot2 can't switch to the pipe at <https://forum.posit.co/t/why-cant-ggplot2-use/4372/7>.
+
+<https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html>.
+
+### Tidy evaluation
+
+* https://cran.r-project.org/web/packages/lazyeval/
+* !! + enquo
+* Killing the tidyverse
+* `{{ }}`
+* https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/
+
+### Hex logos
+
+Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <https://hexb.in> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one's stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I'm pretty sure the first hex logo was magrittr's: https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png in Dec? 2014. Stefan also proposed an early version of the dplyr logo.
+
+(early dplyr + ggplot2 logos)
+
+By looking at emails, it looks like I fully I embraced the idea of hex stickers and started the creation for the major packages in early 2015. By mid-2016 we were ordering en masse for RStudio events, and the R community started to really coalesce around the idea. For my own packages, it now doesn't feel like a real package before it has a logo and sometime I have a name and logo before I even write any code.
+
+I love them as a community building tool, as people looking at your laptop can immediately recognise you. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers.
+
+Today, the vast majority of packages have a logo and I love the diversity of visual styles. Hex wall? My hex sticker board.
+
+## Growing the tidyverse
+
+Bit about the team at RStudio (now posit). Need to think about how to frame
+
+* Jim Hester (2016-2021)
+* Mara Averick (2017-2023)
+* Romain Francois (2018-2023)
+* Tracy Teal (2021-2023)
+* Andy Teucher (2023)
+* Jenny Bryan (2017-)
+* Gabor Csardi (2017-)
+* Lionel Henry (2016-)
+* Thomas Lin Pedersen (2018-)
+* George Stagg (2022-)
+* Davis Vaughan (2018-)
+
+Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao,
+
+ggplot2 interns:
+* 2016: Thomas Lin Pedersen? https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/
+* 2017: Kara Woo  https://www.tidyverse.org/blog/2017/09/ggplot2-internship/
+* 2018: Dana Paige Seidel https://www.danaseidel.com/MeetUpSlides
+* 2019: Dewey Dunnington: https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/
+
+ggplot2 fellow:
+* 2022: Teun van Brand
+
+reprex, gargle, googlesheets4, googledrive
+
+rlang, tidyselect
+
+cli, pillar
+
+tidyverse.org (particularly the blog), June 2017. <https://www.tidyverse.org/blog/2017/07/welcome/>
+
+### tidymodels
+
+
+### tidyverse community
+
+welcome to the tidyverse. Cited ~15,000 in Nov 2024. Makes it easy to cite the tidyverse (instead of citing individual packages or papers) and also gives academic credit to tidyverse maintainers who might benefit from it.
+
+Other tidyverse maintainers.
+
+ggplot2 governance.
+
+ggplot2 contributors framework. ggplot2 interns. ggplot2 extension group.
+
+https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/
+
+### Maintaining the tidyverse
+
+For the last few years, the tidyverse has felt pretty mature to me. It's certainly not perfect, but it feels like we have all of the main pieces in place, and much of the remaining work is grinding down the minor inconsistencies between them. Overall, the goal of the tidyverse is now consoliation and maintainence, not growth. There have been three major initiatives that have helped us create a more cohesive and streamlined experience for everyone using it.
+
+* In 2019, we created a formal policy as to [which versions of R we support](https://www.tidyverse.org/blog/2019/04/r-version-support/): the current version, the devel version, and the previous four versions. Coupled with R's yearly release cycle, this means we support 5 years worth of R versions. This policy is important because many large enterprises use older versions of R, but still want to be able to use the latest and greatest package versions. Supporting 5 years worth of R versions only increases our maintenance burden slightly. The major downside is that we can rely on new R features only five years after they're implemented.
+
+* In 2020 and early 2021, https://www.tidyverse.org/blog/2021/02/lifecycle-1-0-0/. 20-maintenace rstudio::global(2020). During the tidyverse's early life, there were a lot of changes as we iterated towards the right solutions in many different domains. We got the message from the community that the pace of change was too high, and so we we firmed up our policies around deprecating and removing tidyverse functions. We also introduced a new lifecycle phase called "superseded"; these are functions that we no longer recommend for new code but because of their widespread usage we have no plans to remove (but they will no longer be actively developed).
+
+* In late 2021, thanks to the hard work on Mara Averick, we [relicensed most tidyverse packages to MIT](https://www.tidyverse.org/blog/2021/12/relicensing-packages/). This increased consistency across tidyverse packages, making it easier for legally conservative organisations to convince themselves their was little risk to using the tidyvrse.
+
+What does the future hold? When I think about the tidyverse today, there's only one sweeping change that I'd like to make, and that's introducing _editions_. You would deliberately opt-in to an edition by running code like `tidyverse::edition(2025)`, stating that you want to adopt our recommended practices as of 2025. Editions would generally change defaults and disable superseded functions and arguments, ensuring that you're using our latest API recommendations.
+Editions makes it possible for us to change behaviour that we now believe is suboptimal without breaking existing code. You can continue to use the latest package versions (ensuring that you get new features and bug fixes) but you can increase the edition when its convenient for you to spend some time refactoring your code. For example, we could use editions to change the default colour schemes in ggplot2, which we now know could be improved.
+
+As the tidyverse becomes more mature, the places where the tidyverse team spends our innovation energy have started to change. Broadly, the mission of the team is to make R more awesome for doing data science, and we're willing to go whereever this takes us. Currently there are three new areas that we are exploring as a team:
+
+* **Positron**. Positron is a new IDE for data science, produced by the same team that created RStudio. The tidyverse team has been deeply involved in the R tooling. This is existing because it gives us the skills for tighter integrations in the future. Code where coding makes sense, and use an graphical user interface where that is a better fit for the task.
+
+* **R in production**. If you're working in industry, most tasks aren't completed by writing a one-off report. Instead you will typically produce an artifact that's run repeatedly on another machine. This is the challenge of putting your code in production, which in my opinion at least currently suffers from a thousand paper cuts. From getting your database authentication to work to ensuring that you're using exactly the same dependencies both in development and deployment, and over time, there are a lot of rough edges that you have to overcome that are not directly related to doing data science. I'm convinced that we can make this better.
+
+* **LLMs for data science**. Pretty clear now that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements. Allow you to get help where you need it and automate fiddly annoying tasks. Also provides a new tool kit creating tidy data frames from unstructured data, which seems likely to considerably expand the reach of the tidyverse to new types of data. Still very early days, but one initiative is the [elmer package](https://elmer.tidyverse.org) which lets you call LLMs from R.
+
+## Conclusion
+
+Encompasses much of my output for the last 20 years, so it's hard to summarise it all. I hope you forgive me for anything I've forgotten, and please feel to reach out if there's something important that you think I'm missing.
