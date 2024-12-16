@@ -11,20 +11,11 @@ library(purrr)
 library(lubridate)
 library(stringr)
 
-core_pkgs <- tidyverse:::core
-tidy_pkgs <- setdiff(tidyverse:::tidyverse_packages(), core_pkgs)
-db_pkgs <- c("DBI", "RMySQL", "RPostgres", "RSQLite", "odbc")
-pkgs <- c(tidy_pkgs, db_pkgs, core_pkgs)
+packages <- nanoparquet::read_parquet("packages.parquet")
+releases <- nanoparquet::read_parquet("releases.parquet")
 
-type <- bind_rows(
-  tibble(package = db_pkgs, type = "db"),
-  tibble(package = tidy_pkgs, type = "tidy"),
-  tibble(package = core_pkgs, type = "tidy-core")
-)
-releases_raw <- map_dfr(pkgs, pkgsearch::cran_package_history)
-
-releases <- releases_raw %>%
-  select(package = Package, version = Version, date = date, maintainer = Maintainer) %>%
+package_release <- releases |>
+  select(package = Package, version = Version, date = date, maintainer = Maintainer) |>
   separate_wider_delim(
     version,
     delim = ".",
@@ -32,8 +23,8 @@ releases <- releases_raw %>%
     too_few = "align_start",
     too_many = "merge",
     cols_remove = FALSE
-  ) %>%
-  replace_na(list(patch = "0")) %>%
+  ) |>
+  replace_na(list(patch = "0")) |>
   mutate(
     date = as.Date(date),
     year = year(date),
@@ -45,19 +36,19 @@ releases <- releases_raw %>%
     maintainer = str_remove(maintainer, " <.*?>"),
   ) |>
   select(-(major:patch)) |>
-  left_join(type)
+  left_join(packages)
 
-releases
-releases |>
+package_release
+package_release |>
   filter(date == min(date), .by = package) |>
   arrange(date) |>
   select(package, version, year, maintainer) |>
   print(n = Inf)
-releases %>% count(maintainer, sort = TRUE)
-releases %>% count(package)
-releases %>% count(year(date))
-releases %>% count(release)
-releases %>% filter(release == "major") |> arrange(date)
+package_release |> count(maintainer, sort = TRUE)
+package_release |> count(package)
+package_release |> count(year(date))
+package_release |> count(release)
+package_release |> filter(release == "major") |> arrange(date)
 ```
 
 <!--
@@ -132,13 +123,12 @@ Also purrr (2015). Because the data frame side of plyr was handled by dplyr, and
 (2015 was a very busy year!)
 
 ```{r}
-releases |>
+package_release |>
   count(year) |>
   ggplot(aes(year, n)) +
   geom_col()
 
-
-releases |>
+package_release |>
   filter(year > 2012) |>
   count(year = year(date), maintainer) |>
   ggplot(aes(year, n, fill = maintainer == "Hadley Wickham")) +
@@ -159,7 +149,7 @@ So I started the process of coming up with an official name that I could live wi
 Shortly afterwards (in September), I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). Two goals: make it easy to install all the dependencies and make it easy to load the most common packages. Core packgaes: ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr. tidyverse 2.0.0 (March 2023) added lubridate.
 
 ```{r}
-releases %>%
+package_release |>
   filter(year > 2016) |>
   arrange(desc(release)) |>
   ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
@@ -169,7 +159,7 @@ releases %>%
   # scale_colour_brewer(palette = "BuPu", direction = -1) +
   labs(x = NULL, y = NULL)
 
-releases %>%
+package_release |>
   # filter(year > 2016) |>
   arrange(desc(release)) |>
   ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
