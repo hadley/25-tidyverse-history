@@ -32,7 +32,7 @@ jobs:
           pak-version: devel
 
       - name: Render
-        run: quarto render brief-history-tidyverse.qmd
+        run: quarto render
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
