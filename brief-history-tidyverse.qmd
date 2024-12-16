@@ -4,7 +4,13 @@ Unlike our universe, the tidyverse did not start with a big bang. It start with 
 
 ```{r}
 #| include: false
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(purrr)
+library(lubridate)
+library(stringr)
+
 core_pkgs <- tidyverse:::core
 tidy_pkgs <- setdiff(tidyverse:::tidyverse_packages(), core_pkgs)
 db_pkgs <- c("DBI", "RMySQL", "RPostgres", "RSQLite", "odbc")
@@ -156,7 +162,7 @@ Shortly afterwards (in September), I released the [tidyverse package](https://po
 releases %>%
   filter(year > 2016) |>
   arrange(desc(release)) |>
-  ggplot(aes(date, fct_reorder(package, date, min))) +
+  ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
   geom_point(aes(size = release, colour = release)) +
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
   scale_size_manual(values = c(4, 4, 1)) +
@@ -166,7 +172,7 @@ releases %>%
 releases %>%
   # filter(year > 2016) |>
   arrange(desc(release)) |>
-  ggplot(aes(date, fct_reorder(package, date, min))) +
+  ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
   geom_point(aes(colour = maintainer == "Hadley Wickham")) +
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
   # scale_colour_brewer(palette = "BuPu", direction = -1) +
