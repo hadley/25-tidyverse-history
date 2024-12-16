@@ -6,5 +6,5 @@
 .httr-oauth
 .DS_Store
 .quarto
-*_files
-brief-history-tidyverse.html
+/.quarto/
+_manuscript
