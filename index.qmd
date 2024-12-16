@@ -1,8 +1,10 @@
 ---
+title: A brief history of the tidyverse
 author: Hadley Wickham
+date: today
 ---
 
-# A brief history of the tidyverse
+## Introduction
 
 Unlike our universe, the tidyverse did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I'll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I'll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.
 
