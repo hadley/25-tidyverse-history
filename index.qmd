@@ -140,7 +140,6 @@ package_release |>
   count(year = year(date), maintainer) |>
   ggplot(aes(year, n, fill = maintainer == "Hadley Wickham")) +
   geom_col() +
-  scale_x_discrete() +
   labs(fill = "Is Hadley?") +
   theme(legend.position = "bottom")
 
