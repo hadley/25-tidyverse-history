@@ -57,6 +57,7 @@ package_release |> count(release)
 package_release |> filter(release == "major") |> arrange(date)
 ```
 
+```{=html}
 <!--
 
 Some sources to consult:
@@ -65,6 +66,7 @@ Some sources to consult:
 * https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/
 
 -->
+```
 
 ## Before the tidyverse
 
@@ -192,20 +194,30 @@ Giving the tidyverse a name created a bigger question. What exactly is the tidyv
 
 The goal was always to provide composable "lego blocks" that allowed you to build up the unique analysis toolkit that you needed. Learning one part of the tidyverse should help you to learn the next because of shared conventions.
 
-> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. --- Hal Abelson
+In this section, I'll discuss some of our attempts to describe the unifying principles of the tidyverse. But also want to talk about five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.
+
+### tidyverse principles
+
+In my useR talking naming the tidyverse, I cited three unifying principles:
 
 -   Uniform data structures
 -   Uniform APIs
 -   Support referential transparency
 
-By December refined to
+> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. --- Hal Abelson
 
--   Share data structures
--   Compose simple pieces.
--   Embrace FP.
+I think the first two are straightforward to understand. The goal of the tidyverse is to be easy to learn by sharing data structured and interface design across as many functions as possible. You learn a few big new ideas and then apply them in as many places as possible. But what does referential transparency refer to? That's a call to the principles of tidy evaluation, which we'll come back to shortly.
+
+I repeated this talk a few times and by December the principles had been refined to these four:
+
+-   Share data structures (i.e. tidy tibbles).
+-   Compose simple pieces (i.e. use the pipe).
+-   Embrace functional programming (instead of for loops).
 -   Write for humans.
 
-And that has since become: The tidyverse has four guiding principles:
+> Programs must be written for people to read, and only incidentally for machines to execute. --— Hal Abelson
+
+And that has since been further refined to the four guiding principles elucidate at <https://design.tidyverse.org/unifying.html>:
 
 -   It is **human centered**, i.e. the tidyverse is designed specifically to support the activities of a human data analyst.
 
@@ -217,9 +229,33 @@ And that has since become: The tidyverse has four guiding principles:
 
 https://design.tidyverse.org/unifying.html
 
-### Tidy data + tibbles
+### Tidy data
 
-<https://www.jstatsoft.org/article/view/v059i10>
+One of the things I really struggled with when learning visualisation with base R was the variety of data structures that different plotting functions could use. For example, with `plot()` you can either provide it with vectors of data (e.g. `plot(x, y)`) or a formula and a data frame (e.g. `plot(y ~ x, data = df)`). If you want to plot multiple series at once you can use `matplot()`, `matpoints()`, or `matlines()`, all of which take a matrix. But what if you have a longitudinal dataset with columns `x`, `y`, and `series`, where each series has distinct values of `y`. This guided the interface for ggplot2: you must always put your data in a data frame before plotting.
+
+But how do you organise that data, as there are often multiple ways to record the same data in a data frame? I always had a very clear view that there was a "right" way to organise your data and when looking at a dataset I could usually identify what form would be most productive. But it me took me a long time to figure out how to explain my process to other people. But eventually I stumbled on what now seems obvious, the principles of tidy data:
+
+-   Each variable goes in a column.
+-   Each observation goes in a row.
+-   Each value goes in a cell.
+
+And this explanation seems to mostly work for people, even without a precise definition of variable and obseration. I explored this idea in detail in the "Tidy data" paper, <https://www.jstatsoft.org/article/view/v059i10>.
+
+(This is certainly not the only data stucture you might ever want to use, but it's extremely useful to have a organising structure that you can rely on for the majority of your work. It's a great default, even if you might need other forms for specialised purposes.)
+
+These principles made it much easier to identify the status of a data set and determine whether it was likely to be a good fit for the functions of the tidyverse. But it took some further evolution before I was happy with the tools to convert from one form to another. tidyr started by providing the `gather()` and `spread()` functions, but many people had a hard time remembering which was which, and their original design wasn't quite flexible enough to handle all the problems which we later discovered (particularly when multiple variables were encoded in the columns). In [tidyr 1.0.0](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/) (released in 2019), these were superseded by `pivot_longer()` and `pivot_wider()`.
+
+Performed a casual survey, publicised via twitter, to determine what names people use to refer to . Received 2,649 results. (This is one of the reasons that I have found social media so rewarding: it makes it very easy to rapidly validate research). <https://github.com/hadley/table-shapes>
+
+tidyr 1.0.0 also expanded the scope of the package to encompass "rectangling", the art of tidying the deeply nested data that you get back from JSON web APIs. And formed connenctions between various ways of nesting data frames inside of other data frames. My enthusiasm for these data structures has waxed and waned over time, but they're certainly useful to be aware of and I really appreciate the beauty of an approach that unifies the ways of working with them.
+
+::: {#fig-nest-pack-chop}
+![](nest-pack-chop.png)
+
+Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame.
+:::
+
+### tibbles
 
 tibble (2016). Better for larger data sets. Makes data frames a little safer. Contentious choice for formatting decimal places.
 
@@ -255,13 +291,25 @@ As an interesting historial anecdote, there would have been no need for ggplot2 
 
 Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <https://hexb.in> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one's stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I'm pretty sure the first hex logo was magrittr's: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png> in Dec? 2014. Stefan also proposed an early version of the dplyr logo.
 
-(early dplyr + ggplot2 logos)
+::: {#fig-early-logos layout-ncol="2"}
+![](dplyr.png){height="200"}
+
+![](ggplot2.png){height="200"}
+
+Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down.
+:::
 
 By looking at emails, it looks like I fully I embraced the idea of hex stickers and started the creation for the major packages in early 2015. By mid-2016 we were ordering en masse for RStudio events, and the R community started to really coalesce around the idea. For my own packages, it now doesn't feel like a real package before it has a logo and sometime I have a name and logo before I even write any code.
 
 I love them as a community building tool, as people looking at your laptop can immediately recognise you. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers.
 
 Today, the vast majority of packages have a logo and I love the diversity of visual styles. Hex wall? My hex sticker board.
+
+::: {#fig-hex-wall}
+![](hex-wall.jpg)
+
+In my office I've made a display board with all the stickers that I've been gifted over multiple years.
+:::
 
 ## Growing the tidyverse
 
@@ -281,9 +329,14 @@ Bit about the team at RStudio (now posit). Need to think about how to frame
 
 Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao,
 
-ggplot2 interns: \* 2016: Thomas Lin Pedersen? https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/ \* 2017: Kara Woo https://www.tidyverse.org/blog/2017/09/ggplot2-internship/ \* 2018: Dana Paige Seidel https://www.danaseidel.com/MeetUpSlides \* 2019: Dewey Dunnington: https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/
+ggplot2 interns:
 
-ggplot2 fellow: \* 2022: Teun van Brand
+-   2016: [Thomas Lin Pedersen](https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/)
+-   2017: [Kara Woo](https://www.tidyverse.org/blog/2017/09/ggplot2-internship/)
+-   2018: [Dana Paige Seidel](https://www.danaseidel.com/MeetUpSlides)
+-   2019: [Dewey Dunnington](https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/)
+
+And in 2022, we hired Teun van Brand as a ggplot2 "fellow". This is a position similar to a summer internship but instead of lasting six months, it's lasted two years and counting.
 
 reprex, gargle, googlesheets4, googledrive
 
@@ -319,6 +372,8 @@ For the last few years, the tidyverse has felt pretty mature to me. It's certain
 
 What does the future hold? When I think about the tidyverse today, there's only one sweeping change that I'd like to make, and that's introducing *editions*. You would deliberately opt-in to an edition by running code like `tidyverse::edition(2025)`, stating that you want to adopt our recommended practices as of 2025. Editions would generally change defaults and disable superseded functions and arguments, ensuring that you're using our latest API recommendations. Editions makes it possible for us to change behaviour that we now believe is suboptimal without breaking existing code. You can continue to use the latest package versions (ensuring that you get new features and bug fixes) but you can increase the edition when its convenient for you to spend some time refactoring your code. For example, we could use editions to change the default colour schemes in ggplot2, which we now know could be improved.
 
+## Conclusion
+
 As the tidyverse becomes more mature, the places where the tidyverse team spends our innovation energy have started to change. Broadly, the mission of the team is to make R more awesome for doing data science, and we're willing to go whereever this takes us. Currently there are three new areas that we are exploring as a team:
 
 -   **Positron**. [Positron](https://github.com/posit-dev/positron) is a new IDE for data science, produced by the same team that created RStudio. The tidyverse team has been deeply involved in the R tooling. This is existing because it gives us the skills for tighter integrations in the future. Code where coding makes sense, and use an graphical user interface where that is a better fit for the task.
@@ -326,7 +381,5 @@ As the tidyverse becomes more mature, the places where the tidyverse team spends
 -   **R in production**. If you're working in industry, most tasks aren't completed by writing a one-off report. Instead you will typically produce an artifact that's run repeatedly on another machine. This is the challenge of putting your code in production, which in my opinion at least currently suffers from a thousand paper cuts. From getting your database authentication to work to ensuring that you're using exactly the same dependencies both in development and deployment, and over time, there are a lot of rough edges that you have to overcome that are not directly related to doing data science. I'm convinced that we can make this better.
 
 -   **LLMs for data science**. Pretty clear now that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements. Allow you to get help where you need it and automate fiddly annoying tasks. Also provides a new tool kit creating tidy data frames from unstructured data, which seems likely to considerably expand the reach of the tidyverse to new types of data. Still very early days, but one initiative is the [elmer package](https://elmer.tidyverse.org) which lets you call LLMs from R.
-
-## Conclusion
 
 Encompasses much of my output for the last 20 years, so it's hard to summarise it all. I hope you forgive me for anything I've forgotten, and please feel to reach out if there's something important that you think I'm missing.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hadley Wickham">
-<meta name="dcterms.date" content="2024-12-16">
+<meta name="dcterms.date" content="2024-12-17">
 
 <title>A brief history of the tidyverse</title>
 <style>
@@ -42,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 
 <meta name="citation_title" content="A brief history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2024-12-16">
-<meta name="citation_cover_date" content="2024-12-16">
+<meta name="citation_publication_date" content="2024-12-17">
+<meta name="citation_cover_date" content="2024-12-17">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-12-16">
+<meta name="citation_online_date" content="2024-12-17">
 <meta name="citation_language" content="en">
 </head>
 
@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 16, 2024</p>
+              <p class="date">December 17, 2024</p>
             </div>
           </div>
           
@@ -108,7 +108,9 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#what-is-the-tidyverse" id="toc-what-is-the-tidyverse" class="nav-link" data-scroll-target="#what-is-the-tidyverse">What is the tidyverse?</a>
   <ul class="collapse">
-  <li><a href="#tidy-data-tibbles" id="toc-tidy-data-tibbles" class="nav-link" data-scroll-target="#tidy-data-tibbles">Tidy data + tibbles</a></li>
+  <li><a href="#tidyverse-principles" id="toc-tidyverse-principles" class="nav-link" data-scroll-target="#tidyverse-principles">tidyverse principles</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data">Tidy data</a></li>
+  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles">tibbles</a></li>
   <li><a href="#the-pipe" id="toc-the-pipe" class="nav-link" data-scroll-target="#the-pipe">The pipe</a></li>
   <li><a href="#tidy-evaluation" id="toc-tidy-evaluation" class="nav-link" data-scroll-target="#tidy-evaluation">Tidy evaluation</a></li>
   <li><a href="#hex-logos" id="toc-hex-logos" class="nav-link" data-scroll-target="#hex-logos">Hex logos</a></li>
@@ -236,22 +238,30 @@ Some sources to consult:
 <h2 class="anchored" data-anchor-id="what-is-the-tidyverse">What is the tidyverse?</h2>
 <p>Giving the tidyverse a name created a bigger question. What exactly is the tidyverse? What are the unifying principles the underlie all packages in the tidyverse?</p>
 <p>The goal was always to provide composable “lego blocks” that allowed you to build up the unique analysis toolkit that you needed. Learning one part of the tidyverse should help you to learn the next because of shared conventions.</p>
-<blockquote class="blockquote">
-<p>No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. — Hal Abelson</p>
-</blockquote>
+<p>In this section, I’ll discuss some of our attempts to describe the unifying principles of the tidyverse. But also want to talk about five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.</p>
+<section id="tidyverse-principles" class="level3">
+<h3 class="anchored" data-anchor-id="tidyverse-principles">tidyverse principles</h3>
+<p>In my useR talking naming the tidyverse, I cited three unifying principles:</p>
 <ul>
 <li>Uniform data structures</li>
 <li>Uniform APIs</li>
 <li>Support referential transparency</li>
 </ul>
-<p>By December refined to</p>
+<blockquote class="blockquote">
+<p>No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. — Hal Abelson</p>
+</blockquote>
+<p>I think the first two are straightforward to understand. The goal of the tidyverse is to be easy to learn by sharing data structured and interface design across as many functions as possible. You learn a few big new ideas and then apply them in as many places as possible. But what does referential transparency refer to? That’s a call to the principles of tidy evaluation, which we’ll come back to shortly.</p>
+<p>I repeated this talk a few times and by December the principles had been refined to these four:</p>
 <ul>
-<li>Share data structures</li>
-<li>Compose simple pieces.</li>
-<li>Embrace FP.</li>
+<li>Share data structures (i.e.&nbsp;tidy tibbles).</li>
+<li>Compose simple pieces (i.e.&nbsp;use the pipe).</li>
+<li>Embrace functional programming (instead of for loops).</li>
 <li>Write for humans.</li>
 </ul>
-<p>And that has since become: The tidyverse has four guiding principles:</p>
+<blockquote class="blockquote">
+<p>Programs must be written for people to read, and only incidentally for machines to execute. –— Hal Abelson</p>
+</blockquote>
+<p>And that has since been further refined to the four guiding principles elucidate at <a href="https://design.tidyverse.org/unifying.html" class="uri">https://design.tidyverse.org/unifying.html</a>:</p>
 <ul>
 <li><p>It is <strong>human centered</strong>, i.e.&nbsp;the tidyverse is designed specifically to support the activities of a human data analyst.</p></li>
 <li><p>It is <strong>consistent</strong>, so that what you learn about one function or package can be applied to another, and the number of special cases that you need to remember is as small as possible.</p></li>
@@ -259,9 +269,34 @@ Some sources to consult:
 <li><p>It is <strong>inclusive</strong>, because the tidyverse is not just the collection of packages, but it is also the community of people who use them.</p></li>
 </ul>
 <p>https://design.tidyverse.org/unifying.html</p>
-<section id="tidy-data-tibbles" class="level3">
-<h3 class="anchored" data-anchor-id="tidy-data-tibbles">Tidy data + tibbles</h3>
-<p><a href="https://www.jstatsoft.org/article/view/v059i10" class="uri">https://www.jstatsoft.org/article/view/v059i10</a></p>
+</section>
+<section id="tidy-data" class="level3">
+<h3 class="anchored" data-anchor-id="tidy-data">Tidy data</h3>
+<p>One of the things I really struggled with when learning visualisation with base R was the variety of data structures that different plotting functions could use. For example, with <code>plot()</code> you can either provide it with vectors of data (e.g.&nbsp;<code>plot(x, y)</code>) or a formula and a data frame (e.g.&nbsp;<code>plot(y ~ x, data = df)</code>). If you want to plot multiple series at once you can use <code>matplot()</code>, <code>matpoints()</code>, or <code>matlines()</code>, all of which take a matrix. But what if you have a longitudinal dataset with columns <code>x</code>, <code>y</code>, and <code>series</code>, where each series has distinct values of <code>y</code>. This guided the interface for ggplot2: you must always put your data in a data frame before plotting.</p>
+<p>But how do you organise that data, as there are often multiple ways to record the same data in a data frame? I always had a very clear view that there was a “right” way to organise your data and when looking at a dataset I could usually identify what form would be most productive. But it me took me a long time to figure out how to explain my process to other people. But eventually I stumbled on what now seems obvious, the principles of tidy data:</p>
+<ul>
+<li>Each variable goes in a column.</li>
+<li>Each observation goes in a row.</li>
+<li>Each value goes in a cell.</li>
+</ul>
+<p>And this explanation seems to mostly work for people, even without a precise definition of variable and obseration. I explored this idea in detail in the “Tidy data” paper, <a href="https://www.jstatsoft.org/article/view/v059i10" class="uri">https://www.jstatsoft.org/article/view/v059i10</a>.</p>
+<p>(This is certainly not the only data stucture you might ever want to use, but it’s extremely useful to have a organising structure that you can rely on for the majority of your work. It’s a great default, even if you might need other forms for specialised purposes.)</p>
+<p>These principles made it much easier to identify the status of a data set and determine whether it was likely to be a good fit for the functions of the tidyverse. But it took some further evolution before I was happy with the tools to convert from one form to another. tidyr started by providing the <code>gather()</code> and <code>spread()</code> functions, but many people had a hard time remembering which was which, and their original design wasn’t quite flexible enough to handle all the problems which we later discovered (particularly when multiple variables were encoded in the columns). In <a href="https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/">tidyr 1.0.0</a> (released in 2019), these were superseded by <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
+<p>Performed a casual survey, publicised via twitter, to determine what names people use to refer to . Received 2,649 results. (This is one of the reasons that I have found social media so rewarding: it makes it very easy to rapidly validate research). <a href="https://github.com/hadley/table-shapes" class="uri">https://github.com/hadley/table-shapes</a></p>
+<p>tidyr 1.0.0 also expanded the scope of the package to encompass “rectangling”, the art of tidying the deeply nested data that you get back from JSON web APIs. And formed connenctions between various ways of nesting data frames inside of other data frames. My enthusiasm for these data structures has waxed and waned over time, but they’re certainly useful to be aware of and I really appreciate the beauty of an approach that unifies the ways of working with them.</p>
+<div id="fig-nest-pack-chop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nest-pack-chop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="nest-pack-chop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame."><img src="nest-pack-chop.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nest-pack-chop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="tibbles" class="level3">
+<h3 class="anchored" data-anchor-id="tibbles">tibbles</h3>
 <p>tibble (2016). Better for larger data sets. Makes data frames a little safer. Contentious choice for formatting decimal places.</p>
 </section>
 <section id="the-pipe" class="level3">
@@ -289,10 +324,36 @@ Some sources to consult:
 <section id="hex-logos" class="level3">
 <h3 class="anchored" data-anchor-id="hex-logos">Hex logos</h3>
 <p>Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <a href="https://hexb.in" class="uri">https://hexb.in</a> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one’s stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I’m pretty sure the first hex logo was magrittr’s: <a href="https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png" class="uri">https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png</a> in Dec? 2014. Stefan also proposed an early version of the dplyr logo.</p>
-<p>(early dplyr + ggplot2 logos)</p>
+<div id="fig-early-logos" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="dplyr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="dplyr.png" class="img-fluid figure-img"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="ggplot2.png" class="img-fluid figure-img"></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down.
+</figcaption>
+</figure>
+</div>
 <p>By looking at emails, it looks like I fully I embraced the idea of hex stickers and started the creation for the major packages in early 2015. By mid-2016 we were ordering en masse for RStudio events, and the R community started to really coalesce around the idea. For my own packages, it now doesn’t feel like a real package before it has a logo and sometime I have a name and logo before I even write any code.</p>
 <p>I love them as a community building tool, as people looking at your laptop can immediately recognise you. I’ve heard many stories of people striking up a conversation with strangers just because they recognised the stickers.</p>
 <p>Today, the vast majority of packages have a logo and I love the diversity of visual styles. Hex wall? My hex sticker board.</p>
+<div id="fig-hex-wall" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="hex-wall.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-wall.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years.
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="growing-the-tidyverse" class="level2">
@@ -312,8 +373,14 @@ Some sources to consult:
 <li>Davis Vaughan (2018-)</li>
 </ul>
 <p>Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao,</p>
-<p>ggplot2 interns: * 2016: Thomas Lin Pedersen? https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/ * 2017: Kara Woo https://www.tidyverse.org/blog/2017/09/ggplot2-internship/ * 2018: Dana Paige Seidel https://www.danaseidel.com/MeetUpSlides * 2019: Dewey Dunnington: https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/</p>
-<p>ggplot2 fellow: * 2022: Teun van Brand</p>
+<p>ggplot2 interns:</p>
+<ul>
+<li>2016: <a href="https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/">Thomas Lin Pedersen</a></li>
+<li>2017: <a href="https://www.tidyverse.org/blog/2017/09/ggplot2-internship/">Kara Woo</a></li>
+<li>2018: <a href="https://www.danaseidel.com/MeetUpSlides">Dana Paige Seidel</a></li>
+<li>2019: <a href="https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/">Dewey Dunnington</a></li>
+</ul>
+<p>And in 2022, we hired Teun van Brand as a ggplot2 “fellow”. This is a position similar to a summer internship but instead of lasting six months, it’s lasted two years and counting.</p>
 <p>reprex, gargle, googlesheets4, googledrive</p>
 <p>rlang, tidyselect</p>
 <p>cli, pillar</p>
@@ -338,16 +405,16 @@ Some sources to consult:
 <li><p>In late 2021, thanks to the hard work on Mara Averick, we <a href="https://www.tidyverse.org/blog/2021/12/relicensing-packages/">relicensed most tidyverse packages to MIT</a>. This increased consistency across tidyverse packages, making it easier for legally conservative organisations to convince themselves their was little risk to using the tidyvrse.</p></li>
 </ul>
 <p>What does the future hold? When I think about the tidyverse today, there’s only one sweeping change that I’d like to make, and that’s introducing <em>editions</em>. You would deliberately opt-in to an edition by running code like <code>tidyverse::edition(2025)</code>, stating that you want to adopt our recommended practices as of 2025. Editions would generally change defaults and disable superseded functions and arguments, ensuring that you’re using our latest API recommendations. Editions makes it possible for us to change behaviour that we now believe is suboptimal without breaking existing code. You can continue to use the latest package versions (ensuring that you get new features and bug fixes) but you can increase the edition when its convenient for you to spend some time refactoring your code. For example, we could use editions to change the default colour schemes in ggplot2, which we now know could be improved.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>As the tidyverse becomes more mature, the places where the tidyverse team spends our innovation energy have started to change. Broadly, the mission of the team is to make R more awesome for doing data science, and we’re willing to go whereever this takes us. Currently there are three new areas that we are exploring as a team:</p>
 <ul>
 <li><p><strong>Positron</strong>. <a href="https://github.com/posit-dev/positron">Positron</a> is a new IDE for data science, produced by the same team that created RStudio. The tidyverse team has been deeply involved in the R tooling. This is existing because it gives us the skills for tighter integrations in the future. Code where coding makes sense, and use an graphical user interface where that is a better fit for the task.</p></li>
 <li><p><strong>R in production</strong>. If you’re working in industry, most tasks aren’t completed by writing a one-off report. Instead you will typically produce an artifact that’s run repeatedly on another machine. This is the challenge of putting your code in production, which in my opinion at least currently suffers from a thousand paper cuts. From getting your database authentication to work to ensuring that you’re using exactly the same dependencies both in development and deployment, and over time, there are a lot of rough edges that you have to overcome that are not directly related to doing data science. I’m convinced that we can make this better.</p></li>
 <li><p><strong>LLMs for data science</strong>. Pretty clear now that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements. Allow you to get help where you need it and automate fiddly annoying tasks. Also provides a new tool kit creating tidy data frames from unstructured data, which seems likely to considerably expand the reach of the tidyverse to new types of data. Still very early days, but one initiative is the <a href="https://elmer.tidyverse.org">elmer package</a> which lets you call LLMs from R.</p></li>
 </ul>
-</section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>Encompasses much of my output for the last 20 years, so it’s hard to summarise it all. I hope you forgive me for anything I’ve forgotten, and please feel to reach out if there’s something important that you think I’m missing.</p>
 </section>
 
