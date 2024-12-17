@@ -155,7 +155,7 @@ Some sources to consult:
 <p>From my mum I learned that you can choose to make a different in any area of life.</p>
 <p>After high school, I immediately entered medical school. At the time in New Zealand, this consisted of two three year degrees and you were admitted directly from high school.</p>
 <p>During my undergarduate degree I also got into web development and that was my part time job. That ability to create websites has had a big impact on my ability to promote my work online.</p>
-<p>I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user.</p>
+<p>I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user. Started using R in 2003, version 1.6.2.</p>
 </section>
 <section id="phd-2004-2008" class="level3">
 <h3 class="anchored" data-anchor-id="phd-2004-2008">PhD (2004-2008)</h3>
@@ -387,6 +387,11 @@ Figure&nbsp;3: In my office I’ve made a display board with all the stickers th
 <p>tidyverse.org (particularly the blog), June 2017. <a href="https://www.tidyverse.org/blog/2017/07/welcome/" class="uri">https://www.tidyverse.org/blog/2017/07/welcome/</a></p>
 <section id="tidymodels" class="level3">
 <h3 class="anchored" data-anchor-id="tidymodels">tidymodels</h3>
+<p>From Max:</p>
+<p>Hadley contacted Max Kuhn to discuss what RStudio might want to do regarding statistical and ML modeling. They and owner JJ Allaire met in New York City on 2016-09-14. One idea proposed by Max was the outline of what would become the recipes package. After more discussions with JJ in Boston, Max joined the company on 2016-11-29.</p>
+<p>Max had already developed a popular R package called caret. That package provided functionality for basic predictive modeling tasks such as performance measures and resampling as well as a consistent user interface. Max’s idea was to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, censored regression models, and others. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools being developed (e.g., non-standard evaluation, etc.).</p>
+<p>R has an extensive collection of user-created modeling packages and the tidymodels package has a much higher reliance on external dependencies than the tidyverse. Previous work on caret led to a very long list of formal dependencies, which made it difficult to maintain and not robust to sudden changes to these dependencies. To avoid this in tidymodels, many calls to external modeling packages are made by programmatically by constructing symbolic calls to those functions. In doing this, the tidymodels code base is smaller and depends on fewer external “hard dependencies.”</p>
+<p>tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max’s initial idea was to give it the code name “carrot” to confuse outside users. Hadley proposed “parsnip,” and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.</p>
 </section>
 <section id="tidyverse-community" class="level3">
 <h3 class="anchored" data-anchor-id="tidyverse-community">tidyverse community</h3>
