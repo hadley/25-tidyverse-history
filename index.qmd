@@ -132,17 +132,17 @@ Also purrr (2015). Because the data frame side of plyr was handled by dplyr, and
 package_release |>
   count(year) |>
   ggplot(aes(year, n)) +
-  geom_col()
+  geom_col() +
+  labs(title = "Package releases by year")
 
 package_release |>
   filter(year > 2012) |>
   count(year = year(date), maintainer) |>
   ggplot(aes(year, n, fill = maintainer == "Hadley Wickham")) +
   geom_col() +
+  scale_x_discrete() +
   labs(fill = "Is Hadley?") +
   theme(legend.position = "bottom")
-
-NULL
 
 ```
 
@@ -215,7 +215,7 @@ And that has since become: The tidyverse has four guiding principles:
 
 -   It is **inclusive**, because the tidyverse is not just the collection of packages, but it is also the community of people who use them.
 
-https://design.tidyverse.org/unifying.html
+<https://design.tidyverse.org/unifying.html>
 
 ### Tidy data + tibbles
 
@@ -248,7 +248,7 @@ As an interesting historial anecdote, there would have been no need for ggplot2 
 -   <https://cran.r-project.org/web/packages/lazyeval/>
 -   !! + enquo
 -   Killing the tidyverse
--   `{{ }}`
+-   `{{ }}` <https://rlang.r-lib.org/reference/embrace-operator.html>
 -   <https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/>
 
 ### Hex logos
@@ -281,9 +281,16 @@ Bit about the team at RStudio (now posit). Need to think about how to frame
 
 Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao,
 
-ggplot2 interns: \* 2016: Thomas Lin Pedersen? https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/ \* 2017: Kara Woo https://www.tidyverse.org/blog/2017/09/ggplot2-internship/ \* 2018: Dana Paige Seidel https://www.danaseidel.com/MeetUpSlides \* 2019: Dewey Dunnington: https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/
+ggplot2 interns: 
 
-ggplot2 fellow: \* 2022: Teun van Brand
+- 2016: Thomas Lin Pedersen? <https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/>
+- 2017: Kara Woo <https://www.tidyverse.org/blog/2017/09/ggplot2-internship/>
+- 2018: Dana Paige Seidel <https://www.danaseidel.com/MeetUpSlides>
+- 2019: Dewey Dunnington: <https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/>
+
+ggplot2 fellow:
+
+- 2022: Teun van Brand
 
 reprex, gargle, googlesheets4, googledrive
 
