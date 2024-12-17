@@ -82,7 +82,7 @@ After high school, I immediately entered medical school. At the time in New Zeal
 
 During my undergarduate degree I also got into web development and that was my part time job. That ability to create websites has had a big impact on my ability to promote my work online.
 
-I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user.
+I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user. Started using R in 2003, version 1.6.2.
 
 ### PhD (2004-2008)
 
