@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
     <meta name="author" content="Hadley Wickham">
-    <meta name="dcterms.date" content="2024-12-17">
+    <meta name="dcterms.date" content="2024-12-18">
 
     <title>A brief history of the tidyverse</title>
     <style>
@@ -164,10 +164,10 @@
      
       <meta name="citation_title" content="A brief history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2024-12-17">
-<meta name="citation_cover_date" content="2024-12-17">
+<meta name="citation_publication_date" content="2024-12-18">
+<meta name="citation_cover_date" content="2024-12-18">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-12-17">
+<meta name="citation_online_date" content="2024-12-18">
 <meta name="citation_language" content="en">
 </head>
 
@@ -202,7 +202,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 17, 2024</p>
+              <p class="date">December 18, 2024</p>
             </div>
           </div>
           
@@ -229,7 +229,7 @@
   <li><a href="#growing-up" id="toc-growing-up" class="nav-link" data-scroll-target="#growing-up">Growing up</a></li>
   <li><a href="#phd-2004-2008" id="toc-phd-2004-2008" class="nav-link" data-scroll-target="#phd-2004-2008">PhD (2004-2008)</a></li>
   <li><a href="#rice-university-2008-2012" id="toc-rice-university-2008-2012" class="nav-link" data-scroll-target="#rice-university-2008-2012">Rice University (2008-2012)</a></li>
-  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
+  <li><a href="#rstudio-2012-" id="toc-rstudio-2012-" class="nav-link" data-scroll-target="#rstudio-2012-">RStudio (2012-)</a></li>
   </ul></li>
   <li><a href="#early-years-of-the-tidyverse" id="toc-early-years-of-the-tidyverse" class="nav-link" data-scroll-target="#early-years-of-the-tidyverse">Early years of the tidyverse</a>
   <ul class="collapse">
@@ -258,10 +258,7 @@
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">      
 
-       <section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Unlike our universe, the <a href="https://www.tidyverse.org/">tidyverse</a> did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I’ll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I’ll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I’ll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.</p>
-<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
+       <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -278,198 +275,25 @@ Attaching package: 'dplyr'</code></pre>
     intersect, setdiff, setequal, union</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'lubridate'</code></pre>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>package_release <span class="ot">&lt;-</span> nanoparquet<span class="sc">::</span><span class="fu">read_parquet</span>(<span class="st">"package_release.parquet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Unlike our universe, the <a href="https://www.tidyverse.org/">tidyverse</a> did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I’ll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I’ll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I’ll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, release) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, n, <span class="at">fill =</span> release)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="">
+<figure class="figure">
+<p class=""><a href="index_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    date, intersect, setdiff, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> nanoparquet<span class="sc">::</span><span class="fu">read_parquet</span>(<span class="st">"packages.parquet"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>releases <span class="ot">&lt;-</span> nanoparquet<span class="sc">::</span><span class="fu">read_parquet</span>(<span class="st">"releases.parquet"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>package_release <span class="ot">&lt;-</span> releases <span class="sc">|&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">package =</span> Package, <span class="at">version =</span> Version, <span class="at">date =</span> date, <span class="at">maintainer =</span> Maintainer) <span class="sc">|&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    version,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">"."</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"major"</span>, <span class="st">"minor"</span>, <span class="st">"patch"</span>),</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">too_few =</span> <span class="st">"align_start"</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">too_many =</span> <span class="st">"merge"</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols_remove =</span> <span class="cn">FALSE</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">patch =</span> <span class="st">"0"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> <span class="fu">as.Date</span>(date),</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">year</span>(date),</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">release =</span> <span class="fu">case_when</span>(</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      minor <span class="sc">==</span> <span class="st">"0"</span> <span class="sc">&amp;</span> patch <span class="sc">==</span> <span class="st">"0"</span> <span class="sc">~</span> <span class="st">"major"</span>,</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>      patch <span class="sc">==</span> <span class="st">"0"</span> <span class="sc">~</span> <span class="st">"minor"</span>,</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"patch"</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">maintainer =</span> <span class="fu">str_remove</span>(maintainer, <span class="st">" &lt;.*?&gt;"</span>),</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(major<span class="sc">:</span>patch)) <span class="sc">|&gt;</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Joining with `by = join_by(package)`</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>package_release</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 901 × 7
-   package version date       maintainer      year release type 
-   &lt;chr&gt;   &lt;chr&gt;   &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;
- 1 DBI     0.1-2   2001-12-05 David A. James  2001 minor   db   
- 2 DBI     0.1-3   2002-04-26 David A. James  2002 minor   db   
- 3 DBI     0.1-4   2002-08-26 David A. James  2002 minor   db   
- 4 DBI     0.1-5   2003-04-06 David A. James  2003 minor   db   
- 5 DBI     0.1-6   2003-06-16 David A. James  2003 minor   db   
- 6 DBI     0.1-7   2003-10-15 David A. James  2003 minor   db   
- 7 DBI     0.1-8   2004-04-10 David A. James  2004 minor   db   
- 8 DBI     0.1-9   2005-04-06 David A. James  2005 minor   db   
- 9 DBI     0.1-10  2006-01-28 David A. James  2006 minor   db   
-10 DBI     0.1-11  2006-10-26 David A. James  2006 minor   db   
-# ℹ 891 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> <span class="fu">min</span>(date), <span class="at">.by =</span> package) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(package, version, year, maintainer) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 36 × 4
-   package       version  year maintainer         
-   &lt;chr&gt;         &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;              
- 1 RMySQL        0.2      2000 &lt;NA&gt;               
- 2 RSQLite       0.2-1    2001 David A. James     
- 3 DBI           0.1-2    2001 David A. James     
- 4 ggplot2       0.5      2007 Hadley Wickham     
- 5 stringr       0.1.10   2009 Hadley Wickham     
- 6 lubridate     0.1      2010 Hadley Wickham     
- 7 httr          0.1      2012 Hadley Wickham     
- 8 jsonlite      0.9.0    2013 Jeroen Ooms        
- 9 dplyr         0.1      2014 Hadley Wickham     
-10 magrittr      1.0.0    2014 Stefan             
-11 rstudioapi    0.1      2014 Hadley Wickham     
-12 tidyr         0.1      2014 'Hadley Wickham'   
-13 rvest         0.1.0    2014 'Hadley Wickham'   
-14 broom         0.3.4    2014 David Robinson     
-15 haven         0.1.0    2015 Hadley Wickham     
-16 readr         0.1.0    2015 Hadley Wickham     
-17 readxl        0.1.0    2015 Hadley Wickham     
-18 xml2          0.1.0    2015 Hadley Wickham     
-19 purrr         0.1.0    2015 Hadley Wickham     
-20 tibble        1.0      2016 Kirill Müller      
-21 hms           0.1      2016 Kirill Müller      
-22 dtplyr        0.0.1    2016 Hadley Wickham     
-23 forcats       0.1.0    2016 Hadley Wickham     
-24 modelr        0.1.0    2016 Hadley Wickham     
-25 tidyverse     1.0.0    2016 Hadley Wickham     
-26 reprex        0.1.0    2017 Jennifer Bryan     
-27 odbc          1.0.0    2017 Jim Hester         
-28 rlang         0.1      2017 Lionel Henry       
-29 dbplyr        1.0.0    2017 Hadley Wickham     
-30 googledrive   0.1.1    2017 Jennifer Bryan     
-31 cli           1.0.0    2017 Gábor Csárdi       
-32 pillar        1.0.0    2017 Kirill Müller      
-33 RPostgres     1.0-3    2017 Kirill Müller      
-34 conflicted    0.1.0    2018 Hadley Wickham     
-35 ragg          0.1.0    2019 Thomas Lin Pedersen
-36 googlesheets4 0.1.0    2019 Jennifer Bryan     </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span> <span class="fu">count</span>(maintainer, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 24 × 2
-   maintainer              n
-   &lt;chr&gt;               &lt;int&gt;
- 1 Hadley Wickham        292
- 2 Kirill Müller         154
- 3 Jeroen Ooms            73
- 4 Lionel Henry           55
- 5 David A. James         48
- 6 Jennifer Bryan         41
- 7 Thomas Lin Pedersen    39
- 8 Jim Hester             34
- 9 Seth Falcon            34
-10 Gábor Csárdi           25
-# ℹ 14 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span> <span class="fu">count</span>(package)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 36 × 2
-   package        n
-   &lt;chr&gt;      &lt;int&gt;
- 1 DBI           38
- 2 RMySQL        55
- 3 RPostgres     20
- 4 RSQLite       90
- 5 broom         39
- 6 cli           25
- 7 conflicted     8
- 8 dbplyr        23
- 9 dplyr         45
-10 dtplyr        11
-# ℹ 26 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span> <span class="fu">count</span>(<span class="fu">year</span>(date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 25 × 2
-   `year(date)`     n
-          &lt;dbl&gt; &lt;int&gt;
- 1         2000     2
- 2         2001     4
- 3         2002     6
- 4         2003     9
- 5         2004     4
- 6         2005     3
- 7         2006    12
- 8         2007    24
- 9         2008    12
-10         2009    12
-# ℹ 15 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span> <span class="fu">count</span>(release)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  release     n
-  &lt;chr&gt;   &lt;int&gt;
-1 major      43
-2 minor     315
-3 patch     543</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span> <span class="fu">filter</span>(release <span class="sc">==</span> <span class="st">"major"</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 43 × 7
-   package  version date       maintainer      year release type     
-   &lt;chr&gt;    &lt;chr&gt;   &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    
- 1 magrittr 1.0.0   2014-02-25 Stefan          2014 major   tidy     
- 2 ggplot2  1.0.0   2014-05-21 Hadley Wickham  2014 major   tidy-core
- 3 RSQLite  1.0.0   2014-10-25 Hadley Wickham  2014 major   db       
- 4 stringr  1.0.0   2015-04-30 Hadley Wickham  2015 major   tidy-core
- 5 httr     1.0.0   2015-06-25 Hadley Wickham  2015 major   tidy     
- 6 ggplot2  2.0.0   2015-12-18 Hadley Wickham  2015 major   tidy-core
- 7 tibble   1.0     2016-03-23 Kirill Müller   2016 major   tidy-core
- 8 xml2     1.0.0   2016-06-24 Hadley Wickham  2016 major   tidy     
- 9 jsonlite 1.0     2016-07-01 Jeroen Ooms     2016 major   tidy     
-10 readr    1.0.0   2016-08-03 Hadley Wickham  2016 major   tidy-core
-# ℹ 33 more rows</code></pre>
 </div>
 </div></div>
-<!--
-
-Some sources to consult:
-
-* https://www.quora.com/How-is-Hadley-Wickham-able-to-contribute-so-much-to-R-particularly-in-the-form-of-packages
-* https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/
-
--->
 </section>
 <section id="before-the-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="before-the-tidyverse">Before the tidyverse</h2>
@@ -496,51 +320,72 @@ Some sources to consult:
 <p>The next major formative experience for the tidyverse was teaching Stat405 “Introduction to data analysis” at Rice. I taught this class four times (2009-2012) and you can still find my final class website at <a href="http://stat405.had.co.nz" class="uri">http://stat405.had.co.nz</a>. Repeatedly teaching a mixed class of 60 grads and undergrads was an extremely useful experience as it allowed me to discover specific pain points and then in the following year attempt to solve them with better packages. This lead to the creation of the stringr (2009) and lubridate (2010) packages as I discovered that many students struggled to master the many intricacies of string and date-time manipulation provided by base R.</p>
 <p><a href="https://lubridate.tidyverse.org/">lubridate</a> with Garrett, part of his PhD thesis. <a href="https://www.jstatsoft.org/article/view/v040i03" class="uri">https://www.jstatsoft.org/article/view/v040i03</a></p>
 <p>This also catalysed my work on tidy data. Although the paper wasn’t published until 2014, I developed and taught the principles of tidy data in 2012. This was a big improvement over my previous attempts to teach reshape2 because reshape2 didn’t declare any form of data more or less useful. But it was very clear to me that there was one form that was substantially easier to work with for most R packages, and that was what we now call tidy data.</p>
-<p>My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. I initially provided tools to solve these challenges using the plyr package, but because the plyr package was fundamentally about functional programming, this required that students first mastered functional programming before they could perform what seemed like relatively simple operations. This is what drove the development of the <a href="https://github.com/tidyverse/dplyr">dplyr</a> package.</p>
+<p>My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many pacakges provided, but is this really how I expectd people to learn a package?)</p>
+<p>Very little success with grants. BD technologies funded ggplot2, plyr, and ggplot2. Funding from google to work on future of plyr.</p>
+<blockquote class="blockquote">
+<p>The generous support of bd.com has allowed me to implement many performance improvements to plyr, reshape and ggplot2, and begin work on the next generation of interactive graphics. Without such support, it is difficult for me to spend time on these projects as they do not directly contribute to my research portfolio. Your support not only gives me the financial backing to pursue these important optimisations, but also sends a strong signal to the statistics community that this work is important. The sections below describe what I have achieved this summer as a result of your funding.</p>
+</blockquote>
 <p>(It was around this time that I kicked off another major parallel work stream: tooling for package development. I was developing enough packages that investing in tooling made sense, and this lead to devtools (2011), testthat (2009), roxygen2 (2011) taking over from Peter Danenberg (who created it as a Google Summer of Code project in 2008?), pkgdown (2012).)</p>
 <p>In 2012, started working with Winston Chang. Garret and Winston were the first external contributors to packages that are now in the tidyverse and I’m still lucky enough to have them as my colleagues.</p>
 </section>
-<section id="rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
-<p>In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers.</p>
-<p>Started work on dplyr.</p>
-<p>Tidyverse adjacent were the database Took over maintenance of DBI and RSQLite in 2013 from Seth Falcon. RMySQL (2014? Jeroen?). bigquery (2015). RPostgres (2015) (forked from RPostgresSQL which was mostly unmaintined). odbc (2016, Jim Hester). Worked with Jeroem Ooms and Kirill Muller. Funded by the R consortium. Much of this work was done in concert with Kiril Mueller, who now maintains this ecosystem of tools.</p>
-<p>tidyr (2014), update of reshape2, based around principles of tidy data. Will talk more about that later.</p>
-<p>dplyr (2014). (with Romain Francois)</p>
-<p>This gave me the time to learn C++, thanks to the mentorship of my new boss, JJ Allaire. This lead to a quantatitive shift in the type of problems I was able to solve. Around this time I also realised that one of the major challenges was just getting data into R. This lead to the development of rvest (2014), readr (2015), readxl (2015), haven (2015), and xml2 (2015).</p>
-<p>Also purrr (2015). Because the data frame side of plyr was handled by dplyr, and I had found arrays to not be that useful, extract out the list handling code into purrr.</p>
-<p>(2015 was a very busy year!)</p>
-<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, n)) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2012</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">year =</span> <span class="fu">year</span>(date), maintainer) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, n, <span class="at">fill =</span> maintainer <span class="sc">==</span> <span class="st">"Hadley Wickham"</span>)) <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Is Hadley?"</span>) <span class="sc">+</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="rstudio-2012-" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-2012-">RStudio (2012-)</h3>
+<p>In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers (although I was still welcome to if I wanted). This gave me the time and freedom to learn C++, an important tool that I was missing for writing high performance code. Mentoring from JJ Allaire was tremendously useful at rapidly improving my C++ skills. Overall, my first few years at RStudio lead to a precambrian explosion of packages because I had both the time to work on what I thought was important and the abilityh to invest in core skills (like C++ programming) that were not valued in academia.</p>
+<p>Particularly important was my work on dplyr. dplyr grew from my dissatisfation with the plyr package for solving grouped data frame problemsFor example, to figure out the rank of each name for each year, for each sex, you had to write plyr code like this:</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(babynames)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ranked <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(babynames, <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"sex"</span>), <span class="cf">function</span>(df) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  plyr<span class="sc">::</span><span class="fu">mutate</span>(df, <span class="at">rank =</span> <span class="fu">rank</span>(<span class="sc">-</span>n))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranked, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
+<pre><code>   year sex      name    n       prop rank
+1  1880   F      Mary 7065 0.07238359    1
+2  1880   F      Anna 2604 0.02667896    2
+3  1880   F      Emma 2003 0.02052149    3
+4  1880   F Elizabeth 1939 0.01986579    4
+5  1880   F    Minnie 1746 0.01788843    5
+6  1880   F  Margaret 1578 0.01616720    6
+7  1880   F       Ida 1472 0.01508119    7
+8  1880   F     Alice 1414 0.01448696    8
+9  1880   F    Bertha 1320 0.01352390    9
+10 1880   F     Sarah 1288 0.01319605   10</code></pre>
 </div>
 </div></div>
+<p>Here we’re using <code>ddply()</code> because the input is a data frame and we want the output also to be a data frame. We then describe how we want to split the input up (here by year and sex), and then what we want to do to each piece. (I’ve also avoided attached plyr as it has some unfortunate conflicts with dplyr that will break my code later in the article. If I was to work on this again today, I would take much greater pains to avoid such conflicts.)</p>
+<p>This code is unappealing when teaching students new to R because I think the question is very accesssible but the code is not: you not only have to understand functions but also the basics of functional programming. This meant that it couldn’t be taught until later in the semester, even though I think the basic ideas are relatively straight foreward.</p>
+<p>The creation of dplyr meant that you could instead write code like this:</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>babynames <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, sex) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">rank</span>(<span class="fu">desc</span>(n)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,924,665 × 6
+# Groups:   year, sex [276]
+    year sex   name          n   prop  rank
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1  1880 F     Mary       7065 0.0724     1
+ 2  1880 F     Anna       2604 0.0267     2
+ 3  1880 F     Emma       2003 0.0205     3
+ 4  1880 F     Elizabeth  1939 0.0199     4
+ 5  1880 F     Minnie     1746 0.0179     5
+ 6  1880 F     Margaret   1578 0.0162     6
+ 7  1880 F     Ida        1472 0.0151     7
+ 8  1880 F     Alice      1414 0.0145     8
+ 9  1880 F     Bertha     1320 0.0135     9
+10  1880 F     Sarah      1288 0.0132    10
+# ℹ 1,924,655 more rows</code></pre>
+</div>
+</div></div>
+<p>This does require learning some new ideas, like the pipe and grouping, but in my experience students picked these up much faster than functional programming. And thanks to the hard work of Romain François dplyr ended up being much faster than plyr too: so much faster that one of my advertising claims was that learning dplyr would pay off immediately in computational time solved.</p>
+<p>(It was unfortunate that I wasn’t aware of data.table at this time, or I would have had much higher expectations for performance!)</p>
+<p>My work on dplyr also lead to the development of the purrr package (2015). It’s hard for me to describe exaclty what purrr is, except that it provides a bunch of useful and consistent functional programming tools. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays. recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr.</p>
+<p>Over this time I expanded my scope to also consider getting data into R. In 2013, I took over maintenance of DBI and RSQLite from Seth Falcon in order to. RMySQL (2014? Jeroen?). I developed bigrquery in 2015 to make it easier to connect to Google’s BigQuery database and also forked RPostgres from the mostly unmaintained RPostgresSQL and had several particularly annoying issues related to secure access. Funded by the R consortium. Much of this work was done in concert with Kiril Mueller, who now maintains this ecosystem of tools. I still remember having the strong sense of realising that a lot of R users had data in excel files and no easy and reliable way to get into R. This build on early work providing tools for web scraping (rvest, 2014), and lead to the development of readxl (2015). I also worked on packages for reading flat text file like csv and fixed width files (readr, 2015), SPSS, SAS, and Stata files (haven, 2015), and XML files (xml2, 2015). None of these packages would have been possible without my new found C++ skills, as they all relied on tight integration with existing C libraries for reading those data types.</p>
+<p>I also created tidyr (2014), an update of reshape2, during this period. I’ll come back to that later when I talk more about tidy data.</p>
+<p>This also felt like the time where I started to become particularly well known in the R Community and did a couple of internet Q&amp;A sessions on <a href="https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/">reddit</a> (2015) and <a href="https://quorasessionwithhadleywickham.quora.com">quara</a> (2016).</p>
 </section>
 </section>
 <section id="early-years-of-the-tidyverse" class="level2">
@@ -548,38 +393,20 @@ Some sources to consult:
 <p>As the collection of packages I had developed grew, the community needed some name to collectively refer to them, and many people started calling them the “Hadleyverse” (e.g.&nbsp;https://github.com/imanuelcostigan/hadleyverse). I found this name unappealing because by this point the packages weren’t just my work, and I found it overweeningly arrogant to refer to my own oeuvre as the “Hadleyverse” (a name I still can’t say or write without making a face).</p>
 <p>So I started the process of coming up with an official name that I could live with. Unfortunately I can no longer find the discussion, but alternatives included the sleekverse, the dapperverse, and the deftverse. Given the success of tidy data, I eventually decided that the tidyverse was the most natural name, and announced this to the world at useR 2016, June 29.</p>
 <p>Shortly afterwards (in September), I released the <a href="https://posit.co/blog/tidyverse-1-0-0/">tidyverse package</a>. Two goals: make it easy to install all the dependencies and make it easy to load the most common packages. Core packgaes: ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr. tidyverse 2.0.0 (March 2023) added lubridate.</p>
-<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2016</span>) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(release)) <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, forcats<span class="sc">::</span><span class="fu">fct_reorder</span>(package, date, min))) <span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> release, <span class="at">colour =</span> release)) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"2 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_colour_brewer(palette = "BuPu", direction = -1) +</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2016</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(release)) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, forcats<span class="sc">::</span><span class="fu">fct_reorder</span>(package, date, min))) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> release, <span class="at">colour =</span> release)) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"2 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_colour_brewer(palette = "BuPu", direction = -1) +</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="">
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(year &gt; 2016) |&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(release)) <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, forcats<span class="sc">::</span><span class="fu">fct_reorder</span>(package, date, min))) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> maintainer <span class="sc">==</span> <span class="st">"Hadley Wickham"</span>)) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"2 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_colour_brewer(palette = "BuPu", direction = -1) +</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-3-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></a></p>
+<p class=""><a href="index_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -644,7 +471,7 @@ Some sources to consult:
 <div id="fig-nest-pack-chop" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nest-pack-chop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="nest-pack-chop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame."><img src="nest-pack-chop.png" class="img-fluid figure-img"></a>
+<a href="nest-pack-chop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame."><img src="nest-pack-chop.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nest-pack-chop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame.
@@ -686,10 +513,10 @@ Figure&nbsp;1: Three ways of representing the same data. On the right, we have a
 <div aria-describedby="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="dplyr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="dplyr.png" class="img-fluid figure-img"></a></p>
+<p><a href="dplyr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="dplyr.png" class="img-fluid figure-img"></a></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="ggplot2.png" class="img-fluid figure-img"></a></p>
+<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="ggplot2.png" class="img-fluid figure-img"></a></p>
 </div>
 </div>
 </div>
@@ -704,7 +531,7 @@ Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dpl
 <div id="fig-hex-wall" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="hex-wall.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-wall.jpg" class="img-fluid figure-img"></a>
+<a href="hex-wall.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-wall.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years.
@@ -715,6 +542,41 @@ Figure&nbsp;3: In my office I’ve made a display board with all the stickers th
 </section>
 <section id="growing-the-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="growing-the-tidyverse">Growing the tidyverse</h2>
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">year =</span> year, maintainer) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, n, <span class="at">fill =</span> maintainer <span class="sc">==</span> <span class="st">"Hadley Wickham"</span>)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Is Hadley?"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>package_release <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n_distinct</span>(maintainer) <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="at">.by =</span> package) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(release)) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, forcats<span class="sc">::</span><span class="fu">fct_reorder</span>(package, date, min))) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> maintainer <span class="sc">==</span> <span class="st">"Hadley Wickham"</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"2 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_colour_brewer(palette = "BuPu", direction = -1) +</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-6-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># But fails to include dplyr or tidyr where really I'm not longer the maintainer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
 <p>Bit about the team at RStudio (now posit). Need to think about how to frame</p>
 <ul>
 <li>Jim Hester (2016-2021)</li>
