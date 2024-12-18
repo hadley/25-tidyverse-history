@@ -4,7 +4,6 @@ author: Hadley Wickham
 date: today
 format:
   typst:
-    columns: 2
     section-numbering: 1.1.1
     shift-heading-level-by: -1
   html: default
@@ -278,11 +277,19 @@ I love them as a community building tool, as people looking at your laptop can i
 
 Today, the vast majority of packages have a logo and I love the diversity of visual styles. Hex wall? My hex sticker board.
 
-::: {#fig-hex-wall}
-![](hex-wall.jpg)
+::: {#fig-hex-office}
+![](hex-office.jpg)
 
 In my office I've made a display board with all the stickers that I've been gifted over multiple years.
 :::
+
+::: {#fig-hex-wall}
+![](hex-wall.png)
+
+posit::conf() (and rstudio::conf() before) it features a hex wall that's a popular place to take photos.
+:::
+
+
 
 ## Growing the tidyverse
 
