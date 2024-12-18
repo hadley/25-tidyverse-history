@@ -7,8 +7,12 @@ library(tidyr)
 
 # Define packages --------------------------------------------------------
 
-core_pkgs <- tidyverse:::core
-tidy_pkgs <- c(setdiff(tidyverse:::tidyverse_packages(), c(core_pkgs, "rstudioapi")), "httr2")
+core_pkgs <- c("ggplot2", "tibble", "tidyr", "readr", "purrr", "dplyr", "stringr",
+  "forcats", "lubridate")
+tidy_pkgs <- c("broom", "conflicted", "cli", "dbplyr", "dtplyr", "googledrive",
+  "googlesheets4", "haven", "hms", "httr", "jsonlite", "magrittr",
+  "modelr", "pillar", "ragg", "readxl", "reprex", "rlang", "rvest",
+  "xml2", "tidyverse", "httr2")
 precusors <- c("plyr", "reshape", "reshape2", "ggplot")
 db_pkgs <- c("DBI", "RMySQL", "RPostgres", "RSQLite", "odbc")
 pkgs <- c(tidy_pkgs, db_pkgs, core_pkgs)
