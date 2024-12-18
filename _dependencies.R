@@ -1,2 +1,0 @@
-library(babynames)
-library(plyr)
