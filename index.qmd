@@ -3,7 +3,10 @@ title: A brief history of the tidyverse
 author: Hadley Wickham
 date: today
 format:
-  pdf: default
+  typst:
+    columns: 2
+    section-numbering: 1.1.1
+    shift-heading-level-by: -1
   html: default
 ---
 
