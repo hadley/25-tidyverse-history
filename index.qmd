@@ -16,7 +16,7 @@ format:
     html: default
 ---
 
-```{r}
+```{r setup}
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -32,13 +32,35 @@ Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start w
 package_release |>
   count(year, release) |>
   ggplot(aes(year, n, fill = release)) +
-  geom_col()
+  geom_col() +
+  labs(x = NULL, y = "Number of package releases")
 ```
 
 
 ## Before the tidyverse
 
-While the tidyverse itself was named in 2016, the work that lead to it started much earlier, and its inextricably connected to the course of my career.
+While the tidyverse itself was named in 2016, the work that lead to it started much earlier, and its inextricably connected to the course of my career. @fig-first-release shows the releases of the tidyverse packages (and a couple of important precursors). From this diagram it's pretty clear that a lot of work happened before the tidyverse was named.
+
+```{r}
+#| fig-label: fig-first-releases
+#| fig-cap: >
+#|   Initial releases of tidyverse packages and important precusors.
+#|   A vertical line indicates the release of the tidyverse package.
+package_release |>
+  mutate(is_first = release == "first") |>
+  filter(
+    type %in% c("core", "tidyverse", "precursor"),
+    package != "tidyverse"
+  ) |>
+  arrange(desc(release)) |>
+  ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
+  geom_point(aes(colour = is_first)) +
+  geom_vline(xintercept = as.Date("2016-09-15")) +
+  scale_colour_manual(values = c("grey80", "black")) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position = "none")
+```
 
 ### Growing up
 
@@ -129,7 +151,7 @@ babynames |>
 
 This does require learning some new ideas, like the pipe and grouping, but in my experience students picked these up much faster than functional programming. And thanks to the hard work of Romain François dplyr ended up being much faster than plyr too: so much faster that one of my advertising claims was that learning dplyr would pay off immediately in computational time solved.
 
-(It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance!)
+(It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships and I'm proud that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).)
 
 My work on dplyr also lead to the development of the purrr package (2015). It's hard for me to describe exaclty what purrr is, except that it provides a bunch of useful and consistent functional programming tools. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays.  recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr.
 
@@ -139,35 +161,13 @@ I also created tidyr (2014), an update of reshape2, during this period. I'll com
 
 This also felt like the time where I started to become particularly well known in the R Community and did a couple of internet Q&A sessions on [reddit](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/) (2015) and [quara](https://quorasessionwithhadleywickham.quora.com) (2016).
 
-## Early years of the tidyverse
+## Naming and defining the tidyverse
 
 As the collection of packages I had developed grew, the community needed some name to collectively refer to them, and many people started calling them the "Hadleyverse" (e.g. https://github.com/imanuelcostigan/hadleyverse). I found this name unappealing because by this point the packages weren't just my work, and I found it overweeningly arrogant to refer to my own oeuvre as the "Hadleyverse" (a name I still can't say or write without making a face).
 
 So I started the process of coming up with an official name that I could live with. Unfortunately I can no longer find the discussion, but alternatives included the sleekverse, the dapperverse, and the deftverse. Given the success of tidy data, I eventually decided that the tidyverse was the most natural name, and announced this to the world at useR 2016, June 29.
 
 Shortly afterwards (in September), I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). Two goals: make it easy to install all the dependencies and make it easy to load the most common packages. Core packgaes: ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr. tidyverse 2.0.0 (March 2023) added lubridate.
-
-```{r}
-package_release |>
-  filter(year > 2016) |>
-  arrange(desc(release)) |>
-  ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
-  geom_point(aes(size = release, colour = release)) +
-  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
-  scale_size_manual(values = c(4, 4, 4, 1)) +
-  # scale_colour_brewer(palette = "BuPu", direction = -1) +
-  labs(x = NULL, y = NULL)
-```
-
-### R for data science
-
-R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.
-
-Incredibly successful book.
-
-Many translations. I'm particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).
-
-## What is the tidyverse?
 
 Giving the tidyverse a name created a bigger question. What exactly is the tidyverse? What are the unifying principles the underlie all packages in the tidyverse?
 
@@ -236,35 +236,86 @@ Three ways of representing the same data. On the right, we have a flat data fram
 
 ### tibbles
 
-tibble (2016). Better for larger data sets. Makes data frames a little safer. Contentious choice for formatting decimal places.
+Somewhat related to tidy data is the "tibble", an extension of the base R data.frame class. I created the tibble class to solve a few problems that I found annoying with data.frames, particularly around printing and subsetting.
+
+tibbles fix a number of individually small printing issues that bothered me about data frames:
+
+* Often flooded my console with output when working with large datasets. In older versions of R, this printing wasn't interruptible, so you could easily lock yourself out of the console for quite a long time if you printed a big data frame. tibbles only print a small number of rows and only the columns that fit on one screen.
+
+* When teaching, I found that students didn't have a good sense of what type each variable was (and even I sometimes got confused whether a variable was a date or a string). tibbles include the variable types in the heading.
+
+* In the unfortunate case you have this data frame `data.frame(x = c(NA, "<NA>"))`, there's no way to figure out which value is actually missing. Tibbles use a side-channel, colour, to ensure that there's no way to mix up a missing value with a string that has the same printed representation.
+
+* My experiments with nested and packed columns required better printing tools. While they are technically supported by base data frames their printing is sufficiently confusing that their utility is much hampered.
+
+There are a few gotchas with subsetting data frames that make it easier to make silent mistakes. `df[, cols]` will return a vector if `cols` selects one column and a data frame if it selects more than one column. `df$x` does partial matching. Subsetting a tibble with `[` always returns another tibble and `$` never does partial matching. It will also complain if `x` does not exist. For these reasons, I have often jokingly framed tibbles as a lazier and surlier version of data frames.
+
+tibbles [started life](https://posit.co/blog/dplyr-0-4-0/) in dplyr 0.4.0 in early 2015, originally just called `tbl_df` with no suggestion as how to pronounce. tibbles started live in the dplyr package but were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
+
+tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages, and my strong opinions about the formatting of significant digits also caused some consternation. That seems to have mostly died down now. Today I am much more cautious about introducing new data strucutres: they are fundamentally much more costly that introduction new functiosn and packages, and even programming paradigms.
 
 ### The pipe
 
-Excellent history at <http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/> which I've summarised below, along with some personal colour.
+You can't talk about the tidyverse without talking about the pipe. I think the pipe has probably had more impact on R programming in and out of the tidyverse than any other idea. You can find an excellent and detailed history of the pipe by Adolfo Álvarez [on his blog](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/). I've summarised this history below, along with some personal colour.
 
-<https://www.r-statistics.com/2014/08/simpler-r-coding-with-pipes-the-present-and-future-of-the-magrittr-package/>
+First pipe operator introduced in dplyr in Oct 2013, `%.%`. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better `%>%` (since you can hold down the shift button the whole time) and it had more features comprehensive, so I quickly switched to using magrittr and deprecated the dplyr equivalent.
 
-Called the pipe and pronounced then.
+Called the pipe and pronounced "then".
 
-First pipe operator introduced in dplyr in Oct 2013, `%.%`. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better `%>%` (can hold down shift the whole time) and more comprehensive, so switched to magrittr and deprecated the dplyr equivalent.
+Today the pipe is available in base R thanks to much collaborative effort. Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch to R in 2016 and Jim Hester presented it at the DSC in 2017. This had a positive impact but it took some time for the R Core Team to fully align on its benefits. But thanks to the work of Luke Tierney it was added to R in 4.1 (2020) along with lambda syntax and raw strings. Because R could modify the parser, the base pipe was written `|>`. Took a few iterations to get a placeholder syntax (`_` in 4.2) and the ability to pipe into functions like `$` (in 4.3). Final major magrittr release (<https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/>) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to the base pipe and beginning the long process of
 
-"Finally, at the end of 2020, \|\> was born"
-
-Thanks to the efforts of Romain Francois, Lionel Henry, Jim Hester and the R core team, the pipe (called the base pipe for clarity) was added to R 4.1. Took a few iterations to get a placeholder syntax (`_` in 4.2) and the ability to pipe into functions like `$` (in 4.3).
-
-Final major magrittr release (<https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/>) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to
-
-As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to `+` in ggplot2. You can try out ggplot at <https://github.com/hadley/ggplot1> and learn why ggplot2 can't switch to the pipe at <https://forum.posit.co/t/why-cant-ggplot2-use/4372/7>.
-
-<https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html>.
+As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7>).
 
 ### Tidy evaluation
 
--   <https://cran.r-project.org/web/packages/lazyeval/>
--   !! + enquo
--   Killing the tidyverse
--   `{{ }}`
--   <https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/>
+One of the most contentious features of the tidyverse has been the idea of tidy evaluation. The goal of tidy evaluation is to solve a problem introduced by ggplot2 and dplyr's syntax that allows you to mix variables defined in the current environment with variables defined in some data frame. This makes interactive data analysis much more fluent at the cost of making programming much harder.
+
+The need for tidy evaluation is fairly simple to explain. If you have repeated code, you typically want to extract out a function:
+
+```{r}
+#| eval: false
+df1 |> group_by(g1) |> summarise(mean = mean(a))
+df2 |> group_by(g2) |> summarise(mean = mean(b))
+df3 |> group_by(g3) |> summarise(mean = mean(c))
+```
+
+But the naive approach doesn't work:
+
+```{r}
+grouped_mean <- function(df, group_var, summary_var) {
+  df |> group_by(group_var) |> summarise(mean = mean(summary_var))
+}
+```
+
+It took multiple years of struggle to get to a place that we are happy with. Started with [lazyeval](https://cran.r-project.org/web/packages/lazyeval) [2014-2017]. While this approach worked initially, it abused R internals in a way that eventually stopped working.
+
+This lead to the development of the tidy evaluation framework which had five big ideas:
+
+* Code is tree
+* You can capture the tree by "quoting"
+* You can use unquoting to build new trees
+* quoting + unquoting ...
+* Quosures capture the tree + the evaluation environment
+
+I still believe that these big ideas are correct and useful. But they're primary useful for creating a strong underlying theory. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. commuity posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
+
+```{r}
+grouped_mean <- function(df, group_var, summary_var) {
+  df |> group_by(!!enquo(group_var)) |> summarise(mean = mean(!!enquo(summary_var)))
+}
+```
+
+This sent us back to the drawing board and eventually we came up with a new approach called embracing. We [launched this in 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0) and this seems to have been successful.
+
+```{r}
+grouped_mean <- function(df, group_var, summary_var) {
+  df |> group_by({{ group_var }}) |> summarise(mean = mean({{ summary_var }}))
+}
+```
+
+Because we didn't pay enough attention to exactly what people were struggling with, we also missed a couple of common use cases that were surprisingly hard to solve. Now we have a [cookbook](https://dplyr.tidyverse.org/articles/programming.html) of tidy eval recipes that cover the most common situations that you're likely to encounter, so that there's usually one example you can modify.
+
+Tidy evaluation is still one of the hardest parts to grasp, but I think that's unavoidable. At least it's now no longer harder than it needs to be. I think one of the reasons it's hard is because understanding it requires distentangling two concepts that the tidyverse intentionally blurs: df-variables and env-variables. We use the same word for both, and one of the big features of the tidyverse is that it blurs their use. But to use tidyeval effectively you have to grasp the difference because you'll end up with a reference to a df-var stored in an env-var. On top of the additional complexities of writing a funtion and losing access to some of your usual debugging tools, this makes tidyeval necesasarily complex.
 
 ### Hex logos
 
@@ -296,7 +347,7 @@ In my office I've made a display board with all the stickers that I've been gift
 posit::conf() (and rstudio::conf() before) it features a hex wall that's a popular place to take photos.
 :::
 
-
+(As an aside I think one of the weirdest parts of the python community is that they don't have cool and colourful logos for their packages!)
 
 ## Growing the tidyverse
 
@@ -369,6 +420,16 @@ R has an extensive collection of user-created modeling packages and the tidymode
 
 tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max's initial idea was to give it the code name "carrot" to confuse outside users. Hadley proposed "parsnip," and this became the working name. However, eventually this name was codified by the community and was retained.
 The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.
+
+### R for data science
+
+R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.
+
+Incredibly successful book.
+
+Many translations. I'm particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).
+
+### tidyverse dev day
 
 ### tidyverse community
 

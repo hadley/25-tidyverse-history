@@ -55,6 +55,7 @@ package_release <- releases |>
       TRUE ~ "patch"
     ),
     maintainer = str_remove(maintainer, " <.*?>"),
+    maintainer = str_remove_all(maintainer, "'"),
   ) |>
   mutate(release = ifelse(row_number() == 1, "first", release), .by = package) |>
   select(-(major:patch)) |>
