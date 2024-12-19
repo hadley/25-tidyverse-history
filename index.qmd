@@ -28,14 +28,20 @@ package_release <- nanoparquet::read_parquet("package_release.parquet")
 
 Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I'll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I'll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.
 
+This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. So it's necessarily abbreviated. And my memory is fallible. So please let me know if you think I've forgotten something important!
+
 ```{r}
+#| fig-label: fig-tidyverse-timeline
+#| fig-cap: >
+#|   A timeline of tidyverse (and adjacent) package releases.
 package_release |>
+  # filter(!type != "db") |>
   count(year, release) |>
-  ggplot(aes(year, n, fill = release)) +
-  geom_col() +
+  complete(year, release, fill = list(n = 0)) |>
+  ggplot(aes(year, n, colour = release)) +
+  geom_line(linewidth = 1) +
   labs(x = NULL, y = "Number of package releases")
 ```
-
 
 ## Before the tidyverse
 
@@ -174,6 +180,8 @@ Giving the tidyverse a name created a bigger question. What exactly is the tidyv
 The goal was always to provide composable "lego blocks" that allowed you to build up the unique analysis toolkit that you needed. Learning one part of the tidyverse should help you to learn the next because of shared conventions.
 
 In this section, I'll discuss some of our attempts to describe the unifying principles of the tidyverse. But also want to talk about five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.
+
+(Precise definition of even which package is in the tidyverse is a little tricky. Have tidyerse core, tidyverse extended, and then also the tidyverse organisation on github.)
 
 ### tidyverse principles
 
