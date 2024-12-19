@@ -37,7 +37,7 @@ This article summarises almost 20 years of package development encompassing over
 package_release |>
   # filter(!type != "db") |>
   count(year, release) |>
-  complete(year, release, fill = list(n = 0)) |>
+  tidyr::complete(year, release, fill = list(n = 0)) |>
   ggplot(aes(year, n, colour = release)) +
   geom_line(linewidth = 1) +
   labs(x = NULL, y = "Number of package releases")
@@ -157,7 +157,7 @@ babynames |>
 
 This does require learning some new ideas, like the pipe and grouping, but in my experience students picked these up much faster than functional programming. And thanks to the hard work of Romain François dplyr ended up being much faster than plyr too: so much faster that one of my advertising claims was that learning dplyr would pay off immediately in computational time solved.
 
-(It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships and I'm proud that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).)
+(It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships. Particularly thanks to help + advice from Tareef Kawaf in 2019. and I'm proud that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).)
 
 My work on dplyr also lead to the development of the purrr package (2015). It's hard for me to describe exaclty what purrr is, except that it provides a bunch of useful and consistent functional programming tools. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays.  recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr.
 
@@ -258,7 +258,8 @@ tibbles fix a number of individually small printing issues that bothered me abou
 
 There are a few gotchas with subsetting data frames that make it easier to make silent mistakes. `df[, cols]` will return a vector if `cols` selects one column and a data frame if it selects more than one column. `df$x` does partial matching. Subsetting a tibble with `[` always returns another tibble and `$` never does partial matching. It will also complain if `x` does not exist. For these reasons, I have often jokingly framed tibbles as a lazier and surlier version of data frames.
 
-tibbles [started life](https://posit.co/blog/dplyr-0-4-0/) in dplyr 0.4.0 in early 2015, originally just called `tbl_df` with no suggestion as how to pronounce. tibbles started live in the dplyr package but were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
+tibbles started life in dplyr, originally just called `tbl_df` with no suggestion as how to pronounce. [Kevin Ushey](https://x.com/kevin_ushey/status/514659005621219329) proposed pronouncing as tibble-diff, and the tibble bit stuck. Tibbles started lif in the dplyr package but were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
+
 
 tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages, and my strong opinions about the formatting of significant digits also caused some consternation. That seems to have mostly died down now. Today I am much more cautious about introducing new data strucutres: they are fundamentally much more costly that introduction new functiosn and packages, and even programming paradigms.
 
@@ -277,6 +278,8 @@ As an interesting historial anecdote, there would have been no need for ggplot2 
 ### Tidy evaluation
 
 One of the most contentious features of the tidyverse has been the idea of tidy evaluation. The goal of tidy evaluation is to solve a problem introduced by ggplot2 and dplyr's syntax that allows you to mix variables defined in the current environment with variables defined in some data frame. This makes interactive data analysis much more fluent at the cost of making programming much harder.
+
+https://posit.co/blog/dplyr-0-3-2/ — `_` sufffixes
 
 The need for tidy evaluation is fairly simple to explain. If you have repeated code, you typically want to extract out a function:
 
