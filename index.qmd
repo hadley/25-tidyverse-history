@@ -74,7 +74,7 @@ The next major formative experience for the tidyverse was teaching Stat405 "Intr
 
 This also catalysed my work on tidy data. Although the paper wasn't published until 2014, I developed and taught the principles of tidy data in 2012. This was a big improvement over my previous attempts to teach reshape2 because reshape2 didn't declare any form of data more or less useful. But it was very clear to me that there was one form that was substantially easier to work with for most R packages, and that was what we now call tidy data.
 
-My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many pacakges provided, but is this really how I expectd people to learn a package?)
+My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many packages provided, but is this really how I expectd people to learn a package?)
 
 Very little success with grants. BD technologies funded ggplot2, plyr, and ggplot2. Funding from google to work on future of plyr.
 
@@ -94,7 +94,7 @@ In 2012, started working with Winston Chang. Garret and Winston were the first e
 
 ### RStudio (2012-)
 
-In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers (although I was still welcome to if I wanted). This gave me the time and freedom to learn C++, an important tool that I was missing for writing high performance code. Mentoring from JJ Allaire was tremendously useful at rapidly improving my C++ skills. Overall, my first few years at RStudio lead to a precambrian explosion of packages because I had both the time to work on what I thought was important and the abilityh to invest in core skills (like C++ programming) that were not valued in academia.
+In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers (although I was still welcome to if I wanted). This gave me the time and freedom to learn C++, an important tool that I was missing for writing high performance code. Mentoring from JJ Allaire was tremendously useful at rapidly improving my C++ skills. Overall, my first few years at RStudio lead to a precambrian explosion of packages because I had both the time to work on what I thought was important and the ability to invest in core skills (like C++ programming) that were not valued in academia.
 
 Particularly important was my work on dplyr. dplyr grew from my dissatisfation with the plyr package for solving grouped data frame problemsFor example, to figure out the rank of each name for each year, for each sex, you had to write plyr code like this:
 
