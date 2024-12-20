@@ -14,6 +14,9 @@ format:
     include-in-header:
       text: |
         #show heading: set block(below: 1em, above: 1.5em)
+filters:
+  - path: quarto-workaround.lua
+    at: post-cell-cleanup
 ---
 
 ```{r setup}
@@ -333,9 +336,9 @@ Tidy evaluation is still one of the hardest parts to grasp, but I think that's u
 Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <https://hexb.in> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one's stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I'm pretty sure the first hex logo was magrittr's: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png> in Dec? 2014.
 
 ::: {#fig-early-logos layout-ncol="2"}
-![](ggplot2.png){width=200}
+![](ggplot2.png){needs-quarto-bug-workaround="true"}
 
-![](ggplot2-new.png){width=200}
+![](ggplot2-new.png){needs-quarto-bug-workaround="true"}
 
 Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can't find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
 
