@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hadley Wickham">
-<meta name="dcterms.date" content="2024-12-18">
+<meta name="dcterms.date" content="2024-12-20">
 
 <title>A brief history of the tidyverse</title>
 <style>
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta name="citation_title" content="A brief history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2024-12-18">
-<meta name="citation_cover_date" content="2024-12-18">
+<meta name="citation_publication_date" content="2024-12-20">
+<meta name="citation_cover_date" content="2024-12-20">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-12-18">
+<meta name="citation_online_date" content="2024-12-20">
 <meta name="citation_language" content="en">
 </head>
 
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 18, 2024</p>
+              <p class="date">December 20, 2024</p>
             </div>
           </div>
           
@@ -136,11 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rice-university-2008-2012" id="toc-rice-university-2008-2012" class="nav-link" data-scroll-target="#rice-university-2008-2012">Rice University (2008-2012)</a></li>
   <li><a href="#rstudio-2012-" id="toc-rstudio-2012-" class="nav-link" data-scroll-target="#rstudio-2012-">RStudio (2012-)</a></li>
   </ul></li>
-  <li><a href="#early-years-of-the-tidyverse" id="toc-early-years-of-the-tidyverse" class="nav-link" data-scroll-target="#early-years-of-the-tidyverse">Early years of the tidyverse</a>
-  <ul class="collapse">
-  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science">R for data science</a></li>
-  </ul></li>
-  <li><a href="#what-is-the-tidyverse" id="toc-what-is-the-tidyverse" class="nav-link" data-scroll-target="#what-is-the-tidyverse">What is the tidyverse?</a>
+  <li><a href="#naming-and-defining-the-tidyverse" id="toc-naming-and-defining-the-tidyverse" class="nav-link" data-scroll-target="#naming-and-defining-the-tidyverse">Naming and defining the tidyverse</a>
   <ul class="collapse">
   <li><a href="#tidyverse-principles" id="toc-tidyverse-principles" class="nav-link" data-scroll-target="#tidyverse-principles">tidyverse principles</a></li>
   <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data">Tidy data</a></li>
@@ -152,6 +148,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#growing-the-tidyverse" id="toc-growing-the-tidyverse" class="nav-link" data-scroll-target="#growing-the-tidyverse">Growing the tidyverse</a>
   <ul class="collapse">
   <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels">tidymodels</a></li>
+  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science">R for data science</a></li>
+  <li><a href="#tidyverse-dev-day" id="toc-tidyverse-dev-day" class="nav-link" data-scroll-target="#tidyverse-dev-day">tidyverse dev day</a></li>
   <li><a href="#tidyverse-community" id="toc-tidyverse-community" class="nav-link" data-scroll-target="#tidyverse-community">tidyverse community</a></li>
   <li><a href="#maintaining-the-tidyverse" id="toc-maintaining-the-tidyverse" class="nav-link" data-scroll-target="#maintaining-the-tidyverse">Maintaining the tidyverse</a></li>
   </ul></li>
@@ -171,19 +169,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Unlike our universe, the <a href="https://www.tidyverse.org/">tidyverse</a> did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I’ll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I’ll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I’ll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.</p>
-<div class="cell">
+<p>As <a href="#fig-tidyverse-timeline" class="quarto-xref">Figure&nbsp;1</a> shows, this article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. So it’s necessarily abbreviated. And my memory is fallible. So please let me know if you think I’ve forgotten something important!</p>
+<div id="cell-fig-tidyverse-timeline" class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
+<div id="fig-tidyverse-timeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tidyverse-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-tidyverse-timeline-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: A timeline of tidyverse (and adjacent) package releases."><img src="index_files/figure-html/fig-tidyverse-timeline-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tidyverse-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A timeline of tidyverse (and adjacent) package releases.
+</figcaption>
 </figure>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-1" href="index-preview.html">Source: Article Notebook</a></div>
+<a class="quarto-notebook-link" id="nblink-1" href="index-preview.html#cell-fig-tidyverse-timeline">Source: Article Notebook</a></div>
 </section>
 <section id="before-the-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="before-the-tidyverse">Before the tidyverse</h2>
-<p>While the tidyverse itself was named in 2016, the work that lead to it started much earlier, and its inextricably connected to the course of my career.</p>
+<p>The tidyverse was named in 2016, but most of the packages in the tidyverse were created earlier, as summarised in <a href="#fig-first-releases" class="quarto-xref">Figure&nbsp;2</a>. To understand how the tidyverse came to be, this section explores what lead to it, the work that is inextricably connected to the course of my career. I’ll begin the story with some of the influences growing up that eventually shaped the tidyverse, continue on to my PhD where I identified the major problems that the tidyverse aims to solve, then to Rice where my teaching forced my ideas to become more concrete, and thence to RStudio where I had the freedom to go deep on my programming skills.</p>
+<div id="cell-fig-first-releases" class="cell">
+<div class="cell-output-display">
+<div id="fig-first-releases" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-first-releases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-first-releases-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Initial releases of tidyverse packages and important precusors. The vertical line indicates the release of the tidyverse package."><img src="index_files/figure-html/fig-first-releases-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-first-releases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Initial releases of tidyverse packages and important precusors. The vertical line indicates the release of the tidyverse package.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <section id="growing-up" class="level3">
 <h3 class="anchored" data-anchor-id="growing-up">Growing up</h3>
 <p>I was lucky that my dad, Brian Wickham, had access to a laptop for work, so always around computers. I gained an interest in MS Access and developed quite a few. That gave me an appreciation for databases.</p>
@@ -206,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The next major formative experience for the tidyverse was teaching Stat405 “Introduction to data analysis” at Rice. I taught this class four times (2009-2012) and you can still find my final class website at <a href="http://stat405.had.co.nz" class="uri">http://stat405.had.co.nz</a>. Repeatedly teaching a mixed class of 60 grads and undergrads was an extremely useful experience as it allowed me to discover specific pain points and then in the following year attempt to solve them with better packages. This lead to the creation of the stringr (2009) and lubridate (2010) packages as I discovered that many students struggled to master the many intricacies of string and date-time manipulation provided by base R.</p>
 <p><a href="https://lubridate.tidyverse.org/">lubridate</a> with Garrett, part of his PhD thesis. <a href="https://www.jstatsoft.org/article/view/v040i03" class="uri">https://www.jstatsoft.org/article/view/v040i03</a></p>
 <p>This also catalysed my work on tidy data. Although the paper wasn’t published until 2014, I developed and taught the principles of tidy data in 2012. This was a big improvement over my previous attempts to teach reshape2 because reshape2 didn’t declare any form of data more or less useful. But it was very clear to me that there was one form that was substantially easier to work with for most R packages, and that was what we now call tidy data.</p>
-<p>My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many pacakges provided, but is this really how I expectd people to learn a package?)</p>
+<p>My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many packages provided, but is this really how I expectd people to learn a package?)</p>
 <p>Very little success with grants. BD technologies funded ggplot2, plyr, and ggplot2. Funding from google to work on future of plyr.</p>
 <blockquote class="blockquote">
 <p>The generous support of bd.com has allowed me to implement many performance improvements to plyr, reshape and ggplot2, and begin work on the next generation of interactive graphics. Without such support, it is difficult for me to spend time on these projects as they do not directly contribute to my research portfolio. Your support not only gives me the financial backing to pursue these important optimisations, but also sends a strong signal to the statistics community that this work is important. The sections below describe what I have achieved this summer as a result of your funding.</p>
@@ -216,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rstudio-2012-" class="level3">
 <h3 class="anchored" data-anchor-id="rstudio-2012-">RStudio (2012-)</h3>
-<p>In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers (although I was still welcome to if I wanted). This gave me the time and freedom to learn C++, an important tool that I was missing for writing high performance code. Mentoring from JJ Allaire was tremendously useful at rapidly improving my C++ skills. Overall, my first few years at RStudio lead to a precambrian explosion of packages because I had both the time to work on what I thought was important and the abilityh to invest in core skills (like C++ programming) that were not valued in academia.</p>
+<p>In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers (although I was still welcome to if I wanted). This gave me the time and freedom to learn C++, an important tool that I was missing for writing high performance code. Mentoring from JJ Allaire was tremendously useful at rapidly improving my C++ skills. Overall, my first few years at RStudio lead to a precambrian explosion of packages because I had both the time to work on what I thought was important and the ability to invest in core skills (like C++ programming) that were not valued in academia.</p>
 <p>Particularly important was my work on dplyr. dplyr grew from my dissatisfation with the plyr package for solving grouped data frame problemsFor example, to figure out the rank of each name for each year, for each sex, you had to write plyr code like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(babynames)</span>
@@ -267,39 +285,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This does require learning some new ideas, like the pipe and grouping, but in my experience students picked these up much faster than functional programming. And thanks to the hard work of Romain François dplyr ended up being much faster than plyr too: so much faster that one of my advertising claims was that learning dplyr would pay off immediately in computational time solved.</p>
-<p>(It was unfortunate that I wasn’t aware of data.table at this time, or I would have had much higher expectations for performance!)</p>
+<p>(It was unfortunate that I wasn’t aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships. Particularly thanks to help + advice from Tareef Kawaf in 2019. and I’m proud that <a href="https://dtplyr.tidyverse.org">dtplyr</a>, the dplyr backend that uses data.table, recieved a <a href="https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html">data.table seal of approval</a>.)</p>
 <p>My work on dplyr also lead to the development of the purrr package (2015). It’s hard for me to describe exaclty what purrr is, except that it provides a bunch of useful and consistent functional programming tools. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays. recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr.</p>
 <p>Over this time I expanded my scope to also consider getting data into R. In 2013, I took over maintenance of DBI and RSQLite from Seth Falcon in order to. RMySQL (2014? Jeroen?). I developed bigrquery in 2015 to make it easier to connect to Google’s BigQuery database and also forked RPostgres from the mostly unmaintained RPostgresSQL and had several particularly annoying issues related to secure access. Funded by the R consortium. Much of this work was done in concert with Kiril Mueller, who now maintains this ecosystem of tools. I still remember having the strong sense of realising that a lot of R users had data in excel files and no easy and reliable way to get into R. This build on early work providing tools for web scraping (rvest, 2014), and lead to the development of readxl (2015). I also worked on packages for reading flat text file like csv and fixed width files (readr, 2015), SPSS, SAS, and Stata files (haven, 2015), and XML files (xml2, 2015). None of these packages would have been possible without my new found C++ skills, as they all relied on tight integration with existing C libraries for reading those data types.</p>
 <p>I also created tidyr (2014), an update of reshape2, during this period. I’ll come back to that later when I talk more about tidy data.</p>
 <p>This also felt like the time where I started to become particularly well known in the R Community and did a couple of internet Q&amp;A sessions on <a href="https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/">reddit</a> (2015) and <a href="https://quorasessionwithhadleywickham.quora.com">quara</a> (2016).</p>
 </section>
 </section>
-<section id="early-years-of-the-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="early-years-of-the-tidyverse">Early years of the tidyverse</h2>
+<section id="naming-and-defining-the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="naming-and-defining-the-tidyverse">Naming and defining the tidyverse</h2>
 <p>As the collection of packages I had developed grew, the community needed some name to collectively refer to them, and many people started calling them the “Hadleyverse” (e.g.&nbsp;https://github.com/imanuelcostigan/hadleyverse). I found this name unappealing because by this point the packages weren’t just my work, and I found it overweeningly arrogant to refer to my own oeuvre as the “Hadleyverse” (a name I still can’t say or write without making a face).</p>
 <p>So I started the process of coming up with an official name that I could live with. Unfortunately I can no longer find the discussion, but alternatives included the sleekverse, the dapperverse, and the deftverse. Given the success of tidy data, I eventually decided that the tidyverse was the most natural name, and announced this to the world at useR 2016, June 29.</p>
 <p>Shortly afterwards (in September), I released the <a href="https://posit.co/blog/tidyverse-1-0-0/">tidyverse package</a>. Two goals: make it easy to install all the dependencies and make it easy to load the most common packages. Core packgaes: ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr. tidyverse 2.0.0 (March 2023) added lubridate.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="r-for-data-science" class="level3">
-<h3 class="anchored" data-anchor-id="r-for-data-science">R for data science</h3>
-<p>R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.</p>
-<p>Incredibly successful book.</p>
-<p>Many translations. I’m particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).</p>
-</section>
-</section>
-<section id="what-is-the-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-the-tidyverse">What is the tidyverse?</h2>
 <p>Giving the tidyverse a name created a bigger question. What exactly is the tidyverse? What are the unifying principles the underlie all packages in the tidyverse?</p>
 <p>The goal was always to provide composable “lego blocks” that allowed you to build up the unique analysis toolkit that you needed. Learning one part of the tidyverse should help you to learn the next because of shared conventions.</p>
 <p>In this section, I’ll discuss some of our attempts to describe the unifying principles of the tidyverse. But also want to talk about five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.</p>
+<p>(Precise definition of even which package is in the tidyverse is a little tricky. Have tidyerse core, tidyverse extended, and then also the tidyverse organisation on github.)</p>
 <section id="tidyverse-principles" class="level3">
 <h3 class="anchored" data-anchor-id="tidyverse-principles">tidyverse principles</h3>
 <p>In my useR talking naming the tidyverse, I cited three unifying principles:</p>
@@ -348,57 +349,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-nest-pack-chop" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nest-pack-chop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="nest-pack-chop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame."><img src="nest-pack-chop.png" class="img-fluid figure-img"></a>
+<a href="nest-pack-chop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame."><img src="nest-pack-chop.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nest-pack-chop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame.
+Figure&nbsp;3: Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="tibbles" class="level3">
 <h3 class="anchored" data-anchor-id="tibbles">tibbles</h3>
-<p>tibble (2016). Better for larger data sets. Makes data frames a little safer. Contentious choice for formatting decimal places.</p>
+<p>Somewhat related to tidy data is the “tibble”, an extension of the base R data.frame class. I created the tibble class to solve a few problems that I found annoying with data.frames, particularly around printing and subsetting.</p>
+<p>tibbles fix a number of individually small printing issues that bothered me about data frames:</p>
+<ul>
+<li><p>Often flooded my console with output when working with large datasets. In older versions of R, this printing wasn’t interruptible, so you could easily lock yourself out of the console for quite a long time if you printed a big data frame. tibbles only print a small number of rows and only the columns that fit on one screen.</p></li>
+<li><p>When teaching, I found that students didn’t have a good sense of what type each variable was (and even I sometimes got confused whether a variable was a date or a string). tibbles include the variable types in the heading.</p></li>
+<li><p>In the unfortunate case you have this data frame <code>data.frame(x = c(NA, "&lt;NA&gt;"))</code>, there’s no way to figure out which value is actually missing. Tibbles use a side-channel, colour, to ensure that there’s no way to mix up a missing value with a string that has the same printed representation.</p></li>
+<li><p>My experiments with nested and packed columns required better printing tools. While they are technically supported by base data frames their printing is sufficiently confusing that their utility is much hampered.</p></li>
+</ul>
+<p>There are a few gotchas with subsetting data frames that make it easier to make silent mistakes. <code>df[, cols]</code> will return a vector if <code>cols</code> selects one column and a data frame if it selects more than one column. <code>df$x</code> does partial matching. Subsetting a tibble with <code>[</code> always returns another tibble and <code>$</code> never does partial matching. It will also complain if <code>x</code> does not exist. For these reasons, I have often jokingly framed tibbles as a lazier and surlier version of data frames.</p>
+<p>tibbles started life in dplyr, originally just called <code>tbl_df</code> with no suggestion as how to pronounce. <a href="https://x.com/kevin_ushey/status/514659005621219329">Kevin Ushey</a> proposed pronouncing as tibble-diff, and the tibble bit stuck. Tibbles started lif in the dplyr package but were <a href="https://posit.co/blog/tibble-1-0-0/">extracted into their own package</a> in 2016.</p>
+<p>tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages, and my strong opinions about the formatting of significant digits also caused some consternation. That seems to have mostly died down now. Today I am much more cautious about introducing new data strucutres: they are fundamentally much more costly that introduction new functiosn and packages, and even programming paradigms.</p>
 </section>
 <section id="the-pipe" class="level3">
 <h3 class="anchored" data-anchor-id="the-pipe">The pipe</h3>
-<p>Excellent history at <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/" class="uri">http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/</a> which I’ve summarised below, along with some personal colour.</p>
-<p><a href="https://www.r-statistics.com/2014/08/simpler-r-coding-with-pipes-the-present-and-future-of-the-magrittr-package/" class="uri">https://www.r-statistics.com/2014/08/simpler-r-coding-with-pipes-the-present-and-future-of-the-magrittr-package/</a></p>
-<p>Called the pipe and pronounced then.</p>
-<p>First pipe operator introduced in dplyr in Oct 2013, <code>%.%</code>. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better <code>%&gt;%</code> (can hold down shift the whole time) and more comprehensive, so switched to magrittr and deprecated the dplyr equivalent.</p>
-<p>“Finally, at the end of 2020, |&gt; was born”</p>
-<p>Thanks to the efforts of Romain Francois, Lionel Henry, Jim Hester and the R core team, the pipe (called the base pipe for clarity) was added to R 4.1. Took a few iterations to get a placeholder syntax (<code>_</code> in 4.2) and the ability to pipe into functions like <code>$</code> (in 4.3).</p>
-<p>Final major magrittr release (<a href="https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/" class="uri">https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/</a>) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to</p>
-<p>As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to <code>+</code> in ggplot2. You can try out ggplot at <a href="https://github.com/hadley/ggplot1" class="uri">https://github.com/hadley/ggplot1</a> and learn why ggplot2 can’t switch to the pipe at <a href="https://forum.posit.co/t/why-cant-ggplot2-use/4372/7" class="uri">https://forum.posit.co/t/why-cant-ggplot2-use/4372/7</a>.</p>
-<p><a href="https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html" class="uri">https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html</a>.</p>
+<p>You can’t talk about the tidyverse without talking about the pipe. I think the pipe has probably had more impact on R programming in and out of the tidyverse than any other idea. You can find an excellent and detailed history of the pipe by Adolfo Álvarez <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/">on his blog</a>. I’ve summarised this history below, along with some personal colour.</p>
+<p>First pipe operator introduced in dplyr in Oct 2013, <code>%.%</code>. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better <code>%&gt;%</code> (since you can hold down the shift button the whole time) and it had more features comprehensive, so I quickly switched to using magrittr and deprecated the dplyr equivalent.</p>
+<p>Called the pipe and pronounced “then”.</p>
+<p>Today the pipe is available in base R thanks to much collaborative effort. Lionel Henry <a href="https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html">proposed new syntax</a> and wrote a patch to R in 2016 and Jim Hester presented it at the DSC in 2017. This had a positive impact but it took some time for the R Core Team to fully align on its benefits. But thanks to the work of Luke Tierney it was added to R in 4.1 (2020) along with lambda syntax and raw strings. Because R could modify the parser, the base pipe was written <code>|&gt;</code>. Took a few iterations to get a placeholder syntax (<code>_</code> in 4.2) and the ability to pipe into functions like <code>$</code> (in 4.3). Final major magrittr release (<a href="https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/" class="uri">https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/</a>) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to the base pipe and beginning the long process of</p>
+<p>As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to <code>+</code> in ggplot2. You can <a href="https://github.com/hadley/ggplot1">try out ggplot</a> if you want, or <a href="https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E">learn why ggplot2 can’t switch to the pipe</a>.</p>
 </section>
 <section id="tidy-evaluation" class="level3">
 <h3 class="anchored" data-anchor-id="tidy-evaluation">Tidy evaluation</h3>
+<p>One of the most contentious features of the tidyverse has been the idea of tidy evaluation. The goal of tidy evaluation is to solve a problem introduced by ggplot2 and dplyr’s syntax that allows you to mix variables defined in the current environment with variables defined in some data frame. This makes interactive data analysis much more fluent at the cost of making programming much harder.</p>
+<p>https://posit.co/blog/dplyr-0-3-2/ — <code>_</code> sufffixes</p>
+<p>The need for tidy evaluation is fairly simple to explain. If you have repeated code, you typically want to extract out a function:</p>
+<p>But the naive approach doesn’t work:</p>
+<p>It took multiple years of struggle to get to a place that we are happy with. Started with <a href="https://cran.r-project.org/web/packages/lazyeval">lazyeval</a> [2014-2017]. While this approach worked initially, it abused R internals in a way that eventually stopped working.</p>
+<p>This lead to the development of the tidy evaluation framework which had five big ideas:</p>
 <ul>
-<li><a href="https://cran.r-project.org/web/packages/lazyeval/" class="uri">https://cran.r-project.org/web/packages/lazyeval/</a></li>
-<li>!! + enquo</li>
-<li>Killing the tidyverse</li>
-<li><code>{ }</code></li>
-<li><a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/" class="uri">https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/</a></li>
+<li>Code is tree</li>
+<li>You can capture the tree by “quoting”</li>
+<li>You can use unquoting to build new trees</li>
+<li>quoting + unquoting …</li>
+<li>Quosures capture the tree + the evaluation environment</li>
 </ul>
+<p>I still believe that these big ideas are correct and useful. But they’re primary useful for creating a strong underlying theory. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g.&nbsp;commuity posts titled “Should tidyeval be abandoned?” and “Will tidyeval kill the tidyverse?”)</p>
+<p>This sent us back to the drawing board and eventually we came up with a new approach called embracing. We <a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0">launched this in 2019</a> and this seems to have been successful.</p>
+<p>Because we didn’t pay enough attention to exactly what people were struggling with, we also missed a couple of common use cases that were surprisingly hard to solve. Now we have a <a href="https://dplyr.tidyverse.org/articles/programming.html">cookbook</a> of tidy eval recipes that cover the most common situations that you’re likely to encounter, so that there’s usually one example you can modify.</p>
+<p>Tidy evaluation is still one of the hardest parts to grasp, but I think that’s unavoidable. At least it’s now no longer harder than it needs to be. I think one of the reasons it’s hard is because understanding it requires distentangling two concepts that the tidyverse intentionally blurs: df-variables and env-variables. We use the same word for both, and one of the big features of the tidyverse is that it blurs their use. But to use tidyeval effectively you have to grasp the difference because you’ll end up with a reference to a df-var stored in an env-var. On top of the additional complexities of writing a funtion and losing access to some of your usual debugging tools, this makes tidyeval necesasarily complex.</p>
 </section>
 <section id="hex-logos" class="level3">
 <h3 class="anchored" data-anchor-id="hex-logos">Hex logos</h3>
-<p>Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <a href="https://hexb.in" class="uri">https://hexb.in</a> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one’s stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I’m pretty sure the first hex logo was magrittr’s: <a href="https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png" class="uri">https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png</a> in Dec? 2014. Stefan also proposed an early version of the dplyr logo.</p>
+<p>Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <a href="https://hexb.in" class="uri">https://hexb.in</a> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one’s stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I’m pretty sure the first hex logo was magrittr’s: <a href="https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png" class="uri">https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png</a> in Dec? 2014.</p>
 <div id="fig-early-logos" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="dplyr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="dplyr.png" class="img-fluid figure-img"></a></p>
+<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2.png" class="img-fluid figure-img" width="200"></a></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down."><img src="ggplot2.png" class="img-fluid figure-img"></a></p>
+<p><a href="ggplot2-new.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2-new.png" class="img-fluid figure-img" width="200"></a></p>
 </div>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down.
+Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
 </figcaption>
 </figure>
 </div>
@@ -408,23 +425,24 @@ Figure&nbsp;2: Early versions of the dplyr and ggplot2 logos. Shockingly the dpl
 <div id="fig-hex-office" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hex-office-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="hex-office.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-office.jpg" class="img-fluid figure-img"></a>
+<a href="hex-office.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;5: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-office.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hex-office-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years.
+Figure&nbsp;5: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years.
 </figcaption>
 </figure>
 </div>
 <div id="fig-hex-wall" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="hex-wall.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;4: posit::conf() (and rstudio::conf() before) it features a hex wall that’s a popular place to take photos."><img src="hex-wall.png" class="img-fluid figure-img"></a>
+<a href="hex-wall.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;6: posit::conf() (and rstudio::conf() before) it features a hex wall that’s a popular place to take photos."><img src="hex-wall.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: posit::conf() (and rstudio::conf() before) it features a hex wall that’s a popular place to take photos.
+Figure&nbsp;6: posit::conf() (and rstudio::conf() before) it features a hex wall that’s a popular place to take photos.
 </figcaption>
 </figure>
 </div>
+<p>(As an aside I think one of the weirdest parts of the python community is that they don’t have cool and colourful logos for their packages!)</p>
 </section>
 </section>
 <section id="growing-the-tidyverse" class="level2">
@@ -433,14 +451,14 @@ Figure&nbsp;4: posit::conf() (and rstudio::conf() before) it features a hex wall
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-6-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/unnamed-chunk-9-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -479,6 +497,15 @@ Figure&nbsp;4: posit::conf() (and rstudio::conf() before) it features a hex wall
 <p>Max had already developed a popular R package called caret. That package provided functionality for basic predictive modeling tasks such as performance measures and resampling as well as a consistent user interface. Max’s idea was to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, censored regression models, and others. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools being developed (e.g., non-standard evaluation, etc.).</p>
 <p>R has an extensive collection of user-created modeling packages and the tidymodels package has a much higher reliance on external dependencies than the tidyverse. Previous work on caret led to a very long list of formal dependencies, which made it difficult to maintain and not robust to sudden changes to these dependencies. To avoid this in tidymodels, many calls to external modeling packages are made by programmatically by constructing symbolic calls to those functions. In doing this, the tidymodels code base is smaller and depends on fewer external “hard dependencies.”</p>
 <p>tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max’s initial idea was to give it the code name “carrot” to confuse outside users. Hadley proposed “parsnip,” and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.</p>
+</section>
+<section id="r-for-data-science" class="level3">
+<h3 class="anchored" data-anchor-id="r-for-data-science">R for data science</h3>
+<p>R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.</p>
+<p>Incredibly successful book.</p>
+<p>Many translations. I’m particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).</p>
+</section>
+<section id="tidyverse-dev-day" class="level3">
+<h3 class="anchored" data-anchor-id="tidyverse-dev-day">tidyverse dev day</h3>
 </section>
 <section id="tidyverse-community" class="level3">
 <h3 class="anchored" data-anchor-id="tidyverse-community">tidyverse community</h3>
