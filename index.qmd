@@ -3,6 +3,7 @@ title: A brief history of the tidyverse
 author: Hadley Wickham
 date: today
 format:
+  html: default
   typst:
     section-numbering: 1.1.1
     shift-heading-level-by: -1
@@ -13,7 +14,6 @@ format:
     include-in-header:
       text: |
         #show heading: set block(below: 1em, above: 1.5em)
-    html: default
 ---
 
 ```{r setup}
@@ -28,10 +28,10 @@ package_release <- nanoparquet::read_parquet("package_release.parquet")
 
 Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I'll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I'll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.
 
-This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. So it's necessarily abbreviated. And my memory is fallible. So please let me know if you think I've forgotten something important!
+As @fig-tidyverse-timeline shows, this article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. So it's necessarily abbreviated. And my memory is fallible. So please let me know if you think I've forgotten something important!
 
 ```{r}
-#| fig-label: fig-tidyverse-timeline
+#| label: fig-tidyverse-timeline
 #| fig-cap: >
 #|   A timeline of tidyverse (and adjacent) package releases.
 package_release |>
@@ -45,13 +45,13 @@ package_release |>
 
 ## Before the tidyverse
 
-While the tidyverse itself was named in 2016, the work that lead to it started much earlier, and its inextricably connected to the course of my career. @fig-first-release shows the releases of the tidyverse packages (and a couple of important precursors). From this diagram it's pretty clear that a lot of work happened before the tidyverse was named.
+The tidyverse was named in 2016, but most of the packages in the tidyverse were created earlier, as summarised in @fig-first-releases. To understand how the tidyverse came to be, this section explores what lead to it, the work that is inextricably connected to the course of my career. I'll begin the story with some of the influences growing up that eventually shaped the tidyverse, continue on to my PhD where I identified the major problems that the tidyverse aims to solve, then to Rice where my teaching forced my ideas to become more concrete, and thence to RStudio where I had the freedom to go deep on my programming skills.
 
 ```{r}
-#| fig-label: fig-first-releases
+#| label: fig-first-releases
 #| fig-cap: >
 #|   Initial releases of tidyverse packages and important precusors.
-#|   A vertical line indicates the release of the tidyverse package.
+#|   The vertical line indicates the release of the tidyverse package.
 package_release |>
   mutate(is_first = release == "first") |>
   filter(
@@ -330,14 +330,15 @@ Tidy evaluation is still one of the hardest parts to grasp, but I think that's u
 
 ### Hex logos
 
-Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <https://hexb.in> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one's stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I'm pretty sure the first hex logo was magrittr's: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png> in Dec? 2014. Stefan also proposed an early version of the dplyr logo.
+Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <https://hexb.in> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one's stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I'm pretty sure the first hex logo was magrittr's: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png> in Dec? 2014.
 
 ::: {#fig-early-logos layout-ncol="2"}
-![](dplyr.png){height="200"}
+![](ggplot2.png){width=200}
 
-![](ggplot2.png){height="200"}
+![](ggplot2-new.png){width=200}
 
-Early versions of the dplyr and ggplot2 logos. Shockingly the dplyr logo used scissors (not pliers!) and the ggplot2 logo was flat-down, not point-down.
+Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can't find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
+
 :::
 
 By looking at emails, it looks like I fully I embraced the idea of hex stickers and started the creation for the major packages in early 2015. By mid-2016 we were ordering en masse for RStudio events, and the R community started to really coalesce around the idea. For my own packages, it now doesn't feel like a real package before it has a logo and sometime I have a name and logo before I even write any code.
