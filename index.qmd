@@ -19,7 +19,8 @@ filters:
     at: post-cell-cleanup
 ---
 
-```{r setup}
+```{r}
+#| label: setup
 #| include: false
 library(dplyr)
 library(ggplot2)
@@ -29,9 +30,9 @@ package_release <- nanoparquet::read_parquet("package_release.parquet")
 
 ## Introduction
 
-Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I'll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I'll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.
+Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It started with a gradual accumulation of packages that eventually snowballed into the identification and naming of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse, and leading in to the early years of the tidyverse. I'll then discuss what makes the tidyverse the tidyverse, and some of the contributions of the tidyverse that I'm particularly proud off. I'll finish off with some thoughts about the current maturity of the tidyverse and where we might be heading next.
 
-As @fig-tidyverse-timeline shows, this article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. So it's necessarily abbreviated. And my memory is fallible. So please let me know if you think I've forgotten something important!
+This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages, as summarised by @fig-tidyverse-timeline. That means this write up is necessarily abbreviated and coupled with my fallible memory, I've almost certainly forgotton some important details. So if you're reading an early version of this paper, please let me know so I can fix it/
 
 ```{r}
 #| label: fig-tidyverse-timeline
@@ -48,7 +49,7 @@ package_release |>
 
 ## Before the tidyverse
 
-The tidyverse was named in 2016, but most of the packages in the tidyverse were created earlier, as summarised in @fig-first-releases. To understand how the tidyverse came to be, this section explores what lead to it, the work that is inextricably connected to the course of my career. I'll begin the story with some of the influences growing up that eventually shaped the tidyverse, continue on to my PhD where I identified the major problems that the tidyverse aims to solve, then to Rice where my teaching forced my ideas to become more concrete, and thence to RStudio where I had the freedom to go deep on my programming skills.
+While the tidyverse was named in 2016, most of the packages inside of it were created earlier, as summarised by @fig-first-releases. This section explores how the tidyverse came to be, a journey that's inextricably tied to to the course of my career. I'll begin the story with a couple of formative experiences growing up and continue on to my PhD where I created reshape and ggplot. Then we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and acessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
 
 ```{r}
 #| label: fig-first-releases
@@ -73,55 +74,43 @@ package_release |>
 
 ### Growing up
 
-I was lucky that my dad, Brian Wickham, had access to a laptop for work, so always around computers. I gained an interest in MS Access and developed quite a few. That gave me an appreciation for databases.
+Growing up, I was very lucky to have access to computers from a very early age, thanks to my dad[^1]. This lead to an general interest in computers and programming. Thanks to my dad's work with databases, I had many conversations about relational database design and Codd's third normal form much in earlier in life than usual. That in turn lead to a lot playing around in MS Access, and an eventual part-time job developing databases. This work was invaluable when I later came to wrestle with the data needed to fit statistical models.
 
-From my mum I learned that you can choose to make a different in any area of life.
+[^1]: You can read more about him and how he shaped my life at <https://tidydesign.substack.com/p/my-dad-brian-wickham>.
 
-After high school, I immediately entered medical school. At the time in New Zealand, this consisted of two three year degrees and you were admitted directly from high school.
+From my mum I learned that you can choose to make a difference in any area of life. And she instilled in me that belief that if you have the ability to make a positive impact in someone's life, you should. (She also taught me to bake, which I continue to get great enjoyment from, but I don't think that has influenced the development of the tidyverse, except for some fun purrr examples.)
 
-During my undergarduate degree I also got into web development and that was my part time job. That ability to create websites has had a big impact on my ability to promote my work online.
-
-I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user. Started using R in 2003, version 1.6.2.
+The final most obvious formative experience prior to my PhD was my undergraduate at the University of Auckland, the birthplace of R. Unsurprisingly many of my courses were taught using R, and so I started using R in 2003, at version 1.6.2. Looking back at my early code is fun: the files use a `.txt` extension, mix `=` and `<-` for assignment, and use very inconsistent spacing.
 
 ### PhD (2004-2008)
 
-The inspiration for the tidyverse started during my PhD at Iowa State. I was lucky enough to get a consulting assistanceship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work lead me to two insights that remain with me today: the biggest challenge was almost never fitting the right statistical model; the biggest challenge was typically getting the collected data into a form that made sense to me for analysis. This challenge lead to the creation of the reshape pacakge which made it easier to work with a variety of input datasets by first converting to a "molten" form which you could then "cast" into the desired form.
+My undergraduate left me with a desire to learn more about statistics, and since my Dad had done his PhD at Cornell University, it seemed quite obvious that I should do mine in the US too. This lead me to Iowa State University (ISU) and my major advisors Di Cook and Heike Hofmann.
 
-(I took a brief detour through multi-dimensional arrays as a way of storing data, as they have some particularly elegant properties and can use much less memory than data frames. But they only work well for certain experimental designs and my experiences trying to teach the manipulation of even 4D arrays lead me to abandon this approach. You can see related work in <https://juliasilge.github.io/widyr/> and <https://github.com/hadley/cubelyr>. Also a lot of work in [plyr](https://github.com/hadley/plyr) for converting between data frames, arrays, and lists. This work fell by the wayside once I decided that it was better to standardise on data frames, making it possible to focus tools around a single form. More on that below when we talk about tidy data.)
+At ISU, I was lucky enough to get a consulting assistanceship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work lead me to face two challenges that remain with me today. The first challenge was not fitting the right statistical model, but getting the data from my collaborator into that a form that I could actually work with. This challenge lead to the creation of the [reshape packge](http://had.co.nz/reshape/) which made it easier to work with a variety of input datasets by first converting to a "molten" form which you could then "cast" into the desired form[^2].
 
-I also often found it hard to translate the plots that I could imagine in my head to code using either base or lattice (CITE) graphics. At the time I was reading the grammar of graphics (CITE) and really wanted to be able to use those tools. But the only implementation available at the time was very expensive, so I decided I'd have a go at creating my own in R. That lead to ggplot. I was very lucky to get the opportunity to meet Lee Wilkinson who was tremendously supportive on my work. (I also remember a throw away comment he made to me about data reshaping that lead to a vastly more performative implementation that become the heart of reshape2.)
+[^2]: Compared to today's equivalent, tidyr, reshape includes a lot of tools for working with high-dimensional arrays. I was initially interested in arrays because they are rather elegant and can be much more memory efficient than data frames. But they only work well for highly crossed experimental designs and I found them very hard to explain to others. My work on arrays fell by the wayside once I decided that it was better to standardise on data frames.
 
-This work wouldn't have been possible without the support of my PhD advisors Di Cook and Heike Hoffman, who let me work on what I thought was most important, regardless of whether or not it fit the mold of a traditional statistics PhD. They also provided aircover for me when I let my disdane for the utility of theoretical statistics shine a little too clearly.
+The second challenge was translating the plots that I could picture in my head into code using either base or lattice (CITE) graphics. At the time I was reading the grammar of graphics (CITE) and really wanted to be able to use those tools. But the only implementation available at the time was very expensive, so I decided I'd have a go at creating my own in R. That lead to ggplot. I was very lucky to get the opportunity to meet Lee Wilkinson who was tremendously supportive on my work[^3].
 
-(At this time I was also working with ggobi, a tool for interactively exploring high-dimensional data. Lead to a number of R packages including clusterfly and classify that used the rggobi package to get your data from R and into ggobi. This was really cool stuff, but unfortunately it's hard to use it today because of the challenges of maintaining GUI tools across multiple decades. You can see the continuation of this work in the work of Di Cook and students.)
+[^3]: Lee also made a throw away comment about reshaping that lead to a vastly more performative implementation that become the heart of reshape2.
 
-This work culminated in my PhD thesis: "Practical tools for exploring data and models". <http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf>.
+This work wouldn't have been possible without the Di and Heike, who let me work on what I thought was most important[^4], regardless of whether or not it fit the mold of a traditional statistics PhD. They also provided aircover for me when I let my disdain for the utility of theoretical statistics shine a little too clearly. My PhD culminated in my thesis "[Practical tools for exploring data and models](http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf)", a write-up of the collection of R packages I had begun to amass and the ideas that underpinned them.
+
+[^4]: I was supposed to be working on ggobi, a tool for interactively exploring high-dimensional data. This lead to a number of R packages including clusterfly and classify that used the rggobi package to get your data from R and into ggobi. I still think this work is incredibly useful and empowering but someone interactive graphics has failed to have the impact on statistical practice that it really should.
 
 ### Rice University (2008-2012)
 
-The next major formative experience for the tidyverse was teaching Stat405 "Introduction to data analysis" at Rice. I taught this class four times (2009-2012) and you can still find my final class website at <http://stat405.had.co.nz>. Repeatedly teaching a mixed class of 60 grads and undergrads was an extremely useful experience as it allowed me to discover specific pain points and then in the following year attempt to solve them with better packages. This lead to the creation of the stringr (2009) and lubridate (2010) packages as I discovered that many students struggled to master the many intricacies of string and date-time manipulation provided by base R.
+After graduating from ISU, I got a job at Rice University. Here the most formative experience was teaching was teaching [Stat405](http://stat405.had.co.nz), "Introduction to data analysis" (which I'd now call introduction to data science). I taught this class four times (2009-2012) and found the experience of repeatedly teaching the class to be extremely useful. It helped me to discover both topics that students found hard to understand and tools that they found hard to use, and I could see the impact of changes from year-to-year in the maturity of students' analyses. On the small scale, this lead to the creation of the [stringr](https://stringr.tidyverse.org) (2009) and [lubridate](https://lubridate.tidyverse.org) (2010) packages as I discovered that many students struggled to master the many intricacies of base R string and date-time manipulation. My teaching also catalysed my work on tidy data and group-wise manipulation that lead to the tidyr and dplyr packages that were both created after I left Rice.
 
-[lubridate](https://lubridate.tidyverse.org/) with Garrett, part of his PhD thesis. <https://www.jstatsoft.org/article/view/v040i03>
+At Rice, I was lucky enough to work with Garrett Grolemund as a PhD student. He developed the lubridate package, as part of his PhD thesis. <https://www.jstatsoft.org/article/view/v040i03>.
 
-This also catalysed my work on tidy data. Although the paper wasn't published until 2014, I developed and taught the principles of tidy data in 2012. This was a big improvement over my previous attempts to teach reshape2 because reshape2 didn't declare any form of data more or less useful. But it was very clear to me that there was one form that was substantially easier to work with for most R packages, and that was what we now call tidy data.
+Throughout this time, the popularity of ggplot2 continued to rise, and I manage to carve out time to work on it, despite it not being research or valued by my department. But my interactions with the community kept me motivated and continued to reinforce my believe that this sort of work was valuable. And in 2012 I started working with Winston Chang. Garret and Winston were the first external contributors to packages that are now in the tidyverse and I'm still lucky enough to have them as my colleagues.
 
-My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many packages provided, but is this really how I expectd people to learn a package?)
+During my time at Rice I had very little success with grants. I had a hard time packaging my work in a way that the people reviewing statistics grants at the NSF could make sense of, despite my absolute conviction that this work with important. I was fortunate get some small grants from BD and Google to work on plyr, reshape, and ggplot2, but these were not inline with the amounts that I was expected to get. A paragraph from a final report to BD
 
-Very little success with grants. BD technologies funded ggplot2, plyr, and ggplot2. Funding from google to work on future of plyr.
+> The generous support of BD has allowed me to implement many performance improvements to plyr, reshape and ggplot2, and begin work on the next generation of interactive graphics. Without such support, it is difficult for me to spend time on these projects as they do not directly contribute to my research portfolio. Your support not only gives me the financial backing to pursue these important optimisations, but also sends a strong signal to the statistics community that this work is important.
 
-> The generous support of bd.com has allowed me to implement many
-> performance improvements to plyr, reshape and ggplot2, and begin work
-> on the next generation of interactive graphics. Without such support,
-> it is difficult for me to spend time on these projects as they do not
-> directly contribute to my research portfolio. Your support not only
-> gives me the financial backing to pursue these important
-> optimisations, but also sends a strong signal to the statistics
-> community that this work is important. The sections below describe
-> what I have achieved this summer as a result of your funding.
-
-(It was around this time that I kicked off another major parallel work stream: tooling for package development. I was developing enough packages that investing in tooling made sense, and this lead to devtools (2011), testthat (2009), roxygen2 (2011) taking over from Peter Danenberg (who created it as a Google Summer of Code project in 2008?), pkgdown (2012).)
-
-In 2012, started working with Winston Chang. Garret and Winston were the first external contributors to packages that are now in the tidyverse and I'm still lucky enough to have them as my colleagues.
+Despite not having research value, I also worked on a parallel stream of work: tooling for package development. I was developing enough packages that investing in tooling made sense, which lead to the creation of the testthat (2009) and devtools (2011) packages, and taking over maintenance of the roxygen2 (2011) package from Peter Danenberg who created it as a Google Summer of Code project in 2008 (mentored by Manuel J. A. Eugster).
 
 ### RStudio (2012-)
 
@@ -162,7 +151,7 @@ This does require learning some new ideas, like the pipe and grouping, but in my
 
 (It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships. Particularly thanks to help + advice from Tareef Kawaf in 2019. and I'm proud that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).)
 
-My work on dplyr also lead to the development of the purrr package (2015). It's hard for me to describe exaclty what purrr is, except that it provides a bunch of useful and consistent functional programming tools. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays.  recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr.
+My work on dplyr also lead to the development of the purrr package (2015). It's hard for me to describe exaclty what purrr is, except that it provides a bunch of useful and consistent functional programming tools. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays. recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr.
 
 Over this time I expanded my scope to also consider getting data into R. In 2013, I took over maintenance of DBI and RSQLite from Seth Falcon in order to. RMySQL (2014? Jeroen?). I developed bigrquery in 2015 to make it easier to connect to Google's BigQuery database and also forked RPostgres from the mostly unmaintained RPostgresSQL and had several particularly annoying issues related to secure access. Funded by the R consortium. Much of this work was done in concert with Kiril Mueller, who now maintains this ecosystem of tools. I still remember having the strong sense of realising that a lot of R users had data in excel files and no easy and reliable way to get into R. This build on early work providing tools for web scraping (rvest, 2014), and lead to the development of readxl (2015). I also worked on packages for reading flat text file like csv and fixed width files (readr, 2015), SPSS, SAS, and Stata files (haven, 2015), and XML files (xml2, 2015). None of these packages would have been possible without my new found C++ skills, as they all relied on tight integration with existing C libraries for reading those data types.
 
@@ -251,18 +240,17 @@ Somewhat related to tidy data is the "tibble", an extension of the base R data.f
 
 tibbles fix a number of individually small printing issues that bothered me about data frames:
 
-* Often flooded my console with output when working with large datasets. In older versions of R, this printing wasn't interruptible, so you could easily lock yourself out of the console for quite a long time if you printed a big data frame. tibbles only print a small number of rows and only the columns that fit on one screen.
+-   Often flooded my console with output when working with large datasets. In older versions of R, this printing wasn't interruptible, so you could easily lock yourself out of the console for quite a long time if you printed a big data frame. tibbles only print a small number of rows and only the columns that fit on one screen.
 
-* When teaching, I found that students didn't have a good sense of what type each variable was (and even I sometimes got confused whether a variable was a date or a string). tibbles include the variable types in the heading.
+-   When teaching, I found that students didn't have a good sense of what type each variable was (and even I sometimes got confused whether a variable was a date or a string). tibbles include the variable types in the heading.
 
-* In the unfortunate case you have this data frame `data.frame(x = c(NA, "<NA>"))`, there's no way to figure out which value is actually missing. Tibbles use a side-channel, colour, to ensure that there's no way to mix up a missing value with a string that has the same printed representation.
+-   In the unfortunate case you have this data frame `data.frame(x = c(NA, "<NA>"))`, there's no way to figure out which value is actually missing. Tibbles use a side-channel, colour, to ensure that there's no way to mix up a missing value with a string that has the same printed representation.
 
-* My experiments with nested and packed columns required better printing tools. While they are technically supported by base data frames their printing is sufficiently confusing that their utility is much hampered.
+-   My experiments with nested and packed columns required better printing tools. While they are technically supported by base data frames their printing is sufficiently confusing that their utility is much hampered.
 
 There are a few gotchas with subsetting data frames that make it easier to make silent mistakes. `df[, cols]` will return a vector if `cols` selects one column and a data frame if it selects more than one column. `df$x` does partial matching. Subsetting a tibble with `[` always returns another tibble and `$` never does partial matching. It will also complain if `x` does not exist. For these reasons, I have often jokingly framed tibbles as a lazier and surlier version of data frames.
 
 tibbles started life in dplyr, originally just called `tbl_df` with no suggestion as how to pronounce. [Kevin Ushey](https://x.com/kevin_ushey/status/514659005621219329) proposed pronouncing as tibble-diff, and the tibble bit stuck. Tibbles started lif in the dplyr package but were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
-
 
 tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages, and my strong opinions about the formatting of significant digits also caused some consternation. That seems to have mostly died down now. Today I am much more cautious about introducing new data strucutres: they are fundamentally much more costly that introduction new functiosn and packages, and even programming paradigms.
 
@@ -276,7 +264,7 @@ Called the pipe and pronounced "then".
 
 Today the pipe is available in base R thanks to much collaborative effort. Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch to R in 2016 and Jim Hester presented it at the DSC in 2017. This had a positive impact but it took some time for the R Core Team to fully align on its benefits. But thanks to the work of Luke Tierney it was added to R in 4.1 (2020) along with lambda syntax and raw strings. Because R could modify the parser, the base pipe was written `|>`. Took a few iterations to get a placeholder syntax (`_` in 4.2) and the ability to pipe into functions like `$` (in 4.3). Final major magrittr release (<https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/>) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to the base pipe and beginning the long process of
 
-As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7>).
+As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E).
 
 ### Tidy evaluation
 
@@ -301,15 +289,15 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-It took multiple years of struggle to get to a place that we are happy with. Started with [lazyeval](https://cran.r-project.org/web/packages/lazyeval) [2014-2017]. While this approach worked initially, it abused R internals in a way that eventually stopped working.
+It took multiple years of struggle to get to a place that we are happy with. Started with [lazyeval](https://cran.r-project.org/web/packages/lazyeval) \[2014-2017\]. While this approach worked initially, it abused R internals in a way that eventually stopped working.
 
 This lead to the development of the tidy evaluation framework which had five big ideas:
 
-* Code is tree
-* You can capture the tree by "quoting"
-* You can use unquoting to build new trees
-* quoting + unquoting ...
-* Quosures capture the tree + the evaluation environment
+-   Code is tree
+-   You can capture the tree by "quoting"
+-   You can use unquoting to build new trees
+-   quoting + unquoting ...
+-   Quosures capture the tree + the evaluation environment
 
 I still believe that these big ideas are correct and useful. But they're primary useful for creating a strong underlying theory. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. commuity posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
 
@@ -340,8 +328,7 @@ Not possible to discuss the tidyverse without also including a discussion of hex
 
 ![](ggplot2-new.png){needs-quarto-bug-workaround="true"}
 
-Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can't find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
-
+Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can't find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
 :::
 
 By looking at emails, it looks like I fully I embraced the idea of hex stickers and started the creation for the major packages in early 2015. By mid-2016 we were ordering en masse for RStudio events, and the R community started to really coalesce around the idea. For my own packages, it now doesn't feel like a real package before it has a logo and sometime I have a name and logo before I even write any code.
@@ -433,8 +420,7 @@ Max had already developed a popular R package called caret. That package provide
 
 R has an extensive collection of user-created modeling packages and the tidymodels package has a much higher reliance on external dependencies than the tidyverse. Previous work on caret led to a very long list of formal dependencies, which made it difficult to maintain and not robust to sudden changes to these dependencies. To avoid this in tidymodels, many calls to external modeling packages are made by programmatically by constructing symbolic calls to those functions. In doing this, the tidymodels code base is smaller and depends on fewer external "hard dependencies."
 
-tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max's initial idea was to give it the code name "carrot" to confuse outside users. Hadley proposed "parsnip," and this became the working name. However, eventually this name was codified by the community and was retained.
-The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.
+tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max's initial idea was to give it the code name "carrot" to confuse outside users. Hadley proposed "parsnip," and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.
 
 ### R for data science
 
