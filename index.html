@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hadley Wickham">
-<meta name="dcterms.date" content="2024-12-20">
+<meta name="dcterms.date" content="2024-12-23">
 
 <title>A brief history of the tidyverse</title>
 <style>
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta name="citation_title" content="A brief history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2024-12-20">
-<meta name="citation_cover_date" content="2024-12-20">
+<meta name="citation_publication_date" content="2024-12-23">
+<meta name="citation_cover_date" content="2024-12-23">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-12-20">
+<meta name="citation_online_date" content="2024-12-23">
 <meta name="citation_language" content="en">
 </head>
 
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 20, 2024</p>
+              <p class="date">December 23, 2024</p>
             </div>
           </div>
           
@@ -168,8 +168,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Unlike our universe, the <a href="https://www.tidyverse.org/">tidyverse</a> did not start with a big bang. It start with a gradual accumulation of packages to make data science easy which eventually snowballed into the creation of the tidyverse. In this paper, I’ll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse (reshape and ggplot), leading into the early years of the tidyverse. I’ll then discuss what exactly makes the tidyverse the tidyverse, discussing some of the ideas that make the packages work well together. I’ll finish off with some thoughts about the current maturity of the tidyverse and the challenges of continuing to evolve a system that is now used by so many people.</p>
-<p>As <a href="#fig-tidyverse-timeline" class="quarto-xref">Figure&nbsp;1</a> shows, this article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. So it’s necessarily abbreviated. And my memory is fallible. So please let me know if you think I’ve forgotten something important!</p>
+<p>Unlike our universe, the <a href="https://www.tidyverse.org/">tidyverse</a> did not start with a big bang. It started with a gradual accumulation of packages that eventually snowballed into the identification and naming of the tidyverse. In this paper, I’ll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse, and leading in to the early years of the tidyverse. I’ll then discuss what makes the tidyverse the tidyverse, and some of the contributions of the tidyverse that I’m particularly proud off. I’ll finish off with some thoughts about the current maturity of the tidyverse and where we might be heading next.</p>
+<p>This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages, as summarised by <a href="#fig-tidyverse-timeline" class="quarto-xref">Figure&nbsp;1</a>. That means this write up is necessarily abbreviated and coupled with my fallible memory, I’ve almost certainly forgotton some important details. So if you’re reading an early version of this paper, please let me know so I can fix it/</p>
 <div id="cell-fig-tidyverse-timeline" class="cell">
 <div class="cell-output-display">
 <div id="fig-tidyverse-timeline" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -187,7 +187,7 @@ Figure&nbsp;1: A timeline of tidyverse (and adjacent) package releases.
 </section>
 <section id="before-the-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="before-the-tidyverse">Before the tidyverse</h2>
-<p>The tidyverse was named in 2016, but most of the packages in the tidyverse were created earlier, as summarised in <a href="#fig-first-releases" class="quarto-xref">Figure&nbsp;2</a>. To understand how the tidyverse came to be, this section explores what lead to it, the work that is inextricably connected to the course of my career. I’ll begin the story with some of the influences growing up that eventually shaped the tidyverse, continue on to my PhD where I identified the major problems that the tidyverse aims to solve, then to Rice where my teaching forced my ideas to become more concrete, and thence to RStudio where I had the freedom to go deep on my programming skills.</p>
+<p>While the tidyverse was named in 2016, most of the packages inside of it were created earlier, as summarised by <a href="#fig-first-releases" class="quarto-xref">Figure&nbsp;2</a>. This section explores how the tidyverse came to be, a journey that’s inextricably tied to to the course of my career. I’ll begin the story with a couple of formative experiences growing up and continue on to my PhD where I created reshape and ggplot. Then we’ll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and acessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.</p>
 <div id="cell-fig-first-releases" class="cell">
 <div class="cell-output-display">
 <div id="fig-first-releases" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -204,33 +204,27 @@ Figure&nbsp;2: Initial releases of tidyverse packages and important precusors. T
 </div>
 <section id="growing-up" class="level3">
 <h3 class="anchored" data-anchor-id="growing-up">Growing up</h3>
-<p>I was lucky that my dad, Brian Wickham, had access to a laptop for work, so always around computers. I gained an interest in MS Access and developed quite a few. That gave me an appreciation for databases.</p>
-<p>From my mum I learned that you can choose to make a different in any area of life.</p>
-<p>After high school, I immediately entered medical school. At the time in New Zealand, this consisted of two three year degrees and you were admitted directly from high school.</p>
-<p>During my undergarduate degree I also got into web development and that was my part time job. That ability to create websites has had a big impact on my ability to promote my work online.</p>
-<p>I was an R user because I did my undergraduate at the University of Auckland, the birthplace of R, and so unsurprisingly I was an R user. Started using R in 2003, version 1.6.2.</p>
+<p>Growing up, I was very lucky to have access to computers from a very early age, thanks to my dad<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This lead to an general interest in computers and programming. Thanks to my dad’s work with databases, I had many conversations about relational database design and Codd’s third normal form much in earlier in life than usual. That in turn lead to a lot playing around in MS Access, and an eventual part-time job developing databases. This work was invaluable when I later came to wrestle with the data needed to fit statistical models.</p>
+<p>From my mum I learned that you can choose to make a difference in any area of life. And she instilled in me that belief that if you have the ability to make a positive impact in someone’s life, you should. (She also taught me to bake, which I continue to get great enjoyment from, but I don’t think that has influenced the development of the tidyverse, except for some fun purrr examples.)</p>
+<p>The final most obvious formative experience prior to my PhD was my undergraduate at the University of Auckland, the birthplace of R. Unsurprisingly many of my courses were taught using R, and so I started using R in 2003, at version 1.6.2. Looking back at my early code is fun: the files use a <code>.txt</code> extension, mix <code>=</code> and <code>&lt;-</code> for assignment, and use very inconsistent spacing.</p>
 </section>
 <section id="phd-2004-2008" class="level3">
 <h3 class="anchored" data-anchor-id="phd-2004-2008">PhD (2004-2008)</h3>
-<p>The inspiration for the tidyverse started during my PhD at Iowa State. I was lucky enough to get a consulting assistanceship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work lead me to two insights that remain with me today: the biggest challenge was almost never fitting the right statistical model; the biggest challenge was typically getting the collected data into a form that made sense to me for analysis. This challenge lead to the creation of the reshape pacakge which made it easier to work with a variety of input datasets by first converting to a “molten” form which you could then “cast” into the desired form.</p>
-<p>(I took a brief detour through multi-dimensional arrays as a way of storing data, as they have some particularly elegant properties and can use much less memory than data frames. But they only work well for certain experimental designs and my experiences trying to teach the manipulation of even 4D arrays lead me to abandon this approach. You can see related work in <a href="https://juliasilge.github.io/widyr/" class="uri">https://juliasilge.github.io/widyr/</a> and <a href="https://github.com/hadley/cubelyr" class="uri">https://github.com/hadley/cubelyr</a>. Also a lot of work in <a href="https://github.com/hadley/plyr">plyr</a> for converting between data frames, arrays, and lists. This work fell by the wayside once I decided that it was better to standardise on data frames, making it possible to focus tools around a single form. More on that below when we talk about tidy data.)</p>
-<p>I also often found it hard to translate the plots that I could imagine in my head to code using either base or lattice (CITE) graphics. At the time I was reading the grammar of graphics (CITE) and really wanted to be able to use those tools. But the only implementation available at the time was very expensive, so I decided I’d have a go at creating my own in R. That lead to ggplot. I was very lucky to get the opportunity to meet Lee Wilkinson who was tremendously supportive on my work. (I also remember a throw away comment he made to me about data reshaping that lead to a vastly more performative implementation that become the heart of reshape2.)</p>
-<p>This work wouldn’t have been possible without the support of my PhD advisors Di Cook and Heike Hoffman, who let me work on what I thought was most important, regardless of whether or not it fit the mold of a traditional statistics PhD. They also provided aircover for me when I let my disdane for the utility of theoretical statistics shine a little too clearly.</p>
-<p>(At this time I was also working with ggobi, a tool for interactively exploring high-dimensional data. Lead to a number of R packages including clusterfly and classify that used the rggobi package to get your data from R and into ggobi. This was really cool stuff, but unfortunately it’s hard to use it today because of the challenges of maintaining GUI tools across multiple decades. You can see the continuation of this work in the work of Di Cook and students.)</p>
-<p>This work culminated in my PhD thesis: “Practical tools for exploring data and models”. <a href="http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf" class="uri">http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf</a>.</p>
+<p>My undergraduate left me with a desire to learn more about statistics, and since my Dad had done his PhD at Cornell University, it seemed quite obvious that I should do mine in the US too. This lead me to Iowa State University (ISU) and my major advisors Di Cook and Heike Hofmann.</p>
+<p>At ISU, I was lucky enough to get a consulting assistanceship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work lead me to face two challenges that remain with me today. The first challenge was not fitting the right statistical model, but getting the data from my collaborator into that a form that I could actually work with. This challenge lead to the creation of the <a href="http://had.co.nz/reshape/">reshape packge</a> which made it easier to work with a variety of input datasets by first converting to a “molten” form which you could then “cast” into the desired form<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>The second challenge was translating the plots that I could picture in my head into code using either base or lattice (CITE) graphics. At the time I was reading the grammar of graphics (CITE) and really wanted to be able to use those tools. But the only implementation available at the time was very expensive, so I decided I’d have a go at creating my own in R. That lead to ggplot. I was very lucky to get the opportunity to meet Lee Wilkinson who was tremendously supportive on my work<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>This work wouldn’t have been possible without the Di and Heike, who let me work on what I thought was most important<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, regardless of whether or not it fit the mold of a traditional statistics PhD. They also provided aircover for me when I let my disdain for the utility of theoretical statistics shine a little too clearly. My PhD culminated in my thesis “<a href="http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf">Practical tools for exploring data and models</a>”, a write-up of the collection of R packages I had begun to amass and the ideas that underpinned them.</p>
 </section>
 <section id="rice-university-2008-2012" class="level3">
 <h3 class="anchored" data-anchor-id="rice-university-2008-2012">Rice University (2008-2012)</h3>
-<p>The next major formative experience for the tidyverse was teaching Stat405 “Introduction to data analysis” at Rice. I taught this class four times (2009-2012) and you can still find my final class website at <a href="http://stat405.had.co.nz" class="uri">http://stat405.had.co.nz</a>. Repeatedly teaching a mixed class of 60 grads and undergrads was an extremely useful experience as it allowed me to discover specific pain points and then in the following year attempt to solve them with better packages. This lead to the creation of the stringr (2009) and lubridate (2010) packages as I discovered that many students struggled to master the many intricacies of string and date-time manipulation provided by base R.</p>
-<p><a href="https://lubridate.tidyverse.org/">lubridate</a> with Garrett, part of his PhD thesis. <a href="https://www.jstatsoft.org/article/view/v040i03" class="uri">https://www.jstatsoft.org/article/view/v040i03</a></p>
-<p>This also catalysed my work on tidy data. Although the paper wasn’t published until 2014, I developed and taught the principles of tidy data in 2012. This was a big improvement over my previous attempts to teach reshape2 because reshape2 didn’t declare any form of data more or less useful. But it was very clear to me that there was one form that was substantially easier to work with for most R packages, and that was what we now call tidy data.</p>
-<p>My teaching also revealed the challenges of performing group-wise operations in base R. There were a number of interesting questions that seemed easy to formulate but hard to solve, like find the most popular male and female baby names in each year. http://plyr.had.co.nz (good example of a pre-pkgdown packge website. Looking back at this I know that this was more of a website than many packages provided, but is this really how I expectd people to learn a package?)</p>
-<p>Very little success with grants. BD technologies funded ggplot2, plyr, and ggplot2. Funding from google to work on future of plyr.</p>
+<p>After graduating from ISU, I got a job at Rice University. Here the most formative experience was teaching was teaching <a href="http://stat405.had.co.nz">Stat405</a>, “Introduction to data analysis” (which I’d now call introduction to data science). I taught this class four times (2009-2012) and found the experience of repeatedly teaching the class to be extremely useful. It helped me to discover both topics that students found hard to understand and tools that they found hard to use, and I could see the impact of changes from year-to-year in the maturity of students’ analyses. On the small scale, this lead to the creation of the <a href="https://stringr.tidyverse.org">stringr</a> (2009) and <a href="https://lubridate.tidyverse.org">lubridate</a> (2010) packages as I discovered that many students struggled to master the many intricacies of base R string and date-time manipulation. My teaching also catalysed my work on tidy data and group-wise manipulation that lead to the tidyr and dplyr packages that were both created after I left Rice.</p>
+<p>At Rice, I was lucky enough to work with Garrett Grolemund as a PhD student. He developed the lubridate package, as part of his PhD thesis. <a href="https://www.jstatsoft.org/article/view/v040i03" class="uri">https://www.jstatsoft.org/article/view/v040i03</a>.</p>
+<p>Throughout this time, the popularity of ggplot2 continued to rise, and I manage to carve out time to work on it, despite it not being research or valued by my department. But my interactions with the community kept me motivated and continued to reinforce my believe that this sort of work was valuable. And in 2012 I started working with Winston Chang. Garret and Winston were the first external contributors to packages that are now in the tidyverse and I’m still lucky enough to have them as my colleagues.</p>
+<p>During my time at Rice I had very little success with grants. I had a hard time packaging my work in a way that the people reviewing statistics grants at the NSF could make sense of, despite my absolute conviction that this work with important. I was fortunate get some small grants from BD and Google to work on plyr, reshape, and ggplot2, but these were not inline with the amounts that I was expected to get. A paragraph from a final report to BD</p>
 <blockquote class="blockquote">
-<p>The generous support of bd.com has allowed me to implement many performance improvements to plyr, reshape and ggplot2, and begin work on the next generation of interactive graphics. Without such support, it is difficult for me to spend time on these projects as they do not directly contribute to my research portfolio. Your support not only gives me the financial backing to pursue these important optimisations, but also sends a strong signal to the statistics community that this work is important. The sections below describe what I have achieved this summer as a result of your funding.</p>
+<p>The generous support of BD has allowed me to implement many performance improvements to plyr, reshape and ggplot2, and begin work on the next generation of interactive graphics. Without such support, it is difficult for me to spend time on these projects as they do not directly contribute to my research portfolio. Your support not only gives me the financial backing to pursue these important optimisations, but also sends a strong signal to the statistics community that this work is important.</p>
 </blockquote>
-<p>(It was around this time that I kicked off another major parallel work stream: tooling for package development. I was developing enough packages that investing in tooling made sense, and this lead to devtools (2011), testthat (2009), roxygen2 (2011) taking over from Peter Danenberg (who created it as a Google Summer of Code project in 2008?), pkgdown (2012).)</p>
-<p>In 2012, started working with Winston Chang. Garret and Winston were the first external contributors to packages that are now in the tidyverse and I’m still lucky enough to have them as my colleagues.</p>
+<p>Despite not having research value, I also worked on a parallel stream of work: tooling for package development. I was developing enough packages that investing in tooling made sense, which lead to the creation of the testthat (2009) and devtools (2011) packages, and taking over maintenance of the roxygen2 (2011) package from Peter Danenberg who created it as a Google Summer of Code project in 2008 (mentored by Manuel J. A. Eugster).</p>
 </section>
 <section id="rstudio-2012-" class="level3">
 <h3 class="anchored" data-anchor-id="rstudio-2012-">RStudio (2012-)</h3>
@@ -407,15 +401,15 @@ Figure&nbsp;3: Three ways of representing the same data. On the right, we have a
 <div aria-describedby="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2.png" data-needs-quarto-bug-workaround="true" height="200" class="figure-img"></a></p>
+<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2.png" data-needs-quarto-bug-workaround="true" height="200" class="figure-img"></a></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="ggplot2-new.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2-new.png" data-needs-quarto-bug-workaround="true" height="200" class="figure-img"></a></p>
+<p><a href="ggplot2-new.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2-new.png" data-needs-quarto-bug-workaround="true" height="200" class="figure-img"></a></p>
 </div>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created by Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
+Figure&nbsp;4: Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
 </figcaption>
 </figure>
 </div>
@@ -451,14 +445,14 @@ Figure&nbsp;6: posit::conf() (and rstudio::conf() before) it features a hex wall
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-9-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/unnamed-chunk-10-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -537,7 +531,16 @@ Figure&nbsp;6: posit::conf() (and rstudio::conf() before) it features a hex wall
 <p>Encompasses much of my output for the last 20 years, so it’s hard to summarise it all. I hope you forgive me for anything I’ve forgotten, and please feel to reach out if there’s something important that you think I’m missing.</p>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>You can read more about him and how he shaped my life at <a href="https://tidydesign.substack.com/p/my-dad-brian-wickham" class="uri">https://tidydesign.substack.com/p/my-dad-brian-wickham</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Compared to today’s equivalent, tidyr, reshape includes a lot of tools for working with high-dimensional arrays. I was initially interested in arrays because they are rather elegant and can be much more memory efficient than data frames. But they only work well for highly crossed experimental designs and I found them very hard to explain to others. My work on arrays fell by the wayside once I decided that it was better to standardise on data frames.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Lee also made a throw away comment about reshaping that lead to a vastly more performative implementation that become the heart of reshape2.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>I was supposed to be working on ggobi, a tool for interactively exploring high-dimensional data. This lead to a number of R packages including clusterfly and classify that used the rggobi package to get your data from R and into ggobi. I still think this work is incredibly useful and empowering but someone interactive graphics has failed to have the impact on statistical practice that it really should.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
