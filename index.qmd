@@ -116,7 +116,7 @@ Despite not having research value, I also worked on a parallel stream of work: t
 
 In 2012, I left Rice for RStudio, moving to a position where the practice of software engineering was valued and I no longer needed to produce papers (although I was still welcome to if I wanted). This gave me the time and freedom to learn C++, an important tool that I was missing for writing high performance code. Mentoring from JJ Allaire was tremendously useful at rapidly improving my C++ skills. Overall, my first few years at RStudio lead to a precambrian explosion of packages because I had both the time to work on what I thought was important and the ability to invest in core skills (like C++ programming) that were not valued in academia.
 
-Particularly important was my work on dplyr. dplyr grew from my dissatisfation with the plyr package for solving grouped data frame problemsFor example, to figure out the rank of each name for each year, for each sex, you had to write plyr code like this:
+Particularly important was my work on dplyr. dplyr grew from my dissatisfation with the plyr package for solving grouped data frame problems. For example, to figure out the rank of each name for each year, for each sex, you had to write plyr code like this:
 
 ```{r}
 #| label: name-rank-plyr
@@ -130,7 +130,7 @@ ranked <- plyr::ddply(babynames, c("year", "sex"), function(df) {
 head(ranked, 10)
 ```
 
-Here we're using `ddply()` because the input is a data frame and we want the output also to be a data frame. We then describe how we want to split the input up (here by year and sex), and then what we want to do to each piece. (I've also avoided attached plyr as it has some unfortunate conflicts with dplyr that will break my code later in the article. If I was to work on this again today, I would take much greater pains to avoid such conflicts.)
+Here we're using `ddply()` because the input is a data frame and we want the output also to be a data frame. We then describe how we want to split the input up (here by year and sex), and then what we want to do to each piece. (I've also avoided attaching plyr as it has some unfortunate conflicts with dplyr that will break my code later in the article. If I was to work on this again today, I would take much greater pains to avoid such conflicts.)
 
 This code is unappealing when teaching students new to R because I think the question is very accesssible but the code is not: you not only have to understand functions but also the basics of functional programming. This meant that it couldn't be taught until later in the semester, even though I think the basic ideas are relatively straight foreward.
 
@@ -147,7 +147,7 @@ babynames |>
   mutate(rank = rank(desc(n)))
 ```
 
-This does require learning some new ideas, like the pipe and grouping, but in my experience students picked these up much faster than functional programming. And thanks to the hard work of Romain François dplyr ended up being much faster than plyr too: so much faster that one of my advertising claims was that learning dplyr would pay off immediately in computational time solved.
+This does require learning some new ideas, like the pipe and grouping, but in my experience students picked these up much faster than functional programming. And thanks to the hard work of Romain François, dplyr ended up being much faster than plyr too: so much faster that one of my advertising claims was that learning dplyr would pay off immediately in computational time solved.
 
 (It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships. Particularly thanks to help + advice from Tareef Kawaf in 2019. and I'm proud that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).)
 
@@ -157,7 +157,7 @@ Over this time I expanded my scope to also consider getting data into R. In 2013
 
 I also created tidyr (2014), an update of reshape2, during this period. I'll come back to that later when I talk more about tidy data.
 
-This also felt like the time where I started to become particularly well known in the R Community and did a couple of internet Q&A sessions on [reddit](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/) (2015) and [quara](https://quorasessionwithhadleywickham.quora.com) (2016).
+This also felt like the time where I started to become particularly well known in the R Community and did a couple of internet Q&A sessions on [Reddit](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/) (2015) and [Quora](https://quorasessionwithhadleywickham.quora.com) (2016).
 
 ## Naming and defining the tidyverse
 
@@ -185,7 +185,7 @@ In my useR talking naming the tidyverse, I cited three unifying principles:
 
 > No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. --- Hal Abelson
 
-I think the first two are straightforward to understand. The goal of the tidyverse is to be easy to learn by sharing data structured and interface design across as many functions as possible. You learn a few big new ideas and then apply them in as many places as possible. But what does referential transparency refer to? That's a call to the principles of tidy evaluation, which we'll come back to shortly.
+I think the first two are straightforward to understand. The goal of the tidyverse is to make it easy to learn by sharing data structures and interface design across as many functions as possible. You learn a few big new ideas and then apply them in as many places as possible. But what does referential transparency refer to? That's a call to the principles of tidy evaluation, which we'll come back to shortly.
 
 I repeated this talk a few times and by December the principles had been refined to these four:
 
@@ -460,7 +460,7 @@ What does the future hold? When I think about the tidyverse today, there's only 
 
 As the tidyverse becomes more mature, the places where the tidyverse team spends our innovation energy have started to change. Broadly, the mission of the team is to make R more awesome for doing data science, and we're willing to go whereever this takes us. Currently there are three new areas that we are exploring as a team:
 
--   **Positron**. [Positron](https://github.com/posit-dev/positron) is a new IDE for data science, produced by the same team that created RStudio. The tidyverse team has been deeply involved in the R tooling. This is existing because it gives us the skills for tighter integrations in the future. Code where coding makes sense, and use an graphical user interface where that is a better fit for the task.
+-   **Positron**. [Positron](https://github.com/posit-dev/positron) is a new IDE for data science, produced by the same team that created RStudio. The tidyverse team has been deeply involved in the R tooling. This is exciting because it gives us the skills for tighter integrations in the future. Code where coding makes sense, and use an graphical user interface where that is a better fit for the task.
 
 -   **R in production**. If you're working in industry, most tasks aren't completed by writing a one-off report. Instead you will typically produce an artifact that's run repeatedly on another machine. This is the challenge of putting your code in production, which in my opinion at least currently suffers from a thousand paper cuts. From getting your database authentication to work to ensuring that you're using exactly the same dependencies both in development and deployment, and over time, there are a lot of rough edges that you have to overcome that are not directly related to doing data science. I'm convinced that we can make this better.
 
