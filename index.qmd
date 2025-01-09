@@ -2,6 +2,7 @@
 title: A brief history of the tidyverse
 author: Hadley Wickham
 date: today
+bibliography: references.bib
 format:
   html: default
   typst:
@@ -108,6 +109,8 @@ The second challenge was translating the plots that I could picture in my head i
 
 [^3]: Lee also made a throw away comment about reshaping that lead to a vastly more performative implementation that become the heart of reshape2.
 
+When I learned visualisation with base R, I struggled with the variety of data structures that different plotting functions could use. For example, `plot()` can either take vectors of data (e.g. `plot(x, y)`) or a formula and a data frame (e.g. `plot(y ~ x, data = df)`). But if you want to plot multiple series at once you need to use `matplot()`, `matpoints()`, or `matlines()`, all of which take a matrix.
+
 This work wouldn't have been possible without the Di and Heike, who let me work on what I thought was most important[^4], regardless of whether or not it fit the mold of a traditional statistics PhD. They also provided aircover for me when I let my disdain for the utility of theoretical statistics shine a little too clearly. My PhD culminated in my thesis "[Practical tools for exploring data and models](http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf)", a write-up of the collection of R packages I had begun to amass and the ideas that underpinned them.
 
 [^4]: I was supposed to be working on ggobi, a tool for interactively exploring high-dimensional data. This lead to a number of R packages including clusterfly and classify that used the rggobi package to get your data from R and into ggobi. I still think this work is incredibly useful and empowering but someone interactive graphics has failed to have the impact on statistical practice that it really should.
@@ -212,69 +215,79 @@ Since that time I've continued to refine my description of what it means to be p
 
 -   It is **inclusive**, because the tidyverse is not just the collection of packages, but it is also the community of people who use them.
 
-## Key contributions
+## Key innovations
 
 In this section, I'll discuss five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.
 
 ### Tidy data
 
-One of the things I really struggled with when learning visualisation with base R was the variety of data structures that different plotting functions could use. For example, with `plot()` you can either provide it with vectors of data (e.g. `plot(x, y)`) or a formula and a data frame (e.g. `plot(y ~ x, data = df)`). If you want to plot multiple series at once you can use `matplot()`, `matpoints()`, or `matlines()`, all of which take a matrix. But what if you have a longitudinal dataset with columns `x`, `y`, and `series`, where each series has distinct values of `y`. This guided the interface for ggplot2: you must always put your data in a data frame before plotting.
+I've always had a very strong sense that there's a "right" way to organise your data, a way that would make the rest of your analysis much easier. When looking at a dataset I could usually identify what form would be most productive, but I had a time explaining what I was doing to others, and experience numerous failures when trying to teach my approach. But eventually I stumbled on what now seems obvious, the principles of tidy data[^5] explained in @tidy-data :
 
-But how do you organise that data, as there are often multiple ways to record the same data in a data frame? I always had a very clear view that there was a "right" way to organise your data and when looking at a dataset I could usually identify what form would be most productive. But it me took me a long time to figure out how to explain my process to other people. But eventually I stumbled on what now seems obvious, the principles of tidy data:
+[^5]: This is certainly not the only data stucture you might ever want to use, but it's extremely useful to have a organising structure that you can rely on for the majority of your work. It's a great default, even if you might need other forms for specialised purposes.
 
 -   Each variable goes in a column.
 -   Each observation goes in a row.
 -   Each value goes in a cell.
 
-And this explanation seems to mostly work for people, even without a precise definition of variable and obseration. I explored this idea in detail in the "Tidy data" paper, <https://www.jstatsoft.org/article/view/v059i10>.
+This definition seems to mostly work for people, even without a precise definition of variable and observation, and make it much easier for folks to identify the structure of a data set and how it needed be transformed.
 
-(This is certainly not the only data stucture you might ever want to use, but it's extremely useful to have a organising structure that you can rely on for the majority of your work. It's a great default, even if you might need other forms for specialised purposes.)
+The tools needs to effect that transformation quite some iteration and evolution before I was happy with them. The tidy data paper was paired with the tidyr package, which initially provided the `gather()` and `spread()` functions. Unfortunately many people (including me!) had a hard time remembering which was which and what their arguments did. Additionally, their design wasn't quite flexible enough to handle all the problems which we later discovered in practice. In [tidyr 1.0.0](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/) (2019) resolved many of these problems by introducing the new`pivot_longer()` and `pivot_wider()` functions[^6].
 
-These principles made it much easier to identify the status of a data set and determine whether it was likely to be a good fit for the functions of the tidyverse. But it took some further evolution before I was happy with the tools to convert from one form to another. tidyr started by providing the `gather()` and `spread()` functions, but many people had a hard time remembering which was which, and their original design wasn't quite flexible enough to handle all the problems which we later discovered (particularly when multiple variables were encoded in the columns). In [tidyr 1.0.0](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/) (released in 2019), these were superseded by `pivot_longer()` and `pivot_wider()`.
+[^6]: The names of these functions were informed functions was informed by some casual user research performed by asking my twitter followers a couple of questions. I received \~2,600 responses which you can learn read more about on <https://github.com/hadley/table-shapes>.
 
-Performed a casual survey, publicised via twitter, to determine what names people use to refer to . Received 2,649 results. (This is one of the reasons that I have found social media so rewarding: it makes it very easy to rapidly validate research). <https://github.com/hadley/table-shapes>
+tidyr 1.0.0 also expanded the scope of the package to encompass "rectangling", what we called turning hierarchical data into tidy rectangles. This was becoming increasingly important as more data was coming from JSON web API, which tended to produce highly nested data structures. You can learn more about the problem and the solutions that tidyr provides in the tidyr [rectangling vignette](https://tidyr.tidyverse.org/articles/rectangle.html).
 
-tidyr 1.0.0 also expanded the scope of the package to encompass "rectangling", the art of tidying the deeply nested data that you get back from JSON web APIs. And formed connenctions between various ways of nesting data frames inside of other data frames. My enthusiasm for these data structures has waxed and waned over time, but they're certainly useful to be aware of and I really appreciate the beauty of an approach that unifies the ways of working with them.
+```{=html}
+<!--
+This work also stimulated my thinking around the more complex data structures that nested data frames inside of other data frames. \@fig-nest-pack-chop illustrates my thinking at the time, connecting three different ways of representing the same data. My enthusiasm for these data structures has waxed and waned over the years, but they're certainly theoretical structures and I really appreciate the beauty of an approach that unifies the ways of working with them.
 
 ::: {#fig-nest-pack-chop}
 ![](nest-pack-chop.png)
 
 Three ways of representing the same data. On the right, we have a flat data frame. On the right, a nested data frame, where the data column is a list of data frames. On the bottom, we have a packed data frame, where the data column is itself a data frame.
 :::
+-->
+```
 
 ### tibbles
 
-Somewhat related to tidy data is the "tibble", an extension of the base R data.frame class. I created the tibble class to solve a few problems that I found annoying with data.frames, particularly around printing and subsetting.
+Tidy data provides the big picture theoretical framework to help you understand productive ways of organising your data. But you also need convenient data structures to work with your tidy data and I created the tibble (an extension of the base R data.frame class) to solve a few problems that I found annoying. The problems are individually rather small, but I believed that they added needless friction and I had the confidence to believe I could do better.
 
-tibbles fix a number of individually small printing issues that bothered me about data frames:
+-   Data frames often flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even abort this printing, so you could easily lock yourself out of the console for quite a long time if you printed a big data frame. tibbles only print a small number of rows and only the columns that fit on one screen.
 
--   Often flooded my console with output when working with large datasets. In older versions of R, this printing wasn't interruptible, so you could easily lock yourself out of the console for quite a long time if you printed a big data frame. tibbles only print a small number of rows and only the columns that fit on one screen.
+-   When teaching, I found that students didn't have a good sense of the type of each column, and even I sometimes found myself confused about whether a column was a date, a string, or factor. To avoid this problem, tibbles show (abbreviated) variable types underneath the column names.
 
--   When teaching, I found that students didn't have a good sense of what type each variable was (and even I sometimes got confused whether a variable was a date or a string). tibbles include the variable types in the heading.
+-   In the unfortunate case you have `data.frame(x = c(NA, "<NA>"))`, there's no way to figure to distinguish the two values from the printed output. Tibbles use a side-channel, colour, to ensure that there's no way to confuse a missing value with a string that has the same printed representation.
 
--   In the unfortunate case you have this data frame `data.frame(x = c(NA, "<NA>"))`, there's no way to figure out which value is actually missing. Tibbles use a side-channel, colour, to ensure that there's no way to mix up a missing value with a string that has the same printed representation.
+-   My experiments with nested and packed columns required better printing tools. While they are technically supported by base data frames their printing is sufficiently confusing that their utility is much hampered. Tibbles strive to represent these more complex data types in an readable way.
 
--   My experiments with nested and packed columns required better printing tools. While they are technically supported by base data frames their printing is sufficiently confusing that their utility is much hampered.
+There are also a few gotchas with subsetting data frames that make it easy to make silent errors in package code. For example:
 
-There are a few gotchas with subsetting data frames that make it easier to make silent mistakes. `df[, cols]` will return a vector if `cols` selects one column and a data frame if it selects more than one column. `df$x` does partial matching. Subsetting a tibble with `[` always returns another tibble and `$` never does partial matching. It will also complain if `x` does not exist. For these reasons, I have often jokingly framed tibbles as a lazier and surlier version of data frames.
+-   `df[, cols]` will return a vector if `cols` selects one column and a data frame if it selects more than one column.
 
-tibbles started life in dplyr, originally just called `tbl_df` with no suggestion as how to pronounce. [Kevin Ushey](https://x.com/kevin_ushey/status/514659005621219329) proposed pronouncing as tibble-diff, and the tibble bit stuck. Tibbles started lif in the dplyr package but were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
+-   `df$x` does partial matching, so that if column `x`doesn't exist but column `xyz` does, it will silently return `df$xyz`.
+
+For these reasons, subsetting a tibble with `[` always returns another tibble and `$` never does partial matching. It will also complain if `x` does not exist. This why I jokingly say that tibbles are a lazier and surlier version of data frames.
+
+tibbles started life in dplyr, originally just called `tbl_df` with no suggestion as how to pronounce this pure consonant class name. [Kevin Ushey](https://x.com/kevin_ushey/status/514659005621219329) proposed pronouncing them as tibble-diff in 2014, and the tibble bit stuck. As the utility and complexity of tibbles expanded, they need more space to grow and were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
 
 tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages, and my strong opinions about the formatting of significant digits also caused some consternation. That seems to have mostly died down now. Today I am much more cautious about introducing new data strucutres: they are fundamentally much more costly that introduction new functiosn and packages, and even programming paradigms.
 
 ### The pipe
 
-> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. --- Hal Abelson
+> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system.
+>
+> --- Hal Abelson
 
-You can't talk about the tidyverse without talking about the pipe. I think the pipe has probably had more impact on R programming in and out of the tidyverse than any other idea. You can find an excellent and detailed history of the pipe by Adolfo Álvarez [on his blog](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/). I've summarised this history below, along with some personal colour.
+The pipe has grown to be one of the defining features of the tidyverse. It allows you to rewrite function composition (e.g. `f(g(x)))` as a linear sequence of transformations (e.g. `x |> f() |> g()`). This makes certain programming patterns that are common in data science much easier to read, and has gained rapid community adoption.
 
-First pipe operator introduced in dplyr in Oct 2013, `%.%`. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better `%>%` (since you can hold down the shift button the whole time) and it had more features comprehensive, so I quickly switched to using magrittr and deprecated the dplyr equivalent.
+My first attempt at the pipe was implemented in dplyr in Oct 2013 and called `%.%`. When I announced dplyr in Jan 2014, I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. It used `%>%` instead of `%.%`, which was easier to type since you can hold down the shift button the whole time[^7], and had more comprehensive features. So I quickly switched to magrittr and deprecated `%.%`. If you'd like to learn more about the history, I'd highly recommend "[Plumbers, chains, and famous painters: The (updated) history of the pipe operator in R](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/)" by Adolfo Álvarez.
 
-Called the pipe and pronounced "then".
+[^7]: The requirement for infix function names to start and end with `%` comes from R, and there's no avoiding it without patching R itself.
 
-Today the pipe is available in base R thanks to much collaborative effort. Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch to R in 2016 and Jim Hester presented it at the DSC in 2017. This had a positive impact but it took some time for the R Core Team to fully align on its benefits. But thanks to the work of Luke Tierney it was added to R in 4.1 (2020) along with lambda syntax and raw strings. Because R could modify the parser, the base pipe was written `|>`. Took a few iterations to get a placeholder syntax (`_` in 4.2) and the ability to pipe into functions like `$` (in 4.3). Final major magrittr release (<https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/>) to bring consistency between magrittr and base pipe. Now gradually moving all tidyverse packages to the base pipe and beginning the long process of
+Today the pipe is available in base R thanks to much collaborative effort. Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch to R in 2016 and Jim Hester presented it at the DSC in 2017. This had a positive impact but it took some time for the R Core Team to fully align on its benefits. But thanks to the work of Luke Tierney it was added to R in 4.1 (2020) along with lambda syntax and raw strings. Because R could modify the parser, the base pipe was written `|>`. Took a few iterations to get a placeholder syntax (`_` in 4.2) and the ability to pipe into functions like `$` (in 4.3). Today, we are gradually moving all tidyverse packages to use base pipe.
 
-As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring a switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E).
+As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring the switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E).
 
 ### Tidy evaluation
 
@@ -345,9 +358,9 @@ Tidy evaluation is still one of the hardest parts to grasp, but I think that's u
 
 You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan and I co-discovered hex stickers around the same time through <https://hexb.in>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
 
-I'm pretty sure the first hex logo was magrittr's[^5], designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinhart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design.
+I'm pretty sure the first hex logo was magrittr's[^8], designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinhart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design.
 
-[^5]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
+[^8]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
 
 ::: {#fig-early-logos layout-ncol="2"}
 ![](ggplot2.png){needs-quarto-bug-workaround="true"}
