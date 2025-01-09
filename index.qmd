@@ -343,7 +343,11 @@ Tidy evaluation is still one of the hardest parts to grasp, but I think that's u
 
 ### Hex logos
 
-Not possible to discuss the tidyverse without also including a discussion of hex logos. It appears that Stefan and I again co-discovered <https://hexb.in> around the same time. I love having a shape that tiles the plane (and is bit more intersting than a square) and a spec that ensures every one's stickers are the same size and the same orientation (point down!). While the early history of hex logos is now a little murky, I'm pretty sure the first hex logo was magrittr's: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png> in Dec? 2014.
+You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan and I co-discovered hex stickers around the same time through <https://hexb.in>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
+
+I'm pretty sure the first hex logo was magrittr's[^5], designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinhart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design.
+
+[^5]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
 
 ::: {#fig-early-logos layout-ncol="2"}
 ![](ggplot2.png){needs-quarto-bug-workaround="true"}
@@ -353,11 +357,7 @@ Not possible to discuss the tidyverse without also including a discussion of hex
 Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can't find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
 :::
 
-By looking at emails, it looks like I fully I embraced the idea of hex stickers and started the creation for the major packages in early 2015. By mid-2016 we were ordering en masse for RStudio events, and the R community started to really coalesce around the idea. For my own packages, it now doesn't feel like a real package before it has a logo and sometime I have a name and logo before I even write any code.
-
-I love them as a community building tool, as people looking at your laptop can immediately recognise you. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers.
-
-Today, the vast majority of packages have a logo and I love the diversity of visual styles. Hex wall? My hex sticker board.
+I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and @fig-hex-wall shows a collection of stickers that I've been given over the years. @fig-hex-wall shows the Posit conf's hex wall, which is a popular place to take selfies.
 
 ::: {#fig-hex-office}
 ![](hex-office.jpg)
@@ -368,52 +368,28 @@ In my office I've made a display board with all the stickers that I've been gift
 ::: {#fig-hex-wall}
 ![](hex-wall.png)
 
-posit::conf() (and rstudio::conf() before) it features a hex wall that's a popular place to take photos.
+posit::conf() (and rstudio::conf() before) features a hex wall that's a popular place to take photos.
 :::
-
-(As an aside I think one of the weirdest parts of the python community is that they don't have cool and colourful logos for their packages!)
 
 ## Growing the tidyverse
 
-```{r}
-package_release |>
-  count(year = year, maintainer) |>
-  ggplot(aes(year, n, fill = maintainer == "Hadley Wickham")) +
-  geom_col() +
-  labs(fill = "Is Hadley?") +
-  theme(legend.position = "bottom")
+While even the precursors to the tidyverse were greatly aided by discussions on mailing lists, the rise of GitHub and social media (particularly #rstats twitter) lead to substantial contributions from the community.
 
-package_release |>
-  filter(n_distinct(maintainer) > 1, .by = package) |>
-  arrange(desc(release)) |>
-  ggplot(aes(date, forcats::fct_reorder(package, date, min))) +
-  geom_point(aes(colour = maintainer == "Hadley Wickham")) +
-  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
-  # scale_colour_brewer(palette = "BuPu", direction = -1) +
-  labs(
-    x = NULL,
-    y = NULL
-  ) +
-  theme(legend.position = "none")
+As those contributions grew, so did RStudio, and the opportunity to hire members of the community. Forming the tidyverse, and then tidymodels.
 
-# But fails to include dplyr or tidyr where really I'm not longer the maintainer
-```
-
-Bit about the team at RStudio (now posit). Need to think about how to frame
-
+-   Lionel Henry (2016-)
 -   Jim Hester (2016-2021)
 -   Mara Averick (2017-2023)
--   Romain Francois (2018-2023)
--   Tracy Teal (2021-2023)
--   Andy Teucher (2023)
 -   Jenny Bryan (2017-)
 -   Gabor Csardi (2017-)
--   Lionel Henry (2016-)
+-   Romain Francois (2018-2023)
 -   Thomas Lin Pedersen (2018-)
--   George Stagg (2022-)
 -   Davis Vaughan (2018-)
+-   Tracy Teal (2021-2023)
+-   George Stagg (2022-)
+-   Andy Teucher (2023)
 
-Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao,
+Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao.
 
 ggplot2 interns:
 
@@ -444,7 +420,7 @@ R has an extensive collection of user-created modeling packages and the tidymode
 
 tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max's initial idea was to give it the code name "carrot" to confuse outside users. Hadley proposed "parsnip," and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.
 
-### R for data science
+### R for Data Science
 
 R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.
 
@@ -466,7 +442,7 @@ ggplot2 contributors framework. ggplot2 interns. ggplot2 extension group.
 
 <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>
 
-### Maintaining the tidyverse
+## Maintaining the tidyverse
 
 For the last few years, the tidyverse has felt pretty mature to me. It's certainly not perfect, but it feels like we have all of the main pieces in place, and much of the remaining work is grinding down the minor inconsistencies between them. Overall, the goal of the tidyverse is now consoliation and maintainence, not growth. There have been three major initiatives that have helped us create a more cohesive and streamlined experience for everyone using it.
 
