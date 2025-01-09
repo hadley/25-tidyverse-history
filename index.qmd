@@ -175,29 +175,21 @@ This also felt like the time where I started to become particularly well known i
 
 ## Naming and defining the tidyverse
 
-As the collection of packages I had developed grew, the community needed some name to collectively refer to them, and many people started calling them the "Hadleyverse" (e.g. https://github.com/imanuelcostigan/hadleyverse). I found this name unappealing because by this point the packages weren't just my work, and I found it overweeningly arrogant to refer to my own oeuvre as the "Hadleyverse" (a name I still can't say or write without making a face).
+As the collection of packages I had developed grew, the community needed some name to refer to them collectively, and many people started calling them the "Hadleyverse" (e.g. https://github.com/imanuelcostigan/hadleyverse). I found this name unappealing because the packages weren't just my work and I felt uncomfortable tying the work so closely to my name. So I started brainstorming an "official" name that I could live with. Unfortunately I can no longer find the discussion, but possibl names included the sleekverse, the dapperverse, and the deftverse. It seems inevitable now that it should be called the tidyverse, given the success of tidy data, and announced this name to the world at my keynote at useR on June 29, 2016.
 
-So I started the process of coming up with an official name that I could live with. Unfortunately I can no longer find the discussion, but alternatives included the sleekverse, the dapperverse, and the deftverse. Given the success of tidy data, I eventually decided that the tidyverse was the most natural name, and announced this to the world at useR 2016, June 29.
+A few months later in September, I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). This package had two main goals:
 
-Shortly afterwards (in September), I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). Two goals: make it easy to install all the dependencies and make it easy to load the most common packages. Core packgaes: ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr. tidyverse 2.0.0 (March 2023) added lubridate.
+-   To make it easy to install all packages in the tidyverse with a single line of code, `install.packages("tidyverse")` so that folks could easily get a "batteries included" data science environment.
 
-Giving the tidyverse a name created a bigger question. What exactly is the tidyverse? What are the unifying principles the underlie all packages in the tidyverse?
+-   To make it easy to load the most common packages, so that you could type `library(tidyverse)` instead of having to load packages one by one. We called these packages the **core** packgaes and in the first release these were ggplot2, dplyr, tidyr, readr, purrr, tibble. tidyerse 1.2.0 (September 2017) added forcats and stringr to the core packages, and tidyverse 2.0.0 (March 2023) added lubridate.
 
-The goal was always to provide composable "lego blocks" that allowed you to build up the unique analysis toolkit that you needed. Learning one part of the tidyverse should help you to learn the next because of shared conventions.
-
-In this section, I'll discuss some of our attempts to describe the unifying principles of the tidyverse. But also want to talk about five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.
-
-(Precise definition of even which package is in the tidyverse is a little tricky. Have tidyerse core, tidyverse extended, and then also the tidyverse organisation on github.)
-
-### tidyverse principles
-
-In my useR talking naming the tidyverse, I cited three unifying principles:
+Naming tidyverse created a bigger question. What exactly is the tidyverse? What are the unifying principles the underlie all packages in the tidyverse? In my useR talk I cited three unifying principles:
 
 -   Uniform data structures
 -   Uniform APIs
 -   Support referential transparency
 
-> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. --- Hal Abelson
+I think the first two are straightforward to understand: it's easy to learn new tools if they share data structure and interface design with existing tools. That way you can learn a few big new ideas and then apply in as many places. But what does referential transparency refer to? That's a call to the principles of tidy evaluation, which we'll come back to shortly.
 
 I think the first two are straightforward to understand. The goal of the tidyverse is to make it easy to learn by sharing data structures and interface design across as many functions as possible. You learn a few big new ideas and then apply them in as many places as possible. But what does referential transparency refer to? That's a call to the principles of tidy evaluation, which we'll come back to shortly.
 
@@ -210,7 +202,7 @@ I repeated this talk a few times and by December the principles had been refined
 
 > Programs must be written for people to read, and only incidentally for machines to execute. --— Hal Abelson
 
-And that has since been further refined to the four guiding principles elucidate at <https://design.tidyverse.org/unifying.html>:
+Since that time I've continued to refine my description of what it means to be part of the tidyverse. You can see my latest iteration at <https://design.tidyverse.org/unifying.html>. At the time of writing this paper, the four principles were:
 
 -   It is **human centered**, i.e. the tidyverse is designed specifically to support the activities of a human data analyst.
 
