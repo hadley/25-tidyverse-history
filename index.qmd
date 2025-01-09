@@ -39,12 +39,19 @@ This article summarises almost 20 years of package development encompassing over
 #| fig-cap: >
 #|   A timeline of tidyverse (and adjacent) package releases.
 package_release |>
-  # filter(!type != "db") |>
+  filter(type %in% c("core", "tidyverse")) |>
+  mutate(release = if_else(release == "first", "major", release)) |>
   count(year, release) |>
   tidyr::complete(year, release, fill = list(n = 0)) |>
   ggplot(aes(year, n, colour = release)) +
   geom_line(linewidth = 1) +
-  labs(x = NULL, y = "Number of package releases")
+  labs(
+    title = "tidyverse package releases",
+    x = NULL,
+    y = "Number of releases",
+    colour = "Release type"
+  ) +
+  theme(legend.position = "bottom")
 ```
 
 ## Before the tidyverse
@@ -56,8 +63,12 @@ While the tidyverse was named in 2016, most of the packages inside of it were cr
 #| fig-cap: >
 #|   Initial releases of tidyverse packages and important precusors.
 #|   The vertical line indicates the release of the tidyverse package.
+#|   Core tidyverse packages appear in bold in the y-axis labels.
 package_release |>
-  mutate(is_first = release == "first") |>
+  mutate(
+    is_first = release == "first",
+    package = ifelse(type == "core", paste0("**", package, "**"), package)
+  ) |>
   filter(
     type %in% c("core", "tidyverse", "precursor"),
     package != "tidyverse"
@@ -69,7 +80,10 @@ package_release |>
   scale_colour_manual(values = c("grey80", "black")) +
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
   labs(x = NULL, y = NULL) +
-  theme(legend.position = "none")
+  theme(
+    legend.position = "none",
+    axis.text.y.left = ggtext::element_markdown()
+  )
 ```
 
 ### Growing up
