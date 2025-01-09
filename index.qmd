@@ -212,7 +212,9 @@ Since that time I've continued to refine my description of what it means to be p
 
 -   It is **inclusive**, because the tidyverse is not just the collection of packages, but it is also the community of people who use them.
 
-https://design.tidyverse.org/unifying.html
+## Key contributions
+
+In this section, I'll discuss five specific innovations strongly associated with the tidyverse: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.
 
 ### Tidy data
 
@@ -262,6 +264,8 @@ tibbles were a much more contentious data structure than I had anticipated. They
 
 ### The pipe
 
+> No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system. --- Hal Abelson
+
 You can't talk about the tidyverse without talking about the pipe. I think the pipe has probably had more impact on R programming in and out of the tidyverse than any other idea. You can find an excellent and detailed history of the pipe by Adolfo Álvarez [on his blog](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/). I've summarised this history below, along with some personal colour.
 
 First pipe operator introduced in dplyr in Oct 2013, `%.%`. Announced dplyr and this pipe operator in Jan 2014, where I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. Its syntax was better `%>%` (since you can hold down the shift button the whole time) and it had more features comprehensive, so I quickly switched to using magrittr and deprecated the dplyr equivalent.
@@ -282,16 +286,24 @@ The need for tidy evaluation is fairly simple to explain. If you have repeated c
 
 ```{r}
 #| eval: false
-df1 |> group_by(g1) |> summarise(mean = mean(a))
-df2 |> group_by(g2) |> summarise(mean = mean(b))
-df3 |> group_by(g3) |> summarise(mean = mean(c))
+df1 |>
+  group_by(g1) |>
+  summarise(mean = mean(a))
+df2 |>
+  group_by(g2) |>
+  summarise(mean = mean(b))
+df3 |>
+  group_by(g3) |>
+  summarise(mean = mean(c))
 ```
 
 But the naive approach doesn't work:
 
 ```{r}
 grouped_mean <- function(df, group_var, summary_var) {
-  df |> group_by(group_var) |> summarise(mean = mean(summary_var))
+  df |>
+    group_by(group_var) |>
+    summarise(mean = mean(summary_var))
 }
 ```
 
@@ -309,7 +321,9 @@ I still believe that these big ideas are correct and useful. But they're primary
 
 ```{r}
 grouped_mean <- function(df, group_var, summary_var) {
-  df |> group_by(!!enquo(group_var)) |> summarise(mean = mean(!!enquo(summary_var)))
+  df |>
+    group_by(!!enquo(group_var)) |>
+    summarise(mean = mean(!!enquo(summary_var)))
 }
 ```
 
@@ -317,7 +331,9 @@ This sent us back to the drawing board and eventually we came up with a new appr
 
 ```{r}
 grouped_mean <- function(df, group_var, summary_var) {
-  df |> group_by({{ group_var }}) |> summarise(mean = mean({{ summary_var }}))
+  df |>
+    group_by({{ group_var }}) |>
+    summarise(mean = mean({{ summary_var }}))
 }
 ```
 
