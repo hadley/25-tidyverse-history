@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hadley Wickham">
-<meta name="dcterms.date" content="2025-01-09">
+<meta name="dcterms.date" content="2025-01-13">
 
 <title>A brief history of the tidyverse</title>
 <style>
@@ -88,7 +88,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e1e378e796bdd1aa61cf7dc9c87af473.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7bfb9ce031f0150bcdd0059ffcd3ab40.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -96,10 +96,10 @@ div.csl-indent {
 
 <meta name="citation_title" content="A brief history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2025-01-09">
-<meta name="citation_cover_date" content="2025-01-09">
+<meta name="citation_publication_date" content="2025-01-13">
+<meta name="citation_cover_date" content="2025-01-13">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-09">
+<meta name="citation_online_date" content="2025-01-13">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Tidy data;,citation_abstract=A huge amount of effort is spent cleaning data to get it ready for analysis, but there has been little research on how to make data cleaning as easy and effective as possible. This paper tackles a small, but important, component of data cleaning: data tidying. Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. This framework makes it easy to tidy messy datasets because only a small set of tools are needed to deal with a wide range of un-tidy datasets. This structure also makes it easier to develop tidy tools for data analysis, tools that both input and output tidy datasets. The advantages of a consistent data structure and matching tools are demonstrated with a case study free from mundane data manipulation chores.;,citation_author=Hadley Wickham;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_fulltext_html_url=https://www.jstatsoft.org/index.php/jss/article/view/v059i10;,citation_issue=10;,citation_doi=10.18637/jss.v059.i10;,citation_volume=59;,citation_journal_title=Journal of Statistical Software;">
 </head>
@@ -128,7 +128,7 @@ div.csl-indent {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 9, 2025</p>
+              <p class="date">January 13, 2025</p>
             </div>
           </div>
           
@@ -168,13 +168,12 @@ div.csl-indent {
   </ul></li>
   <li><a href="#growing-the-tidyverse" id="toc-growing-the-tidyverse" class="nav-link" data-scroll-target="#growing-the-tidyverse">Growing the tidyverse</a>
   <ul class="collapse">
-  <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels">tidymodels</a></li>
-  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science">R for Data Science</a></li>
-  <li><a href="#tidyverse-dev-day" id="toc-tidyverse-dev-day" class="nav-link" data-scroll-target="#tidyverse-dev-day">tidyverse dev day</a></li>
-  <li><a href="#tidyverse-community" id="toc-tidyverse-community" class="nav-link" data-scroll-target="#tidyverse-community">tidyverse community</a></li>
+  <li><a href="#the-tidyverse-team" id="toc-the-tidyverse-team" class="nav-link" data-scroll-target="#the-tidyverse-team">The tidyverse team</a></li>
+  <li><a href="#the-tidymodels-models" id="toc-the-tidymodels-models" class="nav-link" data-scroll-target="#the-tidymodels-models">The tidymodels models</a></li>
+  <li><a href="#package-authors" id="toc-package-authors" class="nav-link" data-scroll-target="#package-authors">Package authors</a></li>
   </ul></li>
   <li><a href="#maintaining-the-tidyverse" id="toc-maintaining-the-tidyverse" class="nav-link" data-scroll-target="#maintaining-the-tidyverse">Maintaining the tidyverse</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="index-preview.html"><i class="bi bi-journal-code"></i>Article Notebook</a></li></ul></div></nav>
 </div>
@@ -461,58 +460,47 @@ Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall th
 </section>
 <section id="growing-the-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="growing-the-tidyverse">Growing the tidyverse</h2>
+<p>Not just me; not just code. (Should these be two separate sections?)</p>
 <p>While even the precursors to the tidyverse were greatly aided by discussions on mailing lists, the rise of GitHub and social media (particularly #rstats twitter) lead to substantial contributions from the community.</p>
-<p>As those contributions grew, so did RStudio, and the opportunity to hire members of the community. Forming the tidyverse, and then tidymodels.</p>
-<ul>
-<li>Lionel Henry (2016-)</li>
-<li>Jim Hester (2016-2021)</li>
-<li>Mara Averick (2017-2023)</li>
-<li>Jenny Bryan (2017-)</li>
-<li>Gabor Csardi (2017-)</li>
-<li>Romain Francois (2018-2023)</li>
-<li>Thomas Lin Pedersen (2018-)</li>
-<li>Davis Vaughan (2018-)</li>
-<li>Tracy Teal (2021-2023)</li>
-<li>George Stagg (2022-)</li>
-<li>Andy Teucher (2023)</li>
-</ul>
-<p>Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao.</p>
-<p>ggplot2 interns:</p>
-<ul>
-<li>2016: <a href="https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/">Thomas Lin Pedersen</a></li>
-<li>2017: <a href="https://www.tidyverse.org/blog/2017/09/ggplot2-internship/">Kara Woo</a></li>
-<li>2018: <a href="https://www.danaseidel.com/MeetUpSlides">Dana Paige Seidel</a></li>
-<li>2019: <a href="https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/">Dewey Dunnington</a></li>
-</ul>
-<p>And in 2022, we hired Teun van Brand as a ggplot2 “fellow”. This is a position similar to a summer internship but instead of lasting six months, it’s lasted two years and counting.</p>
-<p>reprex, gargle, googlesheets4, googledrive</p>
-<p>rlang, tidyselect</p>
-<p>cli, pillar</p>
-<p>tidyverse.org (particularly the blog), June 2017. <a href="https://www.tidyverse.org/blog/2017/07/welcome/" class="uri">https://www.tidyverse.org/blog/2017/07/welcome/</a></p>
-<section id="tidymodels" class="level3">
-<h3 class="anchored" data-anchor-id="tidymodels">tidymodels</h3>
+<p>R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels. Incredibly successful book. Many translations. I’m particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).</p>
+<p>The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains. I also enjoy watching people grow as contributors, possibly starting off filing issues, learning how to create good reprexes, contributing documentation improvements and bug fixes, answer other people’s questions, propopsing new designs and thoughtfully critiquing existing designs, brainstorming better names. The tidyverse wouldn’t be a fraction as good as it is today without the many ways that the community has helped make it better.</p>
+<section id="the-tidyverse-team" class="level3">
+<h3 class="anchored" data-anchor-id="the-tidyverse-team">The tidyverse team</h3>
+<p>Joining RStudio not only gave me the time to work on the tidyverse, but also enabled me to a pay others to work full or part time on the tidyverse. Current members of the tidyverse team include Lionel Henry, Jenny Bryan, Gábor Csárdi, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand. The tidymodels subteam is led by Max Kuhn and includes Hannah Frick, Simon Couch, and Emil Hvitfeldt. Past members include Jim Hester, Mara Averick, Romain Francois, Mine Cetinkaya-Rundel, Tracy Teal and Andy Teucher; but even those these folks are no longer employees many of them remain active members of “team tidyverse”. RStudio’s support also include funding a number of ggplot2 summer interns, <a href="https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/">Thomas Lin Pedersen</a> (2016) <a href="https://www.tidyverse.org/blog/2017/09/ggplot2-internship/">Kara Woo</a> (2017) <a href="https://www.danaseidel.com/MeetUpSlides">Dana Paige Seidel</a> (2018) <a href="https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/">Dewey Dunnington</a> (2019). And a number of paid contractors including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, and Charlie Gao.</p>
+<!--
+-   Lionel Henry (2016-)
+-   Jenny Bryan (2017-)
+-   Gabor Csardi (2017-)
+-   Thomas Lin Pedersen (2018-)
+-   Davis Vaughan (2018-)
+-   George Stagg (2022-)
+
+-   Jim Hester (2016-2021)
+-   Mara Averick (2017-2023)
+-   Romain Francois (2018-2023)
+-   Tracy Teal (2021-2023)
+-   Andy Teucher (2023)
+-->
+<p>As well as writing the code that powers the tidyverse, the team also contributes to our best practices. Includes the developement of the package release checklist (as implemented in <code>usethis::use_release_isse()</code>), a <a href="https://style.tidyverse.org">style guide</a>, <a href="https://code-review.tidyverse.org">code-review guidelines</a>, and a work-in-progress exposition of the design principles that underlie the tidyverse. This is because our mission is not to just make great packages, but to also help other people get better at writing R code.</p>
+<p>Not just programming, but <a href="https://www.tidyverse.org/blog">writing blog posts</a>, writing books, speaking, teaching, and community building.</p>
+<p>You can also see this in books like Advanced R and R packages, but also the development of the “devtools” family of packages which aim to make it easier to build R packages.</p>
+<p>Team activities like spring cleaning. Helping each other out when our packages fail on CRAN. Provide a safe place where we can vent about things that bother us. Our goal is to vent in private so we can be gracious in public.</p>
+<p>Tidyverse developer days in <a href="https://www.tidyverse.org/blog/2024/04/tdd-2024/">2024</a>, <a href="https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/">2020</a> and <a href="https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/">2019</a>. These were disrupted by Covid, but we hope to run annually. They are a really fun time for the tidyverse team, and designed to get as many community members as possible to contribute.</p>
+</section>
+<section id="the-tidymodels-models" class="level3">
+<h3 class="anchored" data-anchor-id="the-tidymodels-models">The tidymodels models</h3>
 <p>From Max:</p>
 <p>Hadley contacted Max Kuhn to discuss what RStudio might want to do regarding statistical and ML modeling. They and owner JJ Allaire met in New York City on 2016-09-14. One idea proposed by Max was the outline of what would become the recipes package. After more discussions with JJ in Boston, Max joined the company on 2016-11-29.</p>
 <p>Max had already developed a popular R package called caret. That package provided functionality for basic predictive modeling tasks such as performance measures and resampling as well as a consistent user interface. Max’s idea was to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, censored regression models, and others. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools being developed (e.g., non-standard evaluation, etc.).</p>
 <p>R has an extensive collection of user-created modeling packages and the tidymodels package has a much higher reliance on external dependencies than the tidyverse. Previous work on caret led to a very long list of formal dependencies, which made it difficult to maintain and not robust to sudden changes to these dependencies. To avoid this in tidymodels, many calls to external modeling packages are made by programmatically by constructing symbolic calls to those functions. In doing this, the tidymodels code base is smaller and depends on fewer external “hard dependencies.”</p>
 <p>tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max’s initial idea was to give it the code name “carrot” to confuse outside users. Hadley proposed “parsnip,” and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.</p>
 </section>
-<section id="r-for-data-science" class="level3">
-<h3 class="anchored" data-anchor-id="r-for-data-science">R for Data Science</h3>
-<p>R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.</p>
-<p>Incredibly successful book.</p>
-<p>Many translations. I’m particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).</p>
-</section>
-<section id="tidyverse-dev-day" class="level3">
-<h3 class="anchored" data-anchor-id="tidyverse-dev-day">tidyverse dev day</h3>
-</section>
-<section id="tidyverse-community" class="level3">
-<h3 class="anchored" data-anchor-id="tidyverse-community">tidyverse community</h3>
-<p>welcome to the tidyverse. Cited ~15,000 in Nov 2024. Makes it easy to cite the tidyverse (instead of citing individual packages or papers) and also gives academic credit to tidyverse maintainers who might benefit from it.</p>
-<p>Other tidyverse maintainers.</p>
-<p>ggplot2 governance.</p>
-<p>ggplot2 contributors framework. ggplot2 interns. ggplot2 extension group.</p>
+<section id="package-authors" class="level3">
+<h3 class="anchored" data-anchor-id="package-authors">Package authors</h3>
+<p>ggplot2 governance. <a href="https://github.com/tidyverse/tidyups/blob/main/004-governance.md" class="uri">https://github.com/tidyverse/tidyups/blob/main/004-governance.md</a></p>
+<p>welcome to the tidyverse. Cited ~16,000 times in Jan 2025. Makes it easy to cite the tidyverse (instead of citing individual packages or papers) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, Hiroaki Yutani</p>
 <p><a href="https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/" class="uri">https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/</a></p>
+<p>Since we’ve published that paper we’ve gained a few new maintainers including Maximilian Girlich, Mark Fairbanks, Ryan Dickerson, Danny Smith, Maxim Shemanarev, and Teun van den Brand.</p>
 </section>
 </section>
 <section id="maintaining-the-tidyverse" class="level2">
@@ -525,15 +513,14 @@ Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall th
 </ul>
 <p>What does the future hold? When I think about the tidyverse today, there’s only one sweeping change that I’d like to make, and that’s introducing <em>editions</em>. You would deliberately opt-in to an edition by running code like <code>tidyverse::edition(2025)</code>, stating that you want to adopt our recommended practices as of 2025. Editions would generally change defaults and disable superseded functions and arguments, ensuring that you’re using our latest API recommendations. Editions makes it possible for us to change behaviour that we now believe is suboptimal without breaking existing code. You can continue to use the latest package versions (ensuring that you get new features and bug fixes) but you can increase the edition when its convenient for you to spend some time refactoring your code. For example, we could use editions to change the default colour schemes in ggplot2, which we now know could be improved.</p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
 <p>As the tidyverse becomes more mature, the places where the tidyverse team spends our innovation energy have started to change. Broadly, the mission of the team is to make R more awesome for doing data science, and we’re willing to go whereever this takes us. Currently there are three new areas that we are exploring as a team:</p>
 <ul>
 <li><p><strong>Positron</strong>. <a href="https://github.com/posit-dev/positron">Positron</a> is a new IDE for data science, produced by the same team that created RStudio. The tidyverse team has been deeply involved in the R tooling. This is exciting because it gives us the skills for tighter integrations in the future. Code where coding makes sense, and use an graphical user interface where that is a better fit for the task.</p></li>
 <li><p><strong>R in production</strong>. If you’re working in industry, most tasks aren’t completed by writing a one-off report. Instead you will typically produce an artifact that’s run repeatedly on another machine. This is the challenge of putting your code in production, which in my opinion at least currently suffers from a thousand paper cuts. From getting your database authentication to work to ensuring that you’re using exactly the same dependencies both in development and deployment, and over time, there are a lot of rough edges that you have to overcome that are not directly related to doing data science. I’m convinced that we can make this better.</p></li>
 <li><p><strong>LLMs for data science</strong>. Pretty clear now that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements. Allow you to get help where you need it and automate fiddly annoying tasks. Also provides a new tool kit creating tidy data frames from unstructured data, which seems likely to considerably expand the reach of the tidyverse to new types of data. Still very early days, but one initiative is the <a href="https://elmer.tidyverse.org">elmer package</a> which lets you call LLMs from R.</p></li>
 </ul>
-<p>Encompasses much of my output for the last 20 years, so it’s hard to summarise it all. I hope you forgive me for anything I’ve forgotten, and please feel to reach out if there’s something important that you think I’m missing.</p>
 
 </section>
 

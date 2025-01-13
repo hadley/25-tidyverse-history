@@ -386,42 +386,50 @@ posit::conf() (and rstudio::conf() before) features a hex wall that's a popular 
 
 ## Growing the tidyverse
 
+Not just me; not just code. (Should these be two separate sections?)
+
 While even the precursors to the tidyverse were greatly aided by discussions on mailing lists, the rise of GitHub and social media (particularly #rstats twitter) lead to substantial contributions from the community.
 
-As those contributions grew, so did RStudio, and the opportunity to hire members of the community. Forming the tidyverse, and then tidymodels.
+R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels. Incredibly successful book. Many translations. I'm particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).
 
+
+The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains. I also enjoy watching people grow as contributors, possibly starting off filing issues, learning how to create good reprexes, contributing documentation improvements and bug fixes, answer other people's questions, propopsing new designs and thoughtfully critiquing existing designs, brainstorming better names. The tidyverse wouldn't be a fraction as good as it is today without the many ways that the community has helped make it better.
+
+
+
+### The tidyverse team
+
+Joining RStudio not only gave me the time to work on the tidyverse, but also enabled me to a pay others to work full or part time on the tidyverse. Current members of the tidyverse team include Lionel Henry, Jenny Bryan, Gábor Csárdi, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand. The tidymodels subteam is led by Max Kuhn and includes Hannah Frick, Simon Couch, and Emil Hvitfeldt. Past members include Jim Hester, Mara Averick, Romain Francois, Mine Cetinkaya-Rundel, Tracy Teal and Andy Teucher; but even those these folks are no longer employees many of them remain active members of "team tidyverse". RStudio's support also include funding a number of ggplot2 summer interns, [Thomas Lin Pedersen](https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/) (2016)
+[Kara Woo](https://www.tidyverse.org/blog/2017/09/ggplot2-internship/) (2017)
+[Dana Paige Seidel](https://www.danaseidel.com/MeetUpSlides) (2018)
+[Dewey Dunnington](https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/) (2019). And a number of paid contractors including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, and Charlie Gao.
+
+<!--
 -   Lionel Henry (2016-)
--   Jim Hester (2016-2021)
--   Mara Averick (2017-2023)
 -   Jenny Bryan (2017-)
 -   Gabor Csardi (2017-)
--   Romain Francois (2018-2023)
 -   Thomas Lin Pedersen (2018-)
 -   Davis Vaughan (2018-)
--   Tracy Teal (2021-2023)
 -   George Stagg (2022-)
+
+-   Jim Hester (2016-2021)
+-   Mara Averick (2017-2023)
+-   Romain Francois (2018-2023)
+-   Tracy Teal (2021-2023)
 -   Andy Teucher (2023)
+-->
 
-Paid consultants including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, Charlie Gao.
+As well as writing the code that powers the tidyverse, the team also contributes to our best practices. Includes the developement of the package release checklist (as implemented in `usethis::use_release_isse()`), a [style guide](https://style.tidyverse.org), [code-review guidelines](https://code-review.tidyverse.org), and a work-in-progress exposition of the design principles that underlie the tidyverse. This is because our mission is not to just make great packages, but to also help other people get better at writing R code.
 
-ggplot2 interns:
+Not just programming, but [writing blog posts](https://www.tidyverse.org/blog), writing books, speaking, teaching, and community building.
 
--   2016: [Thomas Lin Pedersen](https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/)
--   2017: [Kara Woo](https://www.tidyverse.org/blog/2017/09/ggplot2-internship/)
--   2018: [Dana Paige Seidel](https://www.danaseidel.com/MeetUpSlides)
--   2019: [Dewey Dunnington](https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/)
+You can also see this in books like Advanced R and R packages, but also the development of the "devtools" family of packages which aim to make it easier to build R packages.
 
-And in 2022, we hired Teun van Brand as a ggplot2 "fellow". This is a position similar to a summer internship but instead of lasting six months, it's lasted two years and counting.
+Team activities like spring cleaning. Helping each other out when our packages fail on CRAN. Provide a safe place where we can vent about things that bother us. Our goal is to vent in private so we can be gracious in public.
 
-reprex, gargle, googlesheets4, googledrive
+Tidyverse developer days in [2024](https://www.tidyverse.org/blog/2024/04/tdd-2024/), [2020](https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/) and [2019](https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/). These were disrupted by Covid, but we hope to run annually. They are a really fun time for the tidyverse team, and designed to get as many community members as possible to contribute.
 
-rlang, tidyselect
-
-cli, pillar
-
-tidyverse.org (particularly the blog), June 2017. <https://www.tidyverse.org/blog/2017/07/welcome/>
-
-### tidymodels
+### The tidymodels models
 
 From Max:
 
@@ -433,27 +441,15 @@ R has an extensive collection of user-created modeling packages and the tidymode
 
 tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max's initial idea was to give it the code name "carrot" to confuse outside users. Hadley proposed "parsnip," and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.
 
-### R for Data Science
+### Package authors
 
-R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels.
+ggplot2 governance. <https://github.com/tidyverse/tidyups/blob/main/004-governance.md>
 
-Incredibly successful book.
-
-Many translations. I'm particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).
-
-### tidyverse dev day
-
-### tidyverse community
-
-welcome to the tidyverse. Cited \~15,000 in Nov 2024. Makes it easy to cite the tidyverse (instead of citing individual packages or papers) and also gives academic credit to tidyverse maintainers who might benefit from it.
-
-Other tidyverse maintainers.
-
-ggplot2 governance.
-
-ggplot2 contributors framework. ggplot2 interns. ggplot2 extension group.
+welcome to the tidyverse. Cited \~16,000 times in Jan 2025. Makes it easy to cite the tidyverse (instead of citing individual packages or papers) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, Hiroaki Yutani
 
 <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>
+
+Since we've published that paper we've gained a few new maintainers including Maximilian Girlich, Mark Fairbanks, Ryan Dickerson, Danny Smith, Maxim Shemanarev, and Teun van den Brand.
 
 ## Maintaining the tidyverse
 
@@ -467,7 +463,7 @@ For the last few years, the tidyverse has felt pretty mature to me. It's certain
 
 What does the future hold? When I think about the tidyverse today, there's only one sweeping change that I'd like to make, and that's introducing *editions*. You would deliberately opt-in to an edition by running code like `tidyverse::edition(2025)`, stating that you want to adopt our recommended practices as of 2025. Editions would generally change defaults and disable superseded functions and arguments, ensuring that you're using our latest API recommendations. Editions makes it possible for us to change behaviour that we now believe is suboptimal without breaking existing code. You can continue to use the latest package versions (ensuring that you get new features and bug fixes) but you can increase the edition when its convenient for you to spend some time refactoring your code. For example, we could use editions to change the default colour schemes in ggplot2, which we now know could be improved.
 
-## Conclusion
+## What's next?
 
 As the tidyverse becomes more mature, the places where the tidyverse team spends our innovation energy have started to change. Broadly, the mission of the team is to make R more awesome for doing data science, and we're willing to go whereever this takes us. Currently there are three new areas that we are exploring as a team:
 
@@ -476,5 +472,3 @@ As the tidyverse becomes more mature, the places where the tidyverse team spends
 -   **R in production**. If you're working in industry, most tasks aren't completed by writing a one-off report. Instead you will typically produce an artifact that's run repeatedly on another machine. This is the challenge of putting your code in production, which in my opinion at least currently suffers from a thousand paper cuts. From getting your database authentication to work to ensuring that you're using exactly the same dependencies both in development and deployment, and over time, there are a lot of rough edges that you have to overcome that are not directly related to doing data science. I'm convinced that we can make this better.
 
 -   **LLMs for data science**. Pretty clear now that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements. Allow you to get help where you need it and automate fiddly annoying tasks. Also provides a new tool kit creating tidy data frames from unstructured data, which seems likely to considerably expand the reach of the tidyverse to new types of data. Still very early days, but one initiative is the [elmer package](https://elmer.tidyverse.org) which lets you call LLMs from R.
-
-Encompasses much of my output for the last 20 years, so it's hard to summarise it all. I hope you forgive me for anything I've forgotten, and please feel to reach out if there's something important that you think I'm missing.
