@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
     <meta name="author" content="Hadley Wickham">
-    <meta name="dcterms.date" content="2025-01-13">
+    <meta name="dcterms.date" content="2025-01-14">
 
     <title>A brief history of the tidyverse</title>
     <style>
@@ -184,12 +184,13 @@
      
       <meta name="citation_title" content="A brief history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2025-01-13">
-<meta name="citation_cover_date" content="2025-01-13">
+<meta name="citation_publication_date" content="2025-01-14">
+<meta name="citation_cover_date" content="2025-01-14">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-13">
+<meta name="citation_online_date" content="2025-01-14">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Tidy data;,citation_abstract=A huge amount of effort is spent cleaning data to get it ready for analysis, but there has been little research on how to make data cleaning as easy and effective as possible. This paper tackles a small, but important, component of data cleaning: data tidying. Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. This framework makes it easy to tidy messy datasets because only a small set of tools are needed to deal with a wide range of un-tidy datasets. This structure also makes it easier to develop tidy tools for data analysis, tools that both input and output tidy datasets. The advantages of a consistent data structure and matching tools are demonstrated with a case study free from mundane data manipulation chores.;,citation_author=Hadley Wickham;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_fulltext_html_url=https://www.jstatsoft.org/index.php/jss/article/view/v059i10;,citation_issue=10;,citation_doi=10.18637/jss.v059.i10;,citation_volume=59;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=Welcome to the tidyverse;,citation_author=Hadley Wickham;,citation_author=Mara Averick;,citation_author=Jennifer Bryan;,citation_author=Winston Chang;,citation_author=Lucy D’Agostino McGowan;,citation_author=Romain François;,citation_author=Garrett Grolemund;,citation_author=Alex Hayes;,citation_author=Lionel Henry;,citation_author=Jim Hester;,citation_author=Max Kuhn;,citation_author=Thomas Lin Pedersen;,citation_author=Evan Miller;,citation_author=Stephan Milton Bache;,citation_author=Kirill Müller;,citation_author=Jeroen Ooms;,citation_author=David Robinson;,citation_author=Dana Paige Seidel;,citation_author=Vitalie Spinu;,citation_author=Kohske Takahashi;,citation_author=Davis Vaughan;,citation_author=Claus Wilke;,citation_author=Kara Woo;,citation_author=Hiroaki Yutani;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://doi.org/10.21105/joss.01686;,citation_issue=43;,citation_doi=10.21105/joss.01686;,citation_volume=4;,citation_journal_title=Journal of Open Source Software;,citation_publisher=The Open Journal;">
 </head>
 
   <body class="quarto-notebook">
@@ -223,7 +224,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 13, 2025</p>
+              <p class="date">January 14, 2025</p>
             </div>
           </div>
           
@@ -261,10 +262,16 @@
   <li><a href="#tidy-evaluation" id="toc-tidy-evaluation" class="nav-link" data-scroll-target="#tidy-evaluation">Tidy evaluation</a></li>
   <li><a href="#hex-logos" id="toc-hex-logos" class="nav-link" data-scroll-target="#hex-logos">Hex logos</a></li>
   </ul></li>
-  <li><a href="#growing-the-tidyverse" id="toc-growing-the-tidyverse" class="nav-link" data-scroll-target="#growing-the-tidyverse">Growing the tidyverse</a>
+  <li><a href="#the-tidyverse-team" id="toc-the-tidyverse-team" class="nav-link" data-scroll-target="#the-tidyverse-team">The tidyverse team</a>
   <ul class="collapse">
-  <li><a href="#the-tidyverse-team" id="toc-the-tidyverse-team" class="nav-link" data-scroll-target="#the-tidyverse-team">The tidyverse team</a></li>
-  <li><a href="#the-tidymodels-models" id="toc-the-tidymodels-models" class="nav-link" data-scroll-target="#the-tidymodels-models">The tidymodels models</a></li>
+  <li><a href="#the-people" id="toc-the-people" class="nav-link" data-scroll-target="#the-people">The people</a></li>
+  <li><a href="#the-mission" id="toc-the-mission" class="nav-link" data-scroll-target="#the-mission">The mission</a></li>
+  <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels">tidymodels</a></li>
+  </ul></li>
+  <li><a href="#tidyverse-community" id="toc-tidyverse-community" class="nav-link" data-scroll-target="#tidyverse-community">Tidyverse community</a>
+  <ul class="collapse">
+  <li><a href="#social-media" id="toc-social-media" class="nav-link" data-scroll-target="#social-media">Social media</a></li>
+  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science">R for Data Science</a></li>
   <li><a href="#package-authors" id="toc-package-authors" class="nav-link" data-scroll-target="#package-authors">Package authors</a></li>
   </ul></li>
   <li><a href="#maintaining-the-tidyverse" id="toc-maintaining-the-tidyverse" class="nav-link" data-scroll-target="#maintaining-the-tidyverse">Maintaining the tidyverse</a></li>
@@ -565,7 +572,7 @@ Three ways of representing the same data. On the right, we have a flat data fram
 <p>It took multiple years of struggle to get to a place that we are happy with. Started with <a href="https://cran.r-project.org/web/packages/lazyeval">lazyeval</a> [2014-2017]. While this approach worked initially, it abused R internals in a way that eventually stopped working.</p>
 <p>This lead to the development of the tidy evaluation framework which had five big ideas:</p>
 <ul>
-<li>Code is tree</li>
+<li>Code is a tree</li>
 <li>You can capture the tree by “quoting”</li>
 <li>You can use unquoting to build new trees</li>
 <li>quoting + unquoting …</li>
@@ -579,7 +586,7 @@ Three ways of representing the same data. On the right, we have a flat data fram
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">enquo</span>(summary_var)))</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<p>This sent us back to the drawing board and eventually we came up with a new approach called embracing. We <a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0">launched this in 2019</a> and this seems to have been successful.</p>
+<p>This sent us back to the drawing board and eventually we came up with a new approach called embracing. This style introduced just one new operator <code>{ }</code>, which you use whenever you have an data-variable referenced by an environment-variable:</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>grouped_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, summary_var) {</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">|&gt;</span></span>
@@ -587,6 +594,7 @@ Three ways of representing the same data. On the right, we have a flat data fram
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ summary_var }}))</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
+<p>We <a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0">launched this in 2019</a> and it seems to be have successful, as the number of complaints about tidy evaluation has greatly dropped. It’s still a hard technique to learn, but that challenge is now directly related to the growth of abstraction needs to</p>
 <p>Because we didn’t pay enough attention to exactly what people were struggling with, we also missed a couple of common use cases that were surprisingly hard to solve. Now we have a <a href="https://dplyr.tidyverse.org/articles/programming.html">cookbook</a> of tidy eval recipes that cover the most common situations that you’re likely to encounter, so that there’s usually one example you can modify.</p>
 <p>Tidy evaluation is still one of the hardest parts to grasp, but I think that’s unavoidable. At least it’s now no longer harder than it needs to be. I think one of the reasons it’s hard is because understanding it requires distentangling two concepts that the tidyverse intentionally blurs: df-variables and env-variables. We use the same word for both, and one of the big features of the tidyverse is that it blurs their use. But to use tidyeval effectively you have to grasp the difference because you’ll end up with a reference to a df-var stored in an env-var. On top of the additional complexities of writing a funtion and losing access to some of your usual debugging tools, this makes tidyeval necesasarily complex.</p>
 </section>
@@ -634,15 +642,14 @@ Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall th
 </div>
 </section>
 </section>
-<section id="growing-the-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="growing-the-tidyverse">Growing the tidyverse</h2>
-<p>Not just me; not just code. (Should these be two separate sections?)</p>
-<p>While even the precursors to the tidyverse were greatly aided by discussions on mailing lists, the rise of GitHub and social media (particularly #rstats twitter) lead to substantial contributions from the community.</p>
-<p>R for data science (2017). modelr package which is currently part of the tidyverse, but has been superseded and will be removed the next time. The modelling chapter of the book was also removed in the 2nd edition. I still believe in my vision of modelling but it was a bit quirky (making it hard to use in many courses) and generally underdeveloped. Better to use tidymodels. Incredibly successful book. Many translations. I’m particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).</p>
-<p>The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains. I also enjoy watching people grow as contributors, possibly starting off filing issues, learning how to create good reprexes, contributing documentation improvements and bug fixes, answer other people’s questions, propopsing new designs and thoughtfully critiquing existing designs, brainstorming better names. The tidyverse wouldn’t be a fraction as good as it is today without the many ways that the community has helped make it better.</p>
-<section id="the-tidyverse-team" class="level3">
-<h3 class="anchored" data-anchor-id="the-tidyverse-team">The tidyverse team</h3>
-<p>Joining RStudio not only gave me the time to work on the tidyverse, but also enabled me to a pay others to work full or part time on the tidyverse. Current members of the tidyverse team include Lionel Henry, Jenny Bryan, Gábor Csárdi, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand. The tidymodels subteam is led by Max Kuhn and includes Hannah Frick, Simon Couch, and Emil Hvitfeldt. Past members include Jim Hester, Mara Averick, Romain Francois, Mine Cetinkaya-Rundel, Tracy Teal and Andy Teucher; but even those these folks are no longer employees many of them remain active members of “team tidyverse”. RStudio’s support also include funding a number of ggplot2 summer interns, <a href="https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/">Thomas Lin Pedersen</a> (2016) <a href="https://www.tidyverse.org/blog/2017/09/ggplot2-internship/">Kara Woo</a> (2017) <a href="https://www.danaseidel.com/MeetUpSlides">Dana Paige Seidel</a> (2018) <a href="https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/">Dewey Dunnington</a> (2019). And a number of paid contractors including Kirill Muller, Oliver Gjoneski, Jeroen Ooms, and Charlie Gao.</p>
+<section id="the-tidyverse-team" class="level2">
+<h2 class="anchored" data-anchor-id="the-tidyverse-team">The tidyverse team</h2>
+<p>The naming of the tidyverse coincided with the start of my team at RStudio, and the overarching journey from a project that was primarily developed by me to a project collaboratively owned by many people.</p>
+<section id="the-people" class="level3">
+<h3 class="anchored" data-anchor-id="the-people">The people</h3>
+<p>Current members of the tidyverse team are Lionel Henry, Jenny Bryan, Gábor Csárdi, Mine Cetinkaya-Rundel, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand. The tidymodels subteam (more on that below) is led by Max Kuhn and includes Hannah Frick, Simon Couch, and Emil Hvitfeldt.</p>
+<p>Tidyverse team alumni are Jim Hester, Mara Averick, Romain Francois, Tracy Teal and Andy Teucher. Even these folks are no longer paid to work on the tidyverse, many of them still active community contributors and I consider all of them members of “team tidyverse”.</p>
+<p>Posit also funded four ggplot2 summer interns: <a href="https://www.data-imaginist.com/posts/2016-10-31-becoming-the-intern/">Thomas Lin Pedersen</a> (2016), <a href="https://www.tidyverse.org/blog/2017/09/ggplot2-internship/">Kara Woo</a> (2017), <a href="https://www.danaseidel.com/MeetUpSlides">Dana Paige Seidel</a> (2018), and <a href="https://dewey.dunnington.ca/post/2019/a-summer-of-rstudio-and-ggplot2/">Dewey Dunnington</a> (2019). And there have been other paid contributors such as Kirill Muller, Oliver Gjoneski, Jeroen Ooms, and Charlie Gao.</p>
 <!--
 -   Lionel Henry (2016-)
 -   Jenny Bryan (2017-)
@@ -657,26 +664,53 @@ Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall th
 -   Tracy Teal (2021-2023)
 -   Andy Teucher (2023)
 -->
-<p>As well as writing the code that powers the tidyverse, the team also contributes to our best practices. Includes the developement of the package release checklist (as implemented in <code>usethis::use_release_isse()</code>), a <a href="https://style.tidyverse.org">style guide</a>, <a href="https://code-review.tidyverse.org">code-review guidelines</a>, and a work-in-progress exposition of the design principles that underlie the tidyverse. This is because our mission is not to just make great packages, but to also help other people get better at writing R code.</p>
-<p>Not just programming, but <a href="https://www.tidyverse.org/blog">writing blog posts</a>, writing books, speaking, teaching, and community building.</p>
-<p>You can also see this in books like Advanced R and R packages, but also the development of the “devtools” family of packages which aim to make it easier to build R packages.</p>
-<p>Team activities like spring cleaning. Helping each other out when our packages fail on CRAN. Provide a safe place where we can vent about things that bother us. Our goal is to vent in private so we can be gracious in public.</p>
-<p>Tidyverse developer days in <a href="https://www.tidyverse.org/blog/2024/04/tdd-2024/">2024</a>, <a href="https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/">2020</a> and <a href="https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/">2019</a>. These were disrupted by Covid, but we hope to run annually. They are a really fun time for the tidyverse team, and designed to get as many community members as possible to contribute.</p>
 </section>
-<section id="the-tidymodels-models" class="level3">
-<h3 class="anchored" data-anchor-id="the-tidymodels-models">The tidymodels models</h3>
-<p>From Max:</p>
-<p>Hadley contacted Max Kuhn to discuss what RStudio might want to do regarding statistical and ML modeling. They and owner JJ Allaire met in New York City on 2016-09-14. One idea proposed by Max was the outline of what would become the recipes package. After more discussions with JJ in Boston, Max joined the company on 2016-11-29.</p>
-<p>Max had already developed a popular R package called caret. That package provided functionality for basic predictive modeling tasks such as performance measures and resampling as well as a consistent user interface. Max’s idea was to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, censored regression models, and others. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools being developed (e.g., non-standard evaluation, etc.).</p>
-<p>R has an extensive collection of user-created modeling packages and the tidymodels package has a much higher reliance on external dependencies than the tidyverse. Previous work on caret led to a very long list of formal dependencies, which made it difficult to maintain and not robust to sudden changes to these dependencies. To avoid this in tidymodels, many calls to external modeling packages are made by programmatically by constructing symbolic calls to those functions. In doing this, the tidymodels code base is smaller and depends on fewer external “hard dependencies.”</p>
-<p>tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max’s initial idea was to give it the code name “carrot” to confuse outside users. Hadley proposed “parsnip,” and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and the GitHub repository currently contains over 40 packages for modeling and predicting data.</p>
+<section id="the-mission" class="level3">
+<h3 class="anchored" data-anchor-id="the-mission">The mission</h3>
+<p>The mission of the tidyverse team is broad: we want to make R the best environment for doing data science. We have nothing against other programming languages (and certainly use others where appropriate), but we love R, believe in it, and want to keep our efforts focused.</p>
+<p>Our goal is not to just to write code, but to help people find out. This means that members of the tidyverse team are expected to contribute in many different ways including <a href="https://www.tidyverse.org/blog">writing blog posts</a>, writing books, speaking, teaching, and community building.</p>
+<p>While tidyverse packages strive to provide a common core of tools that really help the most common 80% of problems encountered when analysing data. The remaining 20% of problems tend to be highly varied and we expect every analysis to use many other package. For this reason, we also strive to help every developer make their own high quality packages. You see this in books like <a href="https://adv-r.hadley.nz">Advanced R</a> and <a href="https://r-pkgs.org">R packages</a>, but also the development of the devtools family of packages which aim to make it easier to build R packages. This suite of package has been very impactful on the practice of package development with ~9,000 packages using testthat for unit testing, ~16,000 using roxygen2 for documentation, and ~12,000 using pkgdown to make package websites.</p>
+<p>Generally, we are a process oriented team, and because we strive to work as much in the open as possible, we do our best to write up our processes so that others can benefit from them. This work includes:</p>
+<ul>
+<li><p>Our package release checklist (as implemented in <code>usethis::use_release_isse()</code>) ensures that we maximise the chances of successful CRAN submission by following a standard process. Our process grows as we discover new problems, and shrinks as we figure out how to automate manual steps away.</p></li>
+<li><p>The <a href="https://style.tidyverse.org">tidyverse style guide</a>, probably the most commonly reference style guide in the R community, and used by organisations like Google.</p></li>
+<li><p>We spend a lot of time reviewing code (both internally and externally) so we wrote up <a href="https://code-review.tidyverse.org">code review guidelines</a> to keep our own work consistent, and to help new contributors know what to expect.</p></li>
+<li><p>We are slowly working on an exposition of the <a href="https://design.tidyverse.org">design principles</a> that guide the design of tidyverse APIs. This is helpful for us, because it makes it easier to remember design decisions and re-apply them the same way in multiple places, and also helps the community see reusable patterns that they can apply to their own code.</p></li>
+</ul>
+<p>Our broad mission means that recently we have been spending less time on tidyverse packages and more time on broader data science efforts; I’ll come back to these at the end of this paper.</p>
+</section>
+<section id="tidymodels" class="level3">
+<h3 class="anchored" data-anchor-id="tidymodels">tidymodels</h3>
+<p>Within the tidyverse team, the tidymodels team has a narrower mission: improving the tools data scientists need to fit (and trust) models in R. The tidymodels team started in late 2016 when Max Kuhn joined RStudio, after initial talks about how we could support statistical and ML modeling, talks which lead to the creation of the <a href="https://recipes.tidymodels.org">recipes</a> package.</p>
+<p>Max was the obvious choice to found this team because of his work on the caret package. caret provided functionality for basic predictive modeling tasks such as performance measures and resampling as well as a consistent user interface. Max’s idea was to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, censored regression models, and others. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools being developed (e.g., non-standard evaluation, etc.).</p>
+<p>tidymodels took a somewhat cheeky approach to naming. For one package that was close in spirit to caret, Max’s initial idea was to give it the code name “carrot” to confuse outside users. Hadley proposed “parsnip,” and this became the working name. However, eventually this name was codified by the community and was retained. The tidymodels team has been composed of between two and six people over the years, and its <a href="https://github.com/tidymodels">GitHub repository</a> currently contains over 40 packages for modeling and predicting data.</p>
+</section>
+</section>
+<section id="tidyverse-community" class="level2">
+<h2 class="anchored" data-anchor-id="tidyverse-community">Tidyverse community</h2>
+<p>The tidyverse is certainly not just me, and isn’t even just the team of people paid to work on it full time. It’s primarily the community of people outside of Posit who use it and contribute to its development in many ways, big and small. The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains.</p>
+<p>I also enjoy watching people grow as contributors, possibly starting off filing issues, learning how to create good reprexes, contributing documentation improvements and bug fixes, answer other people’s questions, propopsing new designs and thoughtfully critiquing existing designs, brainstorming better names. The tidyverse wouldn’t be a fraction as good as it is today without the many ways that the community has helped make it better.</p>
+<p>We make a yearly in-person attempt to support contributors through the tidyverse developer days in <a href="https://www.tidyverse.org/blog/2024/04/tdd-2024/">2024</a>, <a href="https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/">2020</a> and <a href="https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/">2019</a>. These were disrupted by Covid, but we hope to run annually. They are a really fun time for the tidyverse team, and designed to get as many community members as possible to contribute.</p>
+<section id="social-media" class="level3">
+<h3 class="anchored" data-anchor-id="social-media">Social media</h3>
+<p>The precursors to the tidyverse were greatly aided by discussions on mailing lists, like r-help. But these mailing lists were definitely of the era where the majority of R user had PhD’s in statistics and they were infamous for rude</p>
+<p>ggplot2 mailing list. Built up a community.</p>
+<p>stackoverflow. Mike Driscoll.</p>
+<p>#rstats twitter.</p>
+<p>After twitter was sold and renamed to X, a lot of the R community moved away. For the last couple of years, it’s felt like</p>
+<p>But as of late 2024, felt like bluesky has taken off.</p>
+</section>
+<section id="r-for-data-science" class="level3">
+<h3 class="anchored" data-anchor-id="r-for-data-science">R for Data Science</h3>
+<p>I’m a big believer in the power of books to get big ideas into the hands of the community. Equally important to me that the books be available to all, regardless of their ability to pay. That’s why all the books I work on have a dual production model: a free online version that I 100% produce and a paid print version made in conjunction with a book publisher.</p>
+<p>The book most closely associated with the tidyverse is R for data science (2017, 2023). The first edition was written in collaboration with Garrett Grolemund, and the second with Mine Çentinkaya Rundel. Very impactful work.</p>
+<p>Many translations. I’m particularly enamored of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).</p>
 </section>
 <section id="package-authors" class="level3">
 <h3 class="anchored" data-anchor-id="package-authors">Package authors</h3>
-<p>ggplot2 governance. <a href="https://github.com/tidyverse/tidyups/blob/main/004-governance.md" class="uri">https://github.com/tidyverse/tidyups/blob/main/004-governance.md</a></p>
-<p>welcome to the tidyverse. Cited ~16,000 times in Jan 2025. Makes it easy to cite the tidyverse (instead of citing individual packages or papers) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, Hiroaki Yutani</p>
-<p><a href="https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/" class="uri">https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/</a></p>
-<p>Since we’ve published that paper we’ve gained a few new maintainers including Maximilian Girlich, Mark Fairbanks, Ryan Dickerson, Danny Smith, Maxim Shemanarev, and Teun van den Brand.</p>
+<p>Most external contributors tend to provide a few small (but meaningful!) contributions. A select few external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by officially making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the pacakge citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our <a href="https://github.com/tidyverse/tidyups/blob/main/004-governance.md">tidyverse governance model</a>.</p>
+<p>Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write <span class="citation" data-cites="tidyverse-welcome">Wickham et al. (<a href="#ref-tidyverse-welcome" role="doc-biblioref">2019</a>)</span>. This makes it easy to cite the tidyverse as a whole<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited ~16,000 times as of January 2025.</p>
+<p>Since we’ve published that paper we’ve gained a few new maintainers including Maximilian Girlich (tidyr, dbplyr), Mark Fairbanks (dtplyr), Ryan Dickerson (dtplyr), Olivier Roy (pkgdown), Danny Smith (haven), Maxim Shemanarev (ragg), and Teun van den Brand (ggplot2).</p>
 </section>
 </section>
 <section id="maintaining-the-tidyverse" class="level2">
@@ -701,6 +735,9 @@ Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall th
 <div id="ref-tidy-data" class="csl-entry" role="listitem">
 Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (10): 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
 </div>
+<div id="ref-tidyverse-welcome" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the Tidyverse.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
 </div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
@@ -714,6 +751,7 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
 <li id="fn6"><p>The names of these functions were informed functions was informed by some casual user research performed by asking my twitter followers a couple of questions. I received ~2,600 responses which you can learn read more about on <a href="https://github.com/hadley/table-shapes" class="uri">https://github.com/hadley/table-shapes</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>The requirement for infix function names to start and end with <code>%</code> comes from R, and there’s no avoiding it without patching R itself.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p><a href="https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png" class="uri">https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>We include some advice on citing packages in our blog post advertising the paper: <a href="https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/" class="uri">https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
      </main>
