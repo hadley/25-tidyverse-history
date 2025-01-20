@@ -193,6 +193,14 @@ I announced this name to the world at my keynote at useR on June 29, 2016. A few
 
 [^11]: We had wanted to add lubridate to the core packages along with forcats and stringr, but there were a couple of function names that caused conflicts. The process of eliminating these functions without unduly affecting user code took a further five years.
 
+@fig-the-tidyverse summarises the state of the tidyverse in 2020, with a slide that I have used in many presentations over the years.
+
+::: {#fig-the-tidyverse}
+![](the-tidyverse.png)
+
+The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny.
+:::
+
 Naming the tidyverse created some bigger questions: What exactly is the tidyverse? What are the unifying principles that underlie the packages in the tidyverse? In my useR talk I cited three unifying principles:
 
 -   Uniform data structures
@@ -402,6 +410,7 @@ I love hex stickers as a community building tool: people can see your laptop, im
 In my office I've made a display board with all the stickers that I've been gifted over multiple years.
 :::
 
+```{=html}
 <!--
  @fig-hex-wall shows the Posit conf's hex wall, which is a popular place to take selfies.
 
@@ -411,6 +420,7 @@ In my office I've made a display board with all the stickers that I've been gift
 posit::conf() (and rstudio::conf() before) features a hex wall that's a popular place to take photos.
 :::
 -->
+```
 
 ## The tidyverse team
 
