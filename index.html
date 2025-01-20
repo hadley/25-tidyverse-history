@@ -320,6 +320,17 @@ Figure&nbsp;2: Initial releases of tidyverse packages and important precusors. T
 <li><p>To make it easy to install all packages in the tidyverse with a single line of code, <code>install.packages("tidyverse")</code> so that folks could easily get a “batteries included” data science environment.</p></li>
 <li><p>To make it easy to load the most common packages, so that you could type <code>library(tidyverse)</code> instead of loading packages one by one. The initial release loaded ggplot2, dplyr, tidyr, readr, purrr, and tibble automatically, then version 1.2.0 (September 2017) added forcats and stringr, and version 2.0.0 (March 2023) added lubridate<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>.</p></li>
 </ul>
+<p><a href="#fig-the-tidyverse" class="quarto-xref">Figure&nbsp;3</a> summarises the state of the tidyverse in 2020, with a slide that I have used in many presentations over the years.</p>
+<div id="fig-the-tidyverse" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-the-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="the-tidyverse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny."><img src="the-tidyverse.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-the-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny.
+</figcaption>
+</figure>
+</div>
 <p>Naming the tidyverse created some bigger questions: What exactly is the tidyverse? What are the unifying principles that underlie the packages in the tidyverse? In my useR talk I cited three unifying principles:</p>
 <ul>
 <li>Uniform data structures</li>
@@ -463,46 +474,43 @@ Three ways of representing the same data. On the right, we have a flat data fram
 </section>
 <section id="hex-logos" class="level3">
 <h3 class="anchored" data-anchor-id="hex-logos">Hex logos</h3>
-<p>You can’t talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan and I co-discovered hex stickers around the same time through <a href="https://hexb.in" class="uri">https://hexb.in</a>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone’s stickers are the same size and the same orientation (point down!).</p>
-<p>I’m pretty sure the first hex logo was magrittr’s<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>, designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinhart; you can see two early versions of the ggplot2 logo in <a href="#fig-early-logos" class="quarto-xref">Figure&nbsp;3</a>. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design.</p>
-<div id="fig-early-logos" class="quarto-layout-panel">
+<p>You can’t talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan Milton Bache and I co-discovered hex stickers around the same time in 2014<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> through <a href="https://hexb.in" class="uri">https://hexb.in</a>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone’s stickers are the same size and the same orientation (point down!).</p>
+<p>I’m pretty sure the first hex logo was magrittr’s<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>, designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinehart; you can see two early versions of the ggplot2 logo in <a href="#fig-early-logos" class="quarto-xref">Figure&nbsp;4</a>. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design!</p>
+<div id="fig-early-logos" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="ggplot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2.png" data-needs-quarto-bug-workaround="true" height="200" class="figure-img"></a></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><a href="ggplot2-new.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3: Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon."><img src="ggplot2-new.png" data-needs-quarto-bug-workaround="true" height="200" class="figure-img"></a></p>
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ggplot2-logos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Two hexagonal logos for ggplot2, a data visualization package. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text ‘ggplot2’ at the top, with the first using bold typography and the second using a lighter weight code font."><img src="ggplot2-logos.png" class="img-fluid figure-img"></a></p>
+<figcaption>Two hexagonal logos for ggplot2, a data visualization package. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text ‘ggplot2’ at the top, with the first using bold typography and the second using a lighter weight code font.</figcaption>
+</figure>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-early-logos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can’t find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
+Figure&nbsp;4: Two early versions of the ggplot2 hex logo. I can’t find any record of who created the first version (left), but I presume it was me given the incorrect orientation of the hex. The second version (right) was created in concert with Garrett Grolemund.
 </figcaption>
 </figure>
 </div>
-<p>I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I’ve heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and <a href="#fig-hex-wall" class="quarto-xref">Figure&nbsp;5</a> shows a collection of stickers that I’ve been given over the years. <a href="#fig-hex-wall" class="quarto-xref">Figure&nbsp;5</a> shows the Posit conf’s hex wall, which is a popular place to take selfies.</p>
+<p>I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I’ve heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and <a href="#fig-hex-office" class="quarto-xref">Figure&nbsp;5</a> shows a collection of stickers that I’ve been given over the years.</p>
 <div id="fig-hex-office" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hex-office-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="hex-office.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-office.jpg" class="img-fluid figure-img"></a>
+<a href="hex-office.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years."><img src="hex-office.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hex-office-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years.
+Figure&nbsp;5: In my office I’ve made a display board with all the stickers that I’ve been gifted over multiple years.
 </figcaption>
 </figure>
 </div>
-<div id="fig-hex-wall" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="hex-wall.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall that’s a popular place to take photos."><img src="hex-wall.png" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hex-wall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall that’s a popular place to take photos.
-</figcaption>
-</figure>
-</div>
+<!--
+ @fig-hex-wall shows the Posit conf's hex wall, which is a popular place to take selfies.
+
+::: {#fig-hex-wall}
+![](hex-wall.png)
+
+posit::conf() (and rstudio::conf() before) features a hex wall that's a popular place to take photos.
+:::
+-->
 </section>
 </section>
 <section id="the-tidyverse-team" class="level2">
@@ -572,7 +580,7 @@ Figure&nbsp;5: posit::conf() (and rstudio::conf() before) features a hex wall th
 <section id="package-authors" class="level3">
 <h3 class="anchored" data-anchor-id="package-authors">Package authors</h3>
 <p>Most external contributors tend to provide a few small (but meaningful!) contributions. A select few external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by officially making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the pacakge citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our <a href="https://github.com/tidyverse/tidyups/blob/main/004-governance.md">tidyverse governance model</a>.</p>
-<p>Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write <span class="citation" data-cites="tidyverse-welcome">Wickham et al. (<a href="#ref-tidyverse-welcome" role="doc-biblioref">2019</a>)</span>. This makes it easy to cite the tidyverse as a whole<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited ~16,000 times as of January 2025.</p>
+<p>Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write <span class="citation" data-cites="tidyverse-welcome">Wickham et al. (<a href="#ref-tidyverse-welcome" role="doc-biblioref">2019</a>)</span>. This makes it easy to cite the tidyverse as a whole<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited ~16,000 times as of January 2025.</p>
 <p>Since we’ve published that paper we’ve gained a few new maintainers including Maximilian Girlich (tidyr, dbplyr), Mark Fairbanks (dtplyr), Ryan Dickerson (dtplyr), Olivier Roy (pkgdown), Danny Smith (haven), Maxim Shemanarev (ragg), and Teun van den Brand (ggplot2).</p>
 </section>
 </section>
@@ -631,8 +639,9 @@ Wilkinson, Leland. 2012. <em>The Grammar of Graphics</em>. Springer.
 <li id="fn12"><p>This is certainly not the only data stucture you might ever want to use, but it’s extremely useful to have a organising structure that you can rely on for the majority of your work. It’s a great default, even if you might need other forms for specialised purposes.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn13"><p>The names of these functions were informed functions was informed by some casual user research performed by asking my twitter followers a couple of questions. I received ~2,600 responses which you can learn read more about on <a href="https://github.com/hadley/table-shapes" class="uri">https://github.com/hadley/table-shapes</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p>The requirement for infix function names to start and end with <code>%</code> comes from R, and there’s no avoiding it without patching R itself.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p><a href="https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png" class="uri">https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png</a><a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn16"><p>We include some advice on citing packages in our blog post advertising the paper: <a href="https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/" class="uri">https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/</a>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Stefan and I were clearly thinking many of the same thoughts in 2014!<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p><a href="https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png" class="uri">https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png</a><a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>We include some advice on citing packages in our blog post advertising the paper: <a href="https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/" class="uri">https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/</a>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

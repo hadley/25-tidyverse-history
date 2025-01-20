@@ -8,7 +8,6 @@ format:
   typst:
     section-numbering: 1.1.1
     shift-heading-level-by: -1
-    columns: 2
     margin:
       x: 1in
       y: 1in
@@ -19,9 +18,6 @@ knitr:
   opts_chunk:
     collapse: true
     comment: "#>"
-filters:
-  - path: quarto-workaround.lua
-    at: post-cell-cleanup
 ---
 
 ```{r}
@@ -197,6 +193,14 @@ I announced this name to the world at my keynote at useR on June 29, 2016. A few
 
 [^11]: We had wanted to add lubridate to the core packages along with forcats and stringr, but there were a couple of function names that caused conflicts. The process of eliminating these functions without unduly affecting user code took a further five years.
 
+@fig-the-tidyverse summarises the state of the tidyverse in 2020, with a slide that I have used in many presentations over the years.
+
+::: {#fig-the-tidyverse}
+![](the-tidyverse.png)
+
+The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny.
+:::
+
 Naming the tidyverse created some bigger questions: What exactly is the tidyverse? What are the unifying principles that underlie the packages in the tidyverse? In my useR talk I cited three unifying principles:
 
 -   Uniform data structures
@@ -336,11 +340,12 @@ I believe that we now have some good vocabulary to describe the problem. The roo
 
 It took us around five years to provide the tools to fully solve the problem. My efforts started in dplyr 0.3.0 (2014) with the introduction of the [lazyeval](https://cran.r-project.org/web/packages/lazyeval) package. There were three pieces:
 
-* `lazyeval::lazy()` allowed you to capture the data-variable stored inside an environment-variable, producing an explict lazy object.
-* `lazyeval::interp()` allowed you to vary the data-variable used inside an expression.
-* Every dplyr function had a variant that ended in an underscore that took lazy objects.
+-   `lazyeval::lazy()` allowed you to capture the data-variable stored inside an environment-variable, producing an explict lazy object.
+-   `lazyeval::interp()` allowed you to vary the data-variable used inside an expression.
+-   Every dplyr function had a variant that ended in an underscore that took lazy objects.
 
 That lead to a solution that looks like this:
+
 ```{r}
 #| echo: true
 grouped_mean <- function(df, group_var, summary_var) {
@@ -366,8 +371,7 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-Tidy evaluation was made possible by a comprehensive theory that put quoting and unquoting on a solid theoretical foundation, and made us more confident that our implementation was correct and complete.
-I still believe that theory is really important but experience taught me that few R users wanted to grapple with it. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. commuity posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
+Tidy evaluation was made possible by a comprehensive theory that put quoting and unquoting on a solid theoretical foundation, and made us more confident that our implementation was correct and complete. I still believe that theory is really important but experience taught me that few R users wanted to grapple with it. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. commuity posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
 
 This again sent us back to the drawing board and eventually we came up with a new approach called embracing, which we [launched in 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0). This style introduced just one new operator `{{ }}`, which you use whenever you have an data-variable referenced by an environment-variable:
 
@@ -384,21 +388,21 @@ While `enquo()` and `!!` continue to be used behind the scenes, there's now only
 
 ### Hex logos
 
-You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan and I co-discovered hex stickers around the same time through <https://hexb.in>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
+You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan Milton Bache and I co-discovered hex stickers around the same time in 2014[^15] through <https://hexb.in>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
 
-I'm pretty sure the first hex logo was magrittr's[^15], designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinhart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design.
+[^15]: Stefan and I were clearly thinking many of the same thoughts in 2014!
 
-[^15]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
+I'm pretty sure the first hex logo was magrittr's[^16], designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinehart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design!
 
-::: {#fig-early-logos layout-ncol="2"}
-![](ggplot2.png){needs-quarto-bug-workaround="true"}
+[^16]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
 
-![](ggplot2-new.png){needs-quarto-bug-workaround="true"}
+::: {#fig-early-logos}
+![Two hexagonal logos for ggplot2, a data visualization package. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text 'ggplot2' at the top, with the first using bold typography and the second using a lighter weight code font.](ggplot2-logos.png)
 
-Two early versions of the ggplot2 hex logo. The second version was created in concert with Garrett Grolemund. I can't find any record of who created the first, but I presume it was me given that I messed up the direction of the hexagon.
+Two early versions of the ggplot2 hex logo. I can't find any record of who created the first version (left), but I presume it was me given the incorrect orientation of the hex. The second version (right) was created in concert with Garrett Grolemund.
 :::
 
-I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and @fig-hex-wall shows a collection of stickers that I've been given over the years. @fig-hex-wall shows the Posit conf's hex wall, which is a popular place to take selfies.
+I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and @fig-hex-office shows a collection of stickers that I've been given over the years.
 
 ::: {#fig-hex-office}
 ![](hex-office.jpg)
@@ -406,11 +410,17 @@ I love hex stickers as a community building tool: people can see your laptop, im
 In my office I've made a display board with all the stickers that I've been gifted over multiple years.
 :::
 
+```{=html}
+<!--
+ @fig-hex-wall shows the Posit conf's hex wall, which is a popular place to take selfies.
+
 ::: {#fig-hex-wall}
 ![](hex-wall.png)
 
 posit::conf() (and rstudio::conf() before) features a hex wall that's a popular place to take photos.
 :::
+-->
+```
 
 ## The tidyverse team
 
@@ -503,9 +513,9 @@ Many translations. I'm particularly enamored of the community translations which
 
 Most external contributors tend to provide a few small (but meaningful!) contributions. A select few external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by officially making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the pacakge citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our [tidyverse governance model](https://github.com/tidyverse/tidyups/blob/main/004-governance.md).
 
-Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^16] (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited \~16,000 times as of January 2025.
+Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^17] (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited \~16,000 times as of January 2025.
 
-[^16]: We include some advice on citing packages in our blog post advertising the paper: <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>.
+[^17]: We include some advice on citing packages in our blog post advertising the paper: <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>.
 
 Since we've published that paper we've gained a few new maintainers including Maximilian Girlich (tidyr, dbplyr), Mark Fairbanks (dtplyr), Ryan Dickerson (dtplyr), Olivier Roy (pkgdown), Danny Smith (haven), Maxim Shemanarev (ragg), and Teun van den Brand (ggplot2).
 
