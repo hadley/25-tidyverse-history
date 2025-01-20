@@ -296,17 +296,13 @@ My first attempt at the pipe was implemented in dplyr in Oct 2013 and called `%.
 
 [^14]: The requirement for infix function names to start and end with `%` comes from R, and there's no avoiding it without patching R itself.
 
-Today, the pipe is available in base R thanks to a collaborative effort. In 2016, Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch for R, which was presented to the R Core team at the Directions in Statistical Computing Conference in 2017 by Jim Hester. This presentation was received positively, but it took some time for the R Core Team to fully align on its benefits. But thanks to the work of Luke Tierney it was added to R in 4.1 (2020) along with two other bits of syntax: lambda syntax and raw strings. Because R could modify the parser, the base pipe was written `|>`, which has even easier to type. It took a few more iterations for the base pipe to gain the main features of the magrittr pipe with placeholder syntax (`_`) arriving in R 4.2 and the ability to pipe into subsetting functions arriving in 4.3. With the maturity of the base pipe, the tidyverse is gradually moving away from `%>%` towards `|>`, a process that will take several years to complete.
+Today, the pipe is available in base R thanks to a collaborative effort. In 2016, Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch for R, which was presented to the R Core team at the Directions in Statistical Computing Conference in 2017 by Jim Hester. This presentation was received positively, but it took some time for the R Core Team to fully align on the utility of the pipe. The base pipe was added to R in 4.1 (2020) thanks to work by Luke Tierney, and it took a few more iterations to gain the main features of the magrittr pipe with placeholder syntax in R 4.2 and the ability to pipe into subsetting functions in R 4.3. Because R can modify the parser, the base pipe has better syntax, `|>`, with a more visible placeholder, `_`. Since the base pipe is now mature, the tidyverse is gradually moving away from `%>%` towards `|>`, a process that will take several years to complete.
 
 As an interesting historial anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring the switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E).
 
 ### Tidy evaluation
 
-One of the most contentious features of the tidyverse has been the idea of tidy evaluation. The goal of tidy evaluation is to solve a problem introduced by ggplot2 and dplyr's syntax that allows you to mix variables defined in the current environment with variables defined in some data frame. This makes interactive data analysis much more fluent at the cost of making programming much harder.
-
-https://posit.co/blog/dplyr-0-3-2/ — `_` sufffixes
-
-The need for tidy evaluation is fairly simple to explain. If you have repeated code, you typically want to extract out a function:
+One of the most contentious features of the tidyverse has been the idea of tidy evaluation. The goal of tidy evaluation is to solve a problem introduced by ggplot2 and dplyr's syntax that allows you to mix variables defined in the current environment with variables defined in some data frame. This makes interactive data analysis much more fluent at the cost of making programming much harder. The need for tidy evaluation is fairly simple to explain. If you have repeated code, you typically want to extract out a function:
 
 ```{r}
 #| eval: false
@@ -321,7 +317,7 @@ df3 |>
   summarise(mean = mean(c))
 ```
 
-But the naive approach doesn't work:
+The naive approach doesn't work, because dplyr will look for variables literally named `group_var` and `summary_var`:
 
 ```{r}
 grouped_mean <- function(df, group_var, summary_var) {
@@ -331,17 +327,29 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-It took multiple years of struggle to get to a place that we are happy with. Started with [lazyeval](https://cran.r-project.org/web/packages/lazyeval) \[2014-2017\]. While this approach worked initially, it abused R internals in a way that eventually stopped working.
+I believe that we now have some good vocabulary to describe the problem. The root cause of the challenge is that we use the word variable to mean two different things. A **data-variable** is a statistical variable, something that exists inside a data frame, like `g1`, or `a`. An **environment-variable** is a computer science variable, something that exists in (e.g.) the global environment, like `df1` or `df2`. The fundamental challenge of programming with dplyr is that you inside a function you have a data-variable stored inside of a environment variable.
 
-This lead to the development of the tidy evaluation framework which had five big ideas:
+It took us around five years to provide the tools to fully solve the problem. My efforts started in dplyr 0.3.0 (2014) with the introduction of the [lazyeval](https://cran.r-project.org/web/packages/lazyeval) package. There were three pieces:
 
--   Code is a tree
--   You can capture the tree by "quoting"
--   You can use unquoting to build new trees
--   quoting + unquoting ...
--   Quosures capture the tree + the evaluation environment
+* `lazyeval::lazy()` allowed you to capture the data-variable stored inside an environment-variable, producing an explict lazy object.
+* `lazyeval::interp()` allowed you to vary the data-variable used inside an expression.
+* Every dplyr function had a variant that ended in an underscore that took lazy objects.
 
-I still believe that these big ideas are correct and useful. But they're primary useful for creating a strong underlying theory. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. commuity posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
+That lead to a solution that looks like this:
+```{r}
+grouped_mean <- function(df, group_var, summary_var) {
+  group_var <- lazyeval::lazy(group_var)
+  summary_var <- lazyeval::lazy(summary_var)
+
+  df |>
+    group_by_(group_var) |>
+    summarise_(mean = lazyeval::interp(~ mean(summary_var), summary_var))
+}
+```
+
+This approach worked, but was a bit clunky, introducing a lot of new syntax that you had to learn. Additionally, in July 2016, I learned that the technique that allowed `lazy()` to work would be no longer supported in a future version of R. This lead me back to the drawing board. Fortunately Lionel Henry had recently joined my team and had a bunch of ideas of how to improve the situation. That lead us to a new framework called tidy evaluation (or tidyeval for short), which we introduced to dplyr 0.6.0 (2017).
+
+Tidy evaluation introduced two new tools: `enquo()` which allowed to "unquote" a environment-variable to access the data-variable it referred to, and `!!` (pronounced bang-bang), which allowed you to interpolate its value anywhere in an existing expression. This approach was particularly appealing because we no longer needed to have an `_` variant of every dplyr function:
 
 ```{r}
 grouped_mean <- function(df, group_var, summary_var) {
@@ -351,7 +359,10 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-This sent us back to the drawing board and eventually we came up with a new approach called embracing. This style introduced just one new operator `{{ }}`, which you use whenever you have an data-variable referenced by an environment-variable:
+Tidy evaluation was made possible by a comprehensive theory that put quoting and unquoting on a solid theoretical foundation, and made us more confident that our implementation was correct and complete.
+I still believe that theory is really important but experience taught me that few R users wanted to grapple with it. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. commuity posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
+
+This again sent us back to the drawing board and eventually we came up with a new approach called embracing, which we [launched in 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0). This style introduced just one new operator `{{ }}`, which you use whenever you have an data-variable referenced by an environment-variable:
 
 ```{r}
 grouped_mean <- function(df, group_var, summary_var) {
@@ -361,11 +372,7 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-We [launched this in 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0) and it seems to be have successful, as the number of complaints about tidy evaluation has greatly dropped. It's still a hard technique to learn, but that challenge is now directly related to the growth of abstraction needs to
-
-Because we didn't pay enough attention to exactly what people were struggling with, we also missed a couple of common use cases that were surprisingly hard to solve. Now we have a [cookbook](https://dplyr.tidyverse.org/articles/programming.html) of tidy eval recipes that cover the most common situations that you're likely to encounter, so that there's usually one example you can modify.
-
-Tidy evaluation is still one of the hardest parts to grasp, but I think that's unavoidable. At least it's now no longer harder than it needs to be. I think one of the reasons it's hard is because understanding it requires distentangling two concepts that the tidyverse intentionally blurs: df-variables and env-variables. We use the same word for both, and one of the big features of the tidyverse is that it blurs their use. But to use tidyeval effectively you have to grasp the difference because you'll end up with a reference to a df-var stored in an env-var. On top of the additional complexities of writing a funtion and losing access to some of your usual debugging tools, this makes tidyeval necesasarily complex.
+While `enquo()` and `!!` continue to be used behind the scenes, there's now only one bit of new syntax to learn. We had also missed a few of common problems that were surprisingly hard to solve, and required a few smaller enhancements and some better documentation. Now we have a [cookbook](https://dplyr.tidyverse.org/articles/programming.html) that doesn't require any theoretical knowledge, and the grumblings about tidyeval seem to have subsided.
 
 ### Hex logos
 
