@@ -177,7 +177,11 @@ During this time I also started thinking about how data gets into R. This initia
 
 Around this time I started to become particularly well known in the R community. This lead to a couple of popular virtual Q&A sessions on [Reddit](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/) (2015) and [Quora](https://quorasessionwithhadleywickham.quora.com) (2016); these are good places to look if you're interested in getting a snapshot of my thinking at the time.
 
-## Naming and defining the tidyverse
+## The early days
+
+Much of what we now call the tidyverse was complete by 2015, but the tidyverse had yet to be named and defined. In the this section you'll learn how the name came to be, the common principles which tidyverse packages adhere to, and how I helped people learn to use it.
+
+### Naming the tidyverse
 
 As the collection of packages I had developed grew, the community needed some name to refer to them collectively, and many people started calling them the "Hadleyverse"[^9]. This name was unappealing to me because using a portmanteau of my name and "universe" felt overweeningly arrogant, so I started brainstorming an "official" name that I could live with, including the sleekverse, the dapperverse, and the deftverse[^10]. In hindsight, given the success of tidy data, calling it the tidyverse seems obvious.
 
@@ -193,13 +197,15 @@ I announced this name to the world at my keynote at useR on June 29, 2016. A few
 
 [^11]: We had wanted to add lubridate to the core packages along with forcats and stringr, but there were a couple of function names that caused conflicts. The process of eliminating these functions without unduly affecting user code took a further five years.
 
-@fig-the-tidyverse summarises the state of the tidyverse in 2020, with a slide that I have used in many presentations over the years.
+@fig-the-tidyverse summarises the current state of the tidyverse.
 
 ::: {#fig-the-tidyverse}
 ![](the-tidyverse.png){fig-alt="A night sky themed diagram showing the data science workflow in R, with main steps connected by arrows: \"Import\" (featuring packages like readr, readxl, haven, xml2) connects to \"Tidy\" (tidyr), which connects to \"Transform\" (featuring dplyr, forcats, hms, lubridate, stringr). The workflow continues to \"Visualise\" (ggplot2) and \"Model\" (tidymodels). The background is dotted with colorful hexagonal shapes. On the right side are two images: a tidyverse.org website screenshot and an \"R for Data Science\" book cover. Additional programming packages purrr and magrittr are listed at the bottom."}
 
-The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny.
+The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny. This image comes from a presentation called the "Joy of Data Science" that I gave in 2020.
 :::
+
+### Defining the tidyverse
 
 Naming the tidyverse created some bigger questions: What exactly is the tidyverse? What are the unifying principles that underlie the packages in the tidyverse? In my useR talk I cited three unifying principles:
 
@@ -230,6 +236,12 @@ Since that time I've continued to refine my description of what it means to be p
 -   It is **composable**, allowing you to solve complex problems by breaking them down into small pieces, supporting a rapid cycle of exploratory iteration to find the best solution.
 
 -   It is **inclusive**, because the tidyverse is not just the collection of packages, but it is also the community of people who use them.
+
+### Learning
+
+Once I had identified the tidyverse as a "thing", it become natural to ask, how do you learn it? The answer to this question became [R for Data Science](https://r4ds.hadley.nz) [@r4ds-1; @r4ds-2]. I wanted to write a book because I believe they're one of the best ways to spread big ideas; the linear format allows you to tell a story with plenty of space for the details. Equally important to me was that the book should be available to all, regardless of their ability to pay. That's why all the books I work on have a dual production model: a free HTML version that I produce and a paid physical version produced by a commercial publisher.
+
+One of my favourite things about R for Data Science is how many languages it has been translated into, including Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified). I'm particularly fond of the community translations ([Spanish](http://es.r4ds.hadley.nz/), [Portugese](https://it.r4ds.hadley.nz/), [Turkish](https://tr.r4ds.hadley.nz/), and [Italian](https://pt.r4ds.hadley.nz/)) because they were translated by volunteers and made freely available to the world.
 
 ## Key innovations
 
@@ -473,43 +485,25 @@ A defining feature of tidymodels is its lighthearted approach to naming and the 
 
 ## Tidyverse community
 
-The tidyverse is certainly not just me, and isn't even just the team of people paid to work on it full time. It's primarily the community of people outside of Posit who use it and contribute to its development in many ways, big and small. The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains.
-
-I also enjoy watching people grow as contributors, possibly starting off filing issues, learning how to create good reprexes, contributing documentation improvements and bug fixes, answer other people's questions, proposing new designs and thoughtfully critiquing existing designs, brainstorming better names. The tidyverse wouldn't be a fraction as good as it is today without the many ways that the community has helped make it better.
-
-We make a yearly in-person attempt to support contributors through the tidyverse developer days in [2024](https://www.tidyverse.org/blog/2024/04/tdd-2024/), [2020](https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/) and [2019](https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/). These were disrupted by Covid, but we hope to run annually. They are a really fun time for the tidyverse team, and designed to get as many community members as possible to contribute.
+The tidyverse is certainly not just me, and isn't even just the team of folks paid to work on it. The tidyverse is the community of all those who use it and contribute to it. The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains.
 
 ### Social media
 
-The precursors to the tidyverse were greatly aided by discussions on mailing lists, like r-help. But these mailing lists were of the era where the majority of R user had PhD's in statistics and they were infamous for rude responses and general unkindness to new learners. I started a ggplot2 mailing list in 2008, explicitly to provide a more friendly place to ask questions.
+The precursors to the tidyverse were aided by discussions on mailing lists, like r-help. But these mailing lists were of the era where the majority of R user had PhD's in statistics and were infamous for general unkindness to new learners. I started a ggplot2 mailing list in 2008, explicitly to provide a more friendly place to ask questions.
 
-The
+Fortunately, as the R community away from mailing lists toward moved to stackoverflow and twitter, and most lately to bluesky, we have managed to shift the dynamic so that the R community is now one of the most welcoming programming languages for new users. I think a big part of this welcomingness is due to the diversity of R users, which has been tremendously boosted thanks to the efforts of groups like [R-ladies](https://rladies.org), [Minorities in R](https://mircommunity.com), and [rainbowR](https://rainbowr.org).
 
-stackoverflow. Mike Driscoll.
+### Community contributors
 
-#rstats twitter.
+The tidyverse wouldn't be a fraction as good as it is today without the many ways that the community has helped make it better. We make a deliberate effort to encourage contributors to the tidyverse, doing our best to recognise contributions, no matter how big or small. We do a regular in-person attempt to support contributors through the tidyverse developer days ([2019](https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/), [2020](https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/), [2024](https://www.tidyverse.org/blog/2024/04/tdd-2024/)). They're a fun community building activity, designed to help folks to learn how to contribute to the tidyverse. They were disrupted by Covid, but the plan is to run every year after posit::conf.
 
-After twitter was sold and renamed to X, a lot of the R community moved away. For the last couple of years, it's felt like
-
-But as of late 2024, felt like bluesky has taken off.
-
-### R for Data Science
-
-I'm a big believer in the power of books to get big ideas into the hands of the community. Equally important to me that the books be available to all, regardless of their ability to pay. That's why all the books I work on have a dual production model: a free online version that I 100% produce and a paid print version made in conjunction with a book publisher.
-
-The book most closely associated with the tidyverse is R for data science (2017, 2023). The first edition was written in collaboration with Garrett Grolemund, and the second with Mine Çentinkaya Rundel. Very impactful work.
-
-Many translations. I'm particularly enamoured of the community translations which now include Spanish, Portugese, Turkish, and Italian. But commercial translations also included Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified).
-
-### Package authors
-
-Most external contributors tend to provide a few small (but meaningful!) contributions. A select few external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by officially making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the package citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our [tidyverse governance model](https://github.com/tidyverse/tidyups/blob/main/004-governance.md).
+Most external contributors tend to provide a few small (but meaningful!) contributions. A really limited number of external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the package citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our [tidyverse governance model](https://github.com/tidyverse/tidyups/blob/main/004-governance.md).
 
 Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^17] (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited \~16,000 times as of January 2025.
 
 [^17]: We include some advice on citing packages in our blog post advertising the paper: <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>.
 
-Since we've published that paper we've gained a few new maintainers including Maximilian Girlich (tidyr, dbplyr), Mark Fairbanks (dtplyr), Ryan Dickerson (dtplyr), Olivier Roy (pkgdown), Danny Smith (haven), Maxim Shemanarev (ragg), and Teun van den Brand (ggplot2).
+Since we've published that paper we've gained a few new maintainers such as Maximilian Girlich (tidyr, dbplyr), Mark Fairbanks (dtplyr), Ryan Dickerson (dtplyr), Olivier Roy (pkgdown), Danny Smith (haven), Maxim Shemanarev (ragg), and Teun van den Brand (ggplot2).
 
 ## Maintaining the tidyverse
 
