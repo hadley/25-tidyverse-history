@@ -196,7 +196,7 @@ I announced this name to the world at my keynote at useR on June 29, 2016. A few
 @fig-the-tidyverse summarises the state of the tidyverse in 2020, with a slide that I have used in many presentations over the years.
 
 ::: {#fig-the-tidyverse}
-![](the-tidyverse.png)
+![](the-tidyverse.png){fig-alt="A night sky themed diagram showing the data science workflow in R, with main steps connected by arrows: \"Import\" (featuring packages like readr, readxl, haven, xml2) connects to \"Tidy\" (tidyr), which connects to \"Transform\" (featuring dplyr, forcats, hms, lubridate, stringr). The workflow continues to \"Visualise\" (ggplot2) and \"Model\" (tidymodels). The background is dotted with colorful hexagonal shapes. On the right side are two images: a tidyverse.org website screenshot and an \"R for Data Science\" book cover. Additional programming packages purrr and magrittr are listed at the bottom."}
 
 The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny.
 :::
@@ -397,7 +397,7 @@ I'm pretty sure the first hex logo was magrittr's[^16], designed in December 201
 [^16]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
 
 ::: {#fig-early-logos}
-![Two hexagonal logos for ggplot2, a data visualization package. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text 'ggplot2' at the top, with the first using bold typography and the second using a lighter weight code font.](ggplot2-logos.png)
+![](ggplot2-logos.png){fig-alt="Two hexagonal logos for ggplot2, a data visualization package. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text 'ggplot2' at the top, with the first using bold typography and the second using a lighter weight code font."}
 
 Two early versions of the ggplot2 hex logo. I can't find any record of who created the first version (left), but I presume it was me given the incorrect orientation of the hex. The second version (right) was created in concert with Garrett Grolemund.
 :::
@@ -405,7 +405,7 @@ Two early versions of the ggplot2 hex logo. I can't find any record of who creat
 I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and @fig-hex-office shows a collection of stickers that I've been given over the years.
 
 ::: {#fig-hex-office}
-![](hex-office.jpg)
+![](hex-office.jpg){fig-alt="A collection of hexagonal stickers arranged in a honeycomb pattern, featuring logos and icons related to R programming, data science, and statistical computing. The stickers use different colors and designs, creating a visually diverse mosaic. Some notable stickers include the RStudio hex logo, a kakapo bird, and various data visualization tools."}
 
 In my office I've made a display board with all the stickers that I've been gifted over multiple years.
 :::
