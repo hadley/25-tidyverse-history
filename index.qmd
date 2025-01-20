@@ -15,6 +15,10 @@ format:
     include-in-header:
       text: |
         #show heading: set block(below: 1em, above: 1.5em)
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
 filters:
   - path: quarto-workaround.lua
     at: post-cell-cleanup
@@ -22,7 +26,6 @@ filters:
 
 ```{r}
 #| label: setup
-#| include: false
 library(dplyr)
 library(ggplot2)
 
@@ -306,6 +309,7 @@ One of the most contentious features of the tidyverse has been the idea of tidy 
 
 ```{r}
 #| eval: false
+#| echo: true
 df1 |>
   group_by(g1) |>
   summarise(mean = mean(a))
@@ -320,6 +324,7 @@ df3 |>
 The naive approach doesn't work, because dplyr will look for variables literally named `group_var` and `summary_var`:
 
 ```{r}
+#| echo: true
 grouped_mean <- function(df, group_var, summary_var) {
   df |>
     group_by(group_var) |>
@@ -337,6 +342,7 @@ It took us around five years to provide the tools to fully solve the problem. My
 
 That lead to a solution that looks like this:
 ```{r}
+#| echo: true
 grouped_mean <- function(df, group_var, summary_var) {
   group_var <- lazyeval::lazy(group_var)
   summary_var <- lazyeval::lazy(summary_var)
@@ -352,6 +358,7 @@ This approach worked, but was a bit clunky, introducing a lot of new syntax that
 Tidy evaluation introduced two new tools: `enquo()` which allowed to "unquote" a environment-variable to access the data-variable it referred to, and `!!` (pronounced bang-bang), which allowed you to interpolate its value anywhere in an existing expression. This approach was particularly appealing because we no longer needed to have an `_` variant of every dplyr function:
 
 ```{r}
+#| echo: true
 grouped_mean <- function(df, group_var, summary_var) {
   df |>
     group_by(!!enquo(group_var)) |>
@@ -365,6 +372,7 @@ I still believe that theory is really important but experience taught me that fe
 This again sent us back to the drawing board and eventually we came up with a new approach called embracing, which we [launched in 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0). This style introduced just one new operator `{{ }}`, which you use whenever you have an data-variable referenced by an environment-variable:
 
 ```{r}
+#| echo: true
 grouped_mean <- function(df, group_var, summary_var) {
   df |>
     group_by({{ group_var }}) |>
