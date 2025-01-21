@@ -286,13 +286,13 @@ Three ways of representing the same data. On the right, we have a flat data fram
 
 Tidy data provides a theoretical framework to productively organise your data. But you also need a practical data structure where this data can live. R provides the data frame for this task, but I found that the data frame suffered from a number of individually small issues that I felt added needless friction. To resolve these issues, I created the tibble, an extension of the data frame with a number of small changes:
 
--   Data frames can flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even cancel this display, making it easy to lock yourself out of your console when working with bigger datasets. tibbles only print a small number of rows and only the columns that fit on one screen. You can always explicitly request more data, but the defaults keep your analysis workflow is nimble.
+-   Data frames can flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even cancel this display, making it easy to lock yourself out of your console when working with bigger datasets. tibbles only print a small number of rows and only the columns that fit on one screen. You can always explicitly request more data, but the defaults keep your analysis workflow nimble.
 
 -   When teaching, I found that students didn't have a good sense of the type of variable stored in each column, and even I sometimes found myself confused about whether a column was a date, a string, or factor. To avoid this problem, tibbles show (abbreviated) variable types underneath the column names.
 
 -   In the unfortunate case of `data.frame(x = c(NA, "<NA>"))`, there's no way to distinguish the two values from the printed output. Tibbles use a side-channel, colour, to ensure that there's no way to confuse a missing value with a string that has the same printed representation.
 
--   Base data frames technically support nested data structures, like columns that are themselves data frames or columns that are lists of data frames. But they are printed poorly, making them hard to use. Tibbles strive to represent these more complex data types in an readable way, making them more usable where needed.
+-   Base data frames technically support nested data structures, like columns that are themselves data frames or columns that are lists of data frames. But they are printed poorly, making them hard to use. Tibbles strive to represent these more complex data types in a readable way, making them more usable where needed.
 
 tibbles also resolve a couple of subsetting gotchas that make it easy to make silent errors when writing package code. For example, if `df` is a data.frame, then:
 
@@ -324,7 +324,7 @@ As an interesting historical anecdote, there would have been no need for ggplot2
 
 ### Tidy evaluation {#sec-tidy-eval}
 
-One of the most challenging features of the tidyverse is tidy evaluation. It's hard to briefly define tidy evaluation, but fortunately it's straightforward to motivate with an example. Imagine you the following repeated code, and following the "rule of three", you want to extract out the repetition into a function:
+One of the most challenging features of the tidyverse is tidy evaluation. It's hard to briefly define tidy evaluation, but fortunately it's straightforward to motivate with an example. Imagine the following repeated code, and that following the "rule of three", you want to extract out the repetition into a function:
 
 ```{r}
 #| eval: false
@@ -419,7 +419,7 @@ We had also missed a few of common problems that were surprisingly hard to solve
 
 ### Hex logos
 
-You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan Milton Bache and I co-discovered hex stickers around the same time in 2014[^15] through <https://hexb.in>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
+You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan Milton Bache and I co-discovered hex stickers around the same time in 2014[^15] through <https://hexb.in>. I personally found it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
 
 [^15]: Stefan and I were clearly thinking many of the same thoughts in 2014!
 
@@ -486,7 +486,7 @@ But it doesn't matter how useful your code is if no one knows about it. So marke
 
 -   Our package release checklist (created by `usethis::use_release_isse()`) ensures that we maximise the chances of successful CRAN submission by following a standard process. Our process grows as we discover new problems, and shrinks as we figure out how to automate manual steps away.
 
--   We strive to keep our code formatting as consistent as possible so we wrote up our choices in the [tidyverse style guide](https://style.tidyverse.org). This is probably the most commonly style guide in the R community.
+-   We strive to keep our code formatting as consistent as possible so we wrote up our choices in the [tidyverse style guide](https://style.tidyverse.org). This is probably the most commonly used style guide in the R community.
 
 -   We spend a lot of time reviewing code (both internally and externally) so we wrote up [code review guidelines](https://code-review.tidyverse.org) to keep our own work consistent, and to help new contributors know what to expect. This work was lead by Davis Vaughan.
 
