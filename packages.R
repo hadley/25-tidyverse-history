@@ -7,12 +7,41 @@ library(tidyr)
 
 # Define packages --------------------------------------------------------
 
-core_pkgs <- c("ggplot2", "tibble", "tidyr", "readr", "purrr", "dplyr", "stringr",
-  "forcats", "lubridate")
-tidy_pkgs <- c("broom", "conflicted", "cli", "dbplyr", "dtplyr", "googledrive",
-  "googlesheets4", "haven", "hms", "httr", "jsonlite", "magrittr",
-  "modelr", "pillar", "ragg", "readxl", "reprex", "rlang", "rvest",
-  "xml2", "tidyverse", "httr2")
+core_pkgs <- c(
+  "ggplot2",
+  "tibble",
+  "tidyr",
+  "readr",
+  "purrr",
+  "dplyr",
+  "stringr",
+  "forcats",
+  "lubridate"
+)
+tidy_pkgs <- c(
+  "broom",
+  "conflicted",
+  "cli",
+  "dbplyr",
+  "dtplyr",
+  "googledrive",
+  "googlesheets4",
+  "haven",
+  "hms",
+  "httr",
+  "jsonlite",
+  "magrittr",
+  "modelr",
+  "pillar",
+  "ragg",
+  "readxl",
+  "reprex",
+  "rlang",
+  "rvest",
+  "xml2",
+  "tidyverse",
+  "httr2"
+)
 precusors <- c("plyr", "reshape", "reshape2", "ggplot")
 db_pkgs <- c("DBI", "RMySQL", "RPostgres", "RSQLite", "odbc")
 pkgs <- c(tidy_pkgs, db_pkgs, core_pkgs)
@@ -27,16 +56,24 @@ nanoparquet::write_parquet(packages, "packages.parquet")
 
 # Get raw release info ---------------------------------------------------
 
-releases <- map_dfr(packages$package, pkgsearch::cran_package_history, .progress = TRUE)
+releases <- map_dfr(
+  packages$package,
+  pkgsearch::cran_package_history,
+  .progress = TRUE
+)
 # Can't currently store list-cols
 releases$dependencies <- NULL
 nanoparquet::write_parquet(releases, "releases.parquet")
 
-
 # Process into useful format ---------------------------------------------
 
 package_release <- releases |>
-  select(package = Package, version = Version, date = date, maintainer = Maintainer) |>
+  select(
+    package = Package,
+    version = Version,
+    date = date,
+    maintainer = Maintainer
+  ) |>
   separate_wider_delim(
     version,
     delim = ".",
@@ -57,12 +94,14 @@ package_release <- releases |>
     maintainer = str_remove(maintainer, " <.*?>"),
     maintainer = str_remove_all(maintainer, "'"),
   ) |>
-  mutate(release = ifelse(row_number() == 1, "first", release), .by = package) |>
+  mutate(
+    release = ifelse(row_number() == 1, "first", release),
+    .by = package
+  ) |>
   select(-(major:patch)) |>
   left_join(packages) |>
   # Only include releases after I took over
   filter(cumany(maintainer == "Hadley Wickham"), .by = package)
-
 
 package_release
 

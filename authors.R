@@ -14,17 +14,20 @@ people |>
   filter(
     role == "aut",
     is.na(email) | !str_detect(email, "posit.co|rstudio.com"),
-    !is.na(family)) |>
-  mutate(name = paste0(given, " ", family), .after = package, .keep = "unused") |>
+    !is.na(family)
+  ) |>
+  mutate(
+    name = paste0(given, " ", family),
+    .after = package,
+    .keep = "unused"
+  ) |>
   print(n = Inf)
 
-|>
-  count(given, family, role, sort = TRUE) |>
-  print(n = Inf)
+# |>
+#   count(given, family, role, sort = TRUE) |>
+#   print(n = Inf)
 
 person_to_df <- function(x) {
   x <- unclass(x)
-  tibble(
-    given = x |> map("given"),
-  )
+  tibble(given = x |> map("given"))
 }
