@@ -3,6 +3,7 @@ title: A brief history of the tidyverse
 author: Hadley Wickham
 date: today
 bibliography: references.bib
+code-links: repo
 format:
   html: default
   typst:
@@ -179,29 +180,31 @@ Around this time I started to become particularly well known in the R community.
 
 ## The early days
 
-Much of what we now call the tidyverse was complete by 2015, but the tidyverse had yet to be named and defined. In the this section you'll learn how the name came to be, the common principles which tidyverse packages adhere to, and how I helped people learn to use it.
+While most of the packages of the tidyverse-to-be existed in 2015, the tidyverse had yet to be named and defined. In the this section you'll learn how the name came to be, the common principles that underlie tidyverse packages, and how I helped people learn to use it.
 
 ### Naming the tidyverse
 
-As the collection of packages I had developed grew, the community needed some name to refer to them collectively, and many people started calling them the "Hadleyverse"[^9]. This name was unappealing to me because using a portmanteau of my name and "universe" felt overweeningly arrogant, so I started brainstorming an "official" name that I could live with, including the sleekverse, the dapperverse, and the deftverse[^10]. In hindsight, given the success of tidy data, calling it the tidyverse seems obvious.
+As the collection of packages I had developed grew, the community needed some name to refer to them in aggregate. Many people started calling these packages the "Hadleyverse"[^9], a name that I found tremendously unappealing. So I started brainstorming an "official" name that I could live with, with candidates including the sleekverse, the dapperverse, and the deftverse[^10]. In hindsight, the tidyverse seems obvious, and I wonder why I had to spend so much time and effort coming up with a name.
 
 [^9]: e.g. <https://github.com/imanuelcostigan/hadleyverse>
 
 [^10]: In June 2016, Winston Chang and I brainstormed a bunch of ideas in slack: shipshape, trim, spruce, dapper, natty, joy-sparking, spiffy, choice, debonair, suave, virile, civil, gallant, pulchritudinous, graceful, well-tempered, deft, fastidious, slick, crack, mellow, mannerly, unctuous, tolerable, glib, fluent, affable, agreeable, stout, dashing, snazzy, boffo, raffish, rakish, swashbuckling, nifty, phat, dandy, sleek.
 
-Overall, I really like the name, but there's one downside: it implies that if you're not using the tidyverse you're using the messyverse. I don't like this implication because I don't believe it's true: the tidyverse is just one way to get the job done, and it's not wrong to use other tools.
+Overall, I'm still very happy with the name, but there's one feature that I don't like: it carries with it the implication that everything outside the tidyverse is the messyverse. I don't believe this is true: the tidyverse is just one way to get the job done, and it's not wrong to use other tools (and indeed it's usually not possible to do an analyis using only the tidyverse).
 
-I announced this name to the world at my keynote at useR on June 29, 2016. A few months later in September, I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). This package had two main goals:
+I announced the name to the world at my keynote at useR on June 29, 2016. And then a few months later in September, I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). This package had two main goals:
 
--   To make it easy to install all packages in the tidyverse with a single line of code, `install.packages("tidyverse")` so that folks could easily get a "batteries included" data science environment.
+-   To make it easy to install all packages in the tidyverse with a single line of code, `install.packages("tidyverse")`. This made it easy to get a "batteries included" data science environment, and was especially useful when teaching.
 
--   To make it easy to load the most common packages, so that you could type `library(tidyverse)` instead of loading packages one by one. The initial release loaded ggplot2, dplyr, tidyr, readr, purrr, and tibble automatically, then version 1.2.0 (September 2017) added forcats and stringr, and version 2.0.0 (March 2023) added lubridate[^11].
+-   To make it easy to load the most common packages, so that you could type `library(tidyverse)` instead of loading packages one by one. The initial release loaded ggplot2, dplyr, tidyr, readr, purrr, and tibble, then version 1.2.0 (September 2017) added forcats and stringr, and version 2.0.0 (March 2023) added lubridate[^11].
 
-[^11]: We had wanted to add lubridate to the core packages along with forcats and stringr, but there were a couple of function names that caused conflicts. The process of eliminating these functions without unduly affecting user code took a further five years.
+[^11]: We had wanted to add lubridate along with forcats and stringr, but there were a couple of function names that caused conflicts. The process of eliminating these functions without unduly affecting user code took a further five years.
 
-@fig-the-tidyverse summarises the current state of the tidyverse.
+@fig-the-tidyverse summarises the current state of the tidyverse, broken down by model of the data science process.
 
 ::: {#fig-the-tidyverse}
+![](the-tidyverse.png){fig-alt="A night sky themed diagram showing the data science workflow in R, with main steps connected by arrows: \"Import\" (featuring packages like readr, readxl, haven, xml2) connects to \"Tidy\" (tidyr), which connects to \"Transform\" (featuring dplyr, forcats, hms, lubridate, stringr). The workflow continues to \"Visualise\" (ggplot2) and \"Model\" (tidymodels). The background is dotted with colorful hexagonal shapes. On the right side are two images: a tidyverse.org website screenshot and an \"R for Data Science\" book cover. Additional programming packages purrr and magrittr are listed at the bottom."}
+
 ![](the-tidyverse.png){fig-alt="A night sky themed diagram showing the data science workflow in R, with main steps connected by arrows: \"Import\" (featuring packages like readr, readxl, haven, xml2) connects to \"Tidy\" (tidyr), which connects to \"Transform\" (featuring dplyr, forcats, hms, lubridate, stringr). The workflow continues to \"Visualise\" (ggplot2) and \"Model\" (tidymodels). The background is dotted with colorful hexagonal shapes. On the right side are two images: a tidyverse.org website screenshot and an \"R for Data Science\" book cover. Additional programming packages purrr and magrittr are listed at the bottom."}
 
 The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny. This image comes from a presentation called the "Joy of Data Science" that I gave in 2020.
@@ -211,13 +214,13 @@ The packages of the tidyverse, organised using a partial version of my model of 
 
 Naming the tidyverse created some bigger questions: What exactly is the tidyverse? What are the unifying principles that underlie the packages in the tidyverse? In my useR talk I cited three unifying principles:
 
--   Uniform data structures
--   Uniform APIs
--   Support referential transparency
+-   Uniform data structures.
+-   Uniform APIs.
+-   Support referential transparency.
 
-The first two principles are straightforward: it's easier to learn a new tool if it uses data structures and interfaces thta you're already familiar with. But what does referential transparency mean? That's a call to the principles of tidy evaluation, which we'll come back to in the next section.
+I think the first two principles are straightforward: it's easier to learn a new tool if it uses data structures and interfaces that you're already familiar with. But what does it mean to support referential transparency? That's a call to the principles of tidy evaluation, which we'll come back to in @sec-tidy-eval.
 
-I repeated my introduction to the tidyverse talk a few times and by December 2016 I'd further refined the core principles to these four:
+I repeated my introduction to the tidyverse talk a few times that year and by December 2016 I'd further refined the core principles to these four:
 
 -   Share data structures (i.e. tidy tibbles).
 -   Compose simple pieces (i.e. use the pipe).
@@ -229,7 +232,9 @@ The final bullet was particularly motivated by this quote:
 > Programs must be written for people to read, and only incidentally for machines to execute.\
 > — Hal Abelson
 
-Since that time I've continued to refine my description of what it means to be part of the tidyverse and you can see my latest iteration in [Tidy design principles](https://design.tidyverse.org/unifying.html). At the time of writing this paper, the four principles of the tidyverse were:
+I think that's a particularly important principle for data science code, because it's very important to be able to read, understand, and the critique the code used to perform an analysis. Ideally, you're not just solving a problem with code, you're also documenting how you solved it so that you (and others) can understand the path that you've taken.
+
+Since that time I've continued the definition of the tidyverse and you can see my latest iteration in [Tidy design principles](https://design.tidyverse.org/unifying.html). At the time of writing, the four principles of the tidyverse were:
 
 -   It is **human centred**, i.e. the tidyverse is designed specifically to support the activities of a human data analyst.
 
@@ -241,17 +246,17 @@ Since that time I've continued to refine my description of what it means to be p
 
 ### Learning
 
-Once I had identified the tidyverse as a "thing", it become natural to ask, how do you learn it? The answer to this question became [R for Data Science](https://r4ds.hadley.nz) [@r4ds-1; @r4ds-2]. I wanted to write a book because I believe they're one of the best ways to spread big ideas; the linear format allows you to tell a story with plenty of space for the details. Equally important to me was that the book should be available to all, regardless of their ability to pay. That's why all the books I work on have a dual production model: a free HTML version that I produce and a paid physical version produced by a commercial publisher.
+Once I had identified the tidyverse, it become natural to ask "how do you learn it?" The answer to this question became the book [R for Data Science](https://r4ds.hadley.nz) [@r4ds-1; @r4ds-2]. I wrote a book because I believe that books are one of the best ways to spread big ideas; the linear format allows you to lead the reader step-by-step and you have plenty of space to go in to the details. Equally important to me was that the book should be available to all, regardless of their ability to pay. That's why all the books I work on have a dual production model: a free HTML version that I produce paired with a paid physical version produced by a commercial publisher.
 
-One of my favourite things about R for Data Science is how many languages it has been translated into, including Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified). I'm particularly fond of the community translations ([Spanish](http://es.r4ds.hadley.nz/), [Portugese](https://it.r4ds.hadley.nz/), [Turkish](https://tr.r4ds.hadley.nz/), and [Italian](https://pt.r4ds.hadley.nz/)) because they were translated by volunteers and made freely available to the world.
+R for Data Science proved to be extremely popular. It sold very well, but more importantly to me, a ton of people used the website (in the last year, my web statistics reveal around 1 million unique visitors and 2.9 million page views). One of my favourite things about the book is how many languages it has been translated into, including Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified). I'm particularly fond of the community translations ([Spanish](http://es.r4ds.hadley.nz/), [Portugese](https://it.r4ds.hadley.nz/), [Turkish](https://tr.r4ds.hadley.nz/), and [Italian](https://pt.r4ds.hadley.nz/)) because they were translated by volunteers and made freely available to the world.
 
 ## Key innovations
 
-In this section, I'll discuss five specific innovations strongly associated with the tidyverse that I am particularly proud of: tidy data, tibbles, the pipe, tidy evaluation, and hex stickers.
+So far I've traced the chronological development of the tidyverse, but it's worth examining some of the specific innovations that emerged during this journey. These innovations weren't just programming achievements: they represent new ways of thinking about and interacting with data, and helped to build a community around the tidyverse. I've selected five contributions—tidy data, tibbles, the pipe, tidy evaluation, and hex stickers—that I'm particularly proud of and that helped create the cohesive ecosystem that users know today. Let's examine each of these key developments in turn.
 
 ### Tidy data
 
-I've always had a very strong sense that there's a "right" way to organise your data, a way that would make the rest of your analysis much easier. And when looking at a dataset I could usually identify what form would be the most productive. But I had a time explaining what I was doing to others, and experienced numerous failures when trying to teach my approach. But eventually I figured out the three principles of tidy data[^12] :
+I've always had a very strong sense that there's a "right" way to organise your data, a way that would make the rest of your analysis much easier. And when looking at a dataset I could usually identify what form would be the most productive. But I had a time explaining what I was doing to others, and experienced numerous failures when trying to teach my approach to students. But eventually I figured out the three principles of tidy data[^12] and elucidated them in @tidy-data:
 
 [^12]: This is certainly not the only data stucture you might ever want to use, but it's extremely useful to have a organising structure that you can rely on for the majority of your work. It's a great default, even if you might need other forms for specialised purposes.
 
@@ -259,15 +264,13 @@ I've always had a very strong sense that there's a "right" way to organise your 
 -   Each observation goes in a row.
 -   Each value goes in a cell.
 
-In hindsight, it seems hard to understand why it took so long to describe these principles, but @tidy-data is one of the rare articles in the statistics literature that actually describes how you should structure your datasets. I find it interesting that this definition seems to work for a wide variety of people, even without a precise definition of variable and observation.
+I find it interesting that this definition seems to work for a wide variety of people, even without a precise definition of variable and observation. Given their simplicity, it seems hard to understand why it took me so long to figure them out principles, but as far as I know, this paper is one of the very few papers in the statistics literature that actually describes how you should structure your data.
 
 <!--# TODO: When I learned visualisation with base R, I struggled with the variety of data structures that different plotting functions could use. For example, `plot()` can either take vectors of data (e.g. `plot(x, y)`) or a formula and a data frame (e.g. `plot(y ~ x, data = df)`). But if you want to plot multiple series at once you need to use `matplot()`, `matpoints()`, or `matlines()`, all of which take a matrix. -->
 
-The definition of tidy data was tightly paired with tools designed to get data into a tidy form. The tidy data paper was paired with the tidyr package, which initially provided the `gather()` and `spread()` functions. Unfortunately many people (including me!) had a hard time remembering which was which and what their arguments did. Additionally, their design wasn't quite flexible enough to handle all the problems which we later discovered in practice. In [tidyr 1.0.0](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/) (2019), we resolved many of these problems by introducing the new`pivot_longer()` and `pivot_wider()` functions[^13].
+The definition of tidy data was tightly paired with tools designed to get data into a tidy form, the [tidyr package](https://tidyr.tidyverse.org). This package initially provided the `gather()` and `spread()` functions, but unfortunately many people (including me!) had a hard time remembering which was which and what their arguments did. Additionally, their design wasn't quite flexible enough to handle all the problems which we later discovered in practice. In [tidyr 1.0.0](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/) (2019), we resolved many of these problems by introducing the new`pivot_longer()` and `pivot_wider()` functions. These new names were informed by (casual) user research, where I asked my twitter followers to describe two data transformation operations. You can learn more about this research at <https://github.com/hadley/table-shapes>.
 
-[^13]: The names of these functions were informed functions was informed by some casual user research performed by asking my twitter followers a couple of questions. I received \~2,600 responses which you can learn read more about on <https://github.com/hadley/table-shapes>.
-
-tidyr 1.0.0 also expanded the scope of the package to encompass "rectangling", a new term for converting hierarchical data into tidy rectangles. At the time, this was becoming increasingly important as more data was coming from JSON web APIs, which tended to produce deeply nested data structures. You can learn more about the problem and the solutions that tidyr provides in the tidyr [rectangling vignette](https://tidyr.tidyverse.org/articles/rectangle.html).
+tidyr 1.0.0 also expanded the scope of the package to encompass "rectangling", a new term for converting hierarchical data into tidy rectangles. At the time, this was becoming increasingly important as more data was coming from JSON web APIs, which tended to produce deeply nested data structures. You can learn more about the problem and the solutions that tidyr provides in [tidyr's rectangling vignette](https://tidyr.tidyverse.org/articles/rectangle.html).
 
 ```{=html}
 <!--
@@ -283,27 +286,27 @@ Three ways of representing the same data. On the right, we have a flat data fram
 
 ### tibbles
 
-Tidy data provides a theoretical framework to productively organise your data. You also need practical data structures that make it easier to work with tidy data. To this end, I created the tibble as an extension of the base R data.frame class. The goal of the tibble was to solve a number of individually small issuses that I felt added needless friction:
+Tidy data provides a theoretical framework to productively organise your data. But you also need a practical data structure where this data can live. R provides the data frame for this task, but I found that the data frame suffered from a number of individually small issues that I felt added needless friction. To resolve these issues, I created the tibble, an extension of the data frame with a number of small changes:
 
--   Data frames often flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even cancel this rendering, making it easy to lock yourself out of your console when working with bigger datasets. tibbles only print a small number of rows and only the columns that fit on one screen. You can always explicitly request more data, but the defaults ensure that your analysis workflow is nimble.
+-   Data frames can flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even cancel this display, making it easy to lock yourself out of your console when working with bigger datasets. tibbles only print a small number of rows and only the columns that fit on one screen. You can always explicitly request more data, but the defaults keep your analysis workflow is nimble.
 
 -   When teaching, I found that students didn't have a good sense of the type of variable stored in each column, and even I sometimes found myself confused about whether a column was a date, a string, or factor. To avoid this problem, tibbles show (abbreviated) variable types underneath the column names.
 
--   In the unfortunate case you have `data.frame(x = c(NA, "<NA>"))`, there's no way to distinguish the two values from the printed output. Tibbles use a side-channel, colour, to ensure that there's no way to confuse a missing value with a string that has the same printed representation.
+-   In the unfortunate case of `data.frame(x = c(NA, "<NA>"))`, there's no way to distinguish the two values from the printed output. Tibbles use a side-channel, colour, to ensure that there's no way to confuse a missing value with a string that has the same printed representation.
 
--   In 2016, I was exploring ways of storing richer data structures inside of data frames, including columns that were themselves data frames, as well as columns that were lists of data frames. While these column types are technically supported by the base data frame, their printing is sufficiently confusing to make them hard to use. Tibbles strive to represent these more complex data types in an readable way.
+-   Base data frames technically support nested data structures, like columns that are themselves data frames or columns that are lists of data frames. But they are printed poorly, making them hard to use. Tibbles strive to represent these more complex data types in an readable way, making them more usable where needed.
 
-tibbles also resolve a couple of gotchas with subsetting data frames that make it easy to make silent errors in package code. For example, if `df` is a data.frame, then:
+tibbles also resolve a couple of subsetting gotchas that make it easy to make silent errors when writing package code. For example, if `df` is a data.frame, then:
 
 -   `df[, cols]` might return a vector or a data frame, depending on how many columns `cols` selects.
 
 -   `df$x` uses partial matching, so that if column `x`doesn't exist but column `xyz` does, it will silently return `df$xyz`.
 
-Neither of these problems occur if `df` is a tibble because `[` will always returns another tibble and `$` will never perform partial matching (and will complain if `x` does not exist). This why I jokingly say that tibbles are lazy and surly versions of data frames.
+If `df` is a tibble then neither of these problems occur because `df[]` always returns another tibble and `df$x` never performs partial matching. This is why I have jokingly described tibbles as lazy and surly versions of data frames.
 
-tibbles started life in dplyr, originally just called `tbl_df` with no suggestion as how to pronounce this work that only contains consonants. [Kevin Ushey](https://x.com/kevin_ushey/status/514659005621219329) proposed pronouncing them as tibble-diffs in 2014, and the tibble bit stuck. As the utility and complexity of tibbles expanded, they need more space to grow and were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
+tibbles started life in dplyr, originally called `tbl_df`s with no suggestion as how to pronounce their name. [Kevin Ushey](https://x.com/kevin_ushey/status/514659005621219329) proposed pronouncing them as tibble-diffs in 2014, and the tibble bit stuck. As the utility and complexity of tibbles expanded, they needed more space to grow and were [extracted into their own package](https://posit.co/blog/tibble-1-0-0/) in 2016.
 
-tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages and my strong opinions about the formatting of significant digits caused some consternation. That contention seems to have mostly died down now, but today I am much more cautious about introducing new data structures. I now believe that new data structures are fundamentally much more costly than introducing new functions or packages, and should be kept to the bare minimum.
+tibbles were a much more contentious data structure than I had anticipated. They broke code in older packages and my strong opinions about the formatting of significant digits caused some consternation in the community. The contention seems to have mostly died down now, but today I am much more cautious about introducing new data structures. New data structures are fundamentally much more costly than new functions or packages, and they should be kept to the bare minimum.
 
 ### The pipe
 
@@ -313,17 +316,17 @@ tibbles were a much more contentious data structure than I had anticipated. They
 
 The pipe quickly became one of the defining features of tidyverse code. It allows you to rewrite function composition (e.g. `f(g(x)))`) as a linear sequence of transformations (e.g. `x |> f() |> g()`), which tends to make common data analysis programming patterns much easier to read.
 
-My first attempt at the pipe was implemented in dplyr in Oct 2013 and called `%.%`. When [I announced dplyr](https://rstudioblog.wordpress.com/2014/01/17/introducing-dplyr/) in January 2014, I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. It used `%>%` instead of `%.%`, which was easier to type since you can hold down the shift button the whole time[^14], and had more comprehensive features. So I quickly pivottoed to use magrittr and deprecate `%.%`. You can learn more about the early history of the pipe in Adolfo Álvarez's excellent blog post "[Plumbers, chains, and famous painters: The (updated) history of the pipe operator in R](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/)".
+I first implemented the pipe in dplyr in Oct 2013 and called it `%.%`. When [I announced dplyr](https://rstudioblog.wordpress.com/2014/01/17/introducing-dplyr/) in January 2014, I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. It used `%>%` instead of `%.%`, which is easier to type since you can hold down the shift button the whole time[^13], and had more comprehensive features. So I quickly pivoted to use magrittr and deprecate `%.%`. I was initially cautious about this new syntax, but users picked up on it quickly, and I found it easy to teach. You can learn more about the early history of the pipe in Adolfo Álvarez's excellent blog post "[Plumbers, chains, and famous painters: The (updated) history of the pipe operator in R](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/)".
 
-[^14]: The requirement for infix function names to start and end with `%` comes from R, and there's no avoiding it without patching R itself.
+[^13]: The requirement for infix function names to start and end with `%` comes from R, and there's no avoiding it without patching R itself.
 
-Today, the pipe is available in base R thanks to a collaborative effort. In 2016, Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch for R, which was presented to the R Core team at the Directions in Statistical Computing Conference in 2017 by Jim Hester. This presentation was received positively, but it took some time for the R Core Team to fully align on the utility of the pipe. The base pipe was added to R in 4.1 (2020) thanks to work by Luke Tierney, and it took a few more iterations to gain the main features of the magrittr pipe with placeholder syntax in R 4.2 and the ability to pipe into subsetting functions in R 4.3. Because R can modify the parser, the base pipe has better syntax, `|>`, with a more visible placeholder, `_`. Since the base pipe is now mature, the tidyverse is gradually moving away from `%>%` towards `|>`, a process that will take several years to complete.
+Today, the pipe is available in base R thanks to a collaborative effort. In 2016, Lionel Henry [proposed new syntax](https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html) and wrote a patch for R, which Jim Hester presented to the R Core Team at the Directions in Statistical Computing Conference in 2017. This presentation was received positively, but it took some time for R Core to fully align on the utility of the pipe. Three years later, Luke Tierney added the base pipe to R 4.1 (2020), following up with placeholder syntax in R 4.2 and compatibility with subsetting functions in R 4.3. Because R can modify the parser, the base pipe has better syntax, `|>`, including a more visible placeholder, `_`. Since the base pipe is now mature, the tidyverse is gradually moving away from `%>%` towards `|>`, a process that will take several years to complete.
 
-As an interesting historical anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than requiring the switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E).
+As an interesting historical anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than needing to switch to `+` in ggplot2. You can [try out ggplot](https://github.com/hadley/ggplot1) if you want, or [learn why ggplot2 can't switch to the pipe](https://forum.posit.co/t/why-cant-ggplot2-use/4372/7%3E).
 
-### Tidy evaluation
+### Tidy evaluation {#sec-tidy-eval}
 
-One of the most contentious features of the tidyverse has been the idea of tidy evaluation. The goal of tidy evaluation is to solve a problem introduced by ggplot2 and dplyr's syntax that allows you to mix variables defined in the current environment with variables defined in some data frame. This makes interactive data analysis much more fluent at the cost of making programming much harder. The need for tidy evaluation is fairly simple to explain. If you have repeated code, you typically want to extract out a function:
+One of the most challenging features of the tidyverse is tidy evaluation. It's hard to briefly define tidy evaluation, but fortunately it's straightforward to motivate with an example. Imagine you the following repeated code, and following the "rule of three", you want to extract out the repetition into a function:
 
 ```{r}
 #| eval: false
@@ -339,23 +342,31 @@ df3 |>
   summarise(mean = mean(c))
 ```
 
-The naive approach doesn't work, because dplyr will look for variables literally named `group_var` and `summary_var`:
+You might try the usual approach to writing a function and come up with the following code:
+
+```{r}
+library(dplyr)
+df1 <- data.frame(g1 = 1, a = 2)
+```
 
 ```{r}
 #| echo: true
+#| error: true
 grouped_mean <- function(df, group_var, summary_var) {
   df |>
     group_by(group_var) |>
     summarise(mean = mean(summary_var))
 }
+
+df1 |> grouped_mean(g1, a)
 ```
 
-I believe that we now have some good vocabulary to describe the problem. The root cause of the challenge is that we use the word variable to mean two different things. A **data-variable** is a statistical variable, something that exists inside a data frame, like `g1`, or `a`. An **environment-variable** is a computer science variable, something that exists in (e.g.) the global environment, like `df1` or `df2`. The fundamental challenge of programming with dplyr is that you inside a function you have a data-variable stored inside of a environment variable.
+This code doesn't work because dplyr looks for a variable literally named `group_var`, not the variable, `a`, that you want. I believe that we now have some good vocabulary to describe the problem. The root cause of the challenge is that we use the word variable to mean two different things. A **data-variable** is a statistical variable, something that exists inside a data frame, like `g1`, or `a`. An **environment-variable** is a computer science variable, something that exists in (e.g.) the global environment, like `df1` or `df2`. The fundamental challenge of programming with dplyr is that inside a function you have a data-variable (`g1`) stored inside of a environment-variable (`group_var`).
 
 It took us around five years to provide the tools to fully solve the problem. My efforts started in dplyr 0.3.0 (2014) with the introduction of the [lazyeval](https://cran.r-project.org/web/packages/lazyeval) package. There were three pieces:
 
 -   `lazyeval::lazy()` allowed you to capture the data-variable stored inside an environment-variable, producing an explicit lazy object.
--   `lazyeval::interp()` allowed you to vary the data-variable used inside an expression.
+-   `lazyeval::interp()` allowed you to interpolate a lazy object into a bigger expression creating a new lazy object.
 -   Every dplyr function had a variant that ended in an underscore that took lazy objects.
 
 That lead to a solution that looks like this:
@@ -372,9 +383,15 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-This approach worked, but was a bit clunky, introducing a lot of new syntax that you had to learn. Additionally, in July 2016, I learned that the technique that allowed `lazy()` to work would be no longer supported in a future version of R. This lead me back to the drawing board. Fortunately Lionel Henry had recently joined my team and had a bunch of ideas of how to improve the situation. That lead us to a new framework called tidy evaluation (or tidyeval for short), which we introduced to dplyr 0.6.0 (2017).
+This approach worked, but was a bit clunky. Additionally, in July 2016, I learned that the technique that allowed `lazy()` to work would be no longer supported in a future version of R, which lead me back to the drawing board. Fortunately Lionel Henry had recently joined my team and had a bunch of ideas of how to improve the situation. That lead us to a new framework called tidy evaluation (tidyeval for short) which we introduced to dplyr 0.6.0 (2017).
 
-Tidy evaluation introduced two new tools: `enquo()` which allowed to "unquote" a environment-variable to access the data-variable it referred to, and `!!` (pronounced bang-bang), which allowed you to interpolate its value anywhere in an existing expression. This approach was particularly appealing because we no longer needed to have an `_` variant of every dplyr function:
+Tidy evaluation is provided by the [rlang](https://rlang.r-lib.org/) package, and introduces two new tools:
+
+-   `enquo()` lets you to "quote" an environment-variable creating an explicit quosure object.
+
+-   `!!` (pronounced bang-bang), allowed you to "unquote" or interpolate a quosure into a bigger expression.
+
+This approach was appealing because every dplyr function could itself call `enquo()`, meaning that we no longer needed to have two versions of every function. This lead to the following solution:
 
 ```{r}
 #| echo: true
@@ -385,9 +402,11 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-Tidy evaluation was made possible by a comprehensive theory that put quoting and unquoting on a solid theoretical foundation, and made us more confident that our implementation was correct and complete. I still believe that theory is really important but experience taught me that few R users wanted to grapple with it. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard. (e.g. community posts titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?")
+Tidy evaluation included a solid theoretical foundation, making us more confident that our implementation was correct and complete. I still believe that theory is really important but experience taught us that few R users wanted to grapple with it. During 2017 and 2018 I gave 12 talks on tidyeval to audiences around the world, trying to convince others that they could use tidyeval for their own code. But this was much less effective than I had hoped and there were general rumblings in the community that tidyeval was too hard[^14].
 
-This again sent us back to the drawing board and eventually we came up with a new approach called embracing, which we [launched in 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0). This style introduced just one new operator `{{ }}`, which you use whenever you have an data-variable referenced by an environment-variable:
+[^14]: Memorable examples of this included posts on the RStudio community forum titled "Should tidyeval be abandoned?" and "Will tidyeval kill the tidyverse?".
+
+This again sent us back to the drawing board and eventually we came up with a new approach called embracing, [launched in mid 2019](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0). This style introduced just one new operator `{{ }}`, which you use whenever you have an data-variable referenced by an environment-variable. While `enquo()` and `!!` continue to be used behind the scenes, there's now only one bit of new syntax to learn.
 
 ```{r}
 #| echo: true
@@ -398,7 +417,7 @@ grouped_mean <- function(df, group_var, summary_var) {
 }
 ```
 
-While `enquo()` and `!!` continue to be used behind the scenes, there's now only one bit of new syntax to learn. We had also missed a few of common problems that were surprisingly hard to solve, and required a few smaller enhancements and some better documentation. Now we have a [cookbook](https://dplyr.tidyverse.org/articles/programming.html) that doesn't require any theoretical knowledge, and the grumblings about tidyeval seem to have subsided.
+We had also missed a few of common problems that were surprisingly hard to solve with existing tools, and required a few smaller enhancements and some better documentation. Now we have a [cookbook](https://dplyr.tidyverse.org/articles/programming.html) that doesn't require any theoretical knowledge, and the grumblings about tidyeval seem to have subsided.
 
 ### Hex logos
 
@@ -406,7 +425,7 @@ You can't talk about the history of the tidyverse without also talking about hex
 
 [^15]: Stefan and I were clearly thinking many of the same thoughts in 2014!
 
-I'm pretty sure the first hex logo was magrittr's[^16], designed in December 2014. Soon afterwards, in early 2015, I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinehart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community. Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design!
+I'm pretty sure the first hex logo was magrittr's[^16], designed by Stefan in December 2014. Soon afterwards I fully I embraced the idea of hex stickers and started creating them for key packages with the help of designer Greg Swinehart; you can see two early versions of the ggplot2 logo in @fig-early-logos. By mid-2016 we were ordering them en masse for RStudio events, and we were beginning to see logos for other packages in the community.
 
 [^16]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
 
@@ -416,12 +435,12 @@ I'm pretty sure the first hex logo was magrittr's[^16], designed in December 201
 Two early versions of the ggplot2 hex logo. I can't find any record of who created the first version (left), but I presume it was me given the incorrect orientation of the hex. The second version (right) was created in concert with Garrett Grolemund.
 :::
 
-I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and @fig-hex-office shows a collection of stickers that I've been given over the years.
+Today, a huge number of packages have a logo, and I love seeing the creativity and diversity package authors bring to their design! I love hex stickers as a community building tool: people can see your laptop, immediately recognise you as a member of the R community, and get a sense of what you use R for. I've heard many stories of people striking up a conversation with strangers just because they recognised the stickers. They also play a role akin to trading cards and @fig-hex-office shows a collection of stickers that I've been given over the years.
 
 ::: {#fig-hex-office}
 ![](hex-office.jpg){fig-alt="A collection of hexagonal stickers arranged in a honeycomb pattern, featuring logos and icons related to R programming, data science, and statistical computing. The stickers use different colors and designs, creating a visually diverse mosaic. Some notable stickers include the RStudio hex logo, a kakapo bird, and various data visualization tools."}
 
-In my office I've made a display board with all the stickers that I've been gifted over multiple years.
+A board of hex stickers on display in my office.
 :::
 
 ```{=html}
@@ -438,9 +457,9 @@ posit::conf() (and rstudio::conf() before) features a hex wall that's a popular 
 
 ## The tidyverse at Posit
 
-The naming of the tidyverse coincided with the start of my team at RStudio (now Posit), and the overarching journey from a project that was primarily developed by me to one with many full-time contributors. This wouldn't have been possible without Posit, which has funded this work as part of its public benefit corporation mission.
+The naming of the tidyverse coincided with the start of my team at RStudio (now Posit), and the overarching journey from a project that was primarily developed by me to one with many full-time contributors. This wouldn't have been possible without Posit, which has funded this work as part of its public benefit corporation mission. I feel tremendously lucky to work at an organisation who's mission so closely aligns with my own.
 
-The tidyverse team currently includes Lionel Henry, Jenny Bryan, Gábor Csárdi, Mine Çetinkaya-Rundel, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand, as well as the tidymodels team, which Idescribe below. Jim Hester, Mara Averick, Romain Francois, Tracy Teal, and Andy Teucher have moved on from their full-time roles at Posit but many of remain active in the community and they're all still valued members of the broader "team tidyverse".
+The tidyverse team currently includes Lionel Henry, Jenny Bryan, Gábor Csárdi, Mine Çetinkaya-Rundel, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand, as well as the tidymodels team, described below. Jim Hester, Mara Averick, Romain Francois, Tracy Teal, and Andy Teucher have moved on from their full-time roles at Posit but many of remain active in the community and they're all still valued members of the broader "team tidyverse".
 
 ```{=html}
 <!--
@@ -461,17 +480,17 @@ Posit has also supported temporary employees and part-time contractors. We've ha
 -->
 ```
 
-The mission of the team is broad: we want to make R the best environment for doing data science. We have nothing against other programming languages (and certainly use them where appropriate), but we love R, believe in it, and believe that you have to stay focused in order to have an impact.
+The mission of the team is broad and extends well beyond the tidyverse: we want to make R the best environment for doing data science. We have nothing against other programming languages (and certainly use them where appropriate), but we love R, believe in it, and believe that you have to stay focused if you want to have an impact.
 
-To achieve this mission the most obvious skills we use are our programming skills: we write a lot of R code (as well as a smattering of C, C++, Rust, and Javascript) to create packages. Our mission extends beyond just tidyverse packages because we recognise that few analyses can be completed with the tidyverse alone, and most will require additional special purpose tools. For this reason, we strive to help every R package developer make higher quality packages. You can see this work in books like [Advanced R](https://adv-r.hadley.nz) and [R Packages](https://r-pkgs.org) and in the devtools family of packages that support tasks related to package development. This family of package has had a big impact on the practice of package development: \~9,000 packages use testthat for unit testing, \~16,000 packages use roxygen2 for documentation, and \~12,000 packages use pkgdown to make package websites.
+To achieve this mission the most obvious skills we deploy are our programming skills: we write a lot of R code (as well as a smattering of C, C++, Rust, and Javascript) to create packages. Our mission extends beyond just tidyverse packages because we recognise that few analyses can be completed with the tidyverse alone, and most will require additional special purpose tools. For this reason, we strive to help every R package developer make higher quality packages. You can see this work in books like [Advanced R](https://adv-r.hadley.nz) and [R Packages](https://r-pkgs.org) and in the devtools family of packages that support tasks related to package development. This family of packages has had a big impact on the practice of package development: at the time of writing, \~9,000 packages use testthat for unit testing, \~12,000 packages use pkgdown to make package websites, and \~16,000 packages use roxygen2 to generate documentation.
 
-It doesn't matter how useful your code is if no one knows about it. So marketing and education are equally important within the team, and all members are expected to contribute through actions such as [writing blog posts](https://www.tidyverse.org/blog), writing books, giving talks, teaching workshops, and helping build and support the R community. We're also a generally process-oriented team and we do our best to write up our processes so that others can benefit from them. This work includes:
+But it doesn't matter how useful your code is if no one knows about it. So marketing and education are as important as programming, and all team members are expected to contribute to our outreach by [writing blog posts](https://www.tidyverse.org/blog), writing books, giving talks, teaching workshops, and helping build and support the R community. We're also a generally process-oriented team and we do our best to write up our processes so that others can benefit from them. This work includes:
 
 -   Our package release checklist (created by `usethis::use_release_isse()`) ensures that we maximise the chances of successful CRAN submission by following a standard process. Our process grows as we discover new problems, and shrinks as we figure out how to automate manual steps away.
 
 -   We strive to keep our code formatting as consistent as possible so we wrote up our choices in the [tidyverse style guide](https://style.tidyverse.org). This is probably the most commonly style guide in the R community.
 
--   We spend a lot of time reviewing code (both internally and externally) so we wrote up [code review guidelines](https://code-review.tidyverse.org) to keep our own work consistent, and to help new contributors know what to expect.
+-   We spend a lot of time reviewing code (both internally and externally) so we wrote up [code review guidelines](https://code-review.tidyverse.org) to keep our own work consistent, and to help new contributors know what to expect. This work was lead by Davis Vaughan.
 
 -   We are slowly working on an exposition of the [design principles](https://design.tidyverse.org) that guide the design of tidyverse APIs. This is helpful for us, because it makes it easier to remember design decisions and re-apply them the same way in multiple places, and also helps the community see reusable patterns that they can apply to their own code.
 
@@ -479,29 +498,35 @@ Our broad mission means that recently we have been spending less time on tidyver
 
 ### tidymodels
 
-Within the tidyverse team, the tidymodels team has a narrower mission: improving the tools data scientists need to fit (and trust) models in R. The tidymodels team started in late 2016 when Max Kuhn joined RStudio, after initial talks about how we could support statistical and ML modelling, talks which lead to the creation of the [recipes](https://recipes.tidymodels.org) package. As well as Max, the tidymodels team currently consists of Hannah Frick, Simon Couch, and Emil Hvitfeldt.
+Within the tidyverse team, the tidymodels team has a narrower mission: improving the tools data scientists need to do statistical modelling and machine learning. The tidymodels team started in late 2016 when Max Kuhn joined RStudio, after initial talks about how we could support statistical and ML modelling. As well as Max, the tidymodels team currently consists of Hannah Frick, Simon Couch, and Emil Hvitfeldt.
 
-Max was the obvious choice to found this team because of his work on the caret package. caret provided functionality for basic predictive modelling tasks such as performance measures and resampling as well as a consistent user interface. Max's idea was to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, censored regression models, and others. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools being developed (e.g., non-standard evaluation, etc.).
+Max was the obvious choice to found this team because of his work on the caret package. caret provided functionality for basic predictive modelling tasks such as performance measures and resampling as well as a consistent user interface across many modelling packages. Based on this work, Max wanted to create a more extensible framework that would integrate more advanced tools, such as more complex pre- and post-processing, and censored regression models. The resulting collection of packages was called tidymodels and heavily relied on the tidyverse syntax and the underlying tools described above.
 
 A defining feature of tidymodels is its lighthearted approach to naming and the fun it has with package logos. For example, for a package similar in spirit to caret, Max's initial idea was to give it the code name "carrot" to confuse outside users. Hadley proposed "parsnip", and the name stuck.
 
 ## Tidyverse community
 
-The tidyverse is certainly not just me, and isn't even just the team of folks paid to work on it. The tidyverse is the community of all those who use it and contribute to it. The community is the reason we work so hard. Tremendously rewarding to see people using the tidyverse to analyse data in so many different domains.
+The tidyverse transcends its technical foundations to represent something far greater: a vibrant, global community of practitioners, educators, and innovators who have embraced these tools to solve real-world problems. While the core team at Posit provides stewardship and a core of software development, the true strength and vitality of the tidyverse flows from its diverse community of users and contributors.
 
-### Social media
+What makes the tidyverse community special is not just its size or reach, but its culture of mutual support and shared learning. Whether someone is taking their first steps with R or pushing the boundaries of what's possible with these tools, they'll find a community ready to help them succeed. This collaborative spirit has created a virtuous cycle where learning flows in all directions: new users bring fresh perspectives and questions that challenge assumptions, while experienced practitioners share deep insights that push the ecosystem forward.
 
-The precursors to the tidyverse were aided by discussions on mailing lists, like r-help. But these mailing lists were of the era where the majority of R user had PhD's in statistics and were infamous for general unkindness to new learners. I started a ggplot2 mailing list in 2008, explicitly to provide a more friendly place to ask questions.
+For us working on the tidyverse, the community serves as both motivation and guide. Your successes energise us, your challenges direct our efforts, and your creativity constantly expands our vision of what's possible. This section explores the various dimensions of this community – from its evolution across different social platforms to the crucial role of community contributors in shaping and improving the tidyverse itself.
 
-Fortunately, as the R community away from mailing lists toward moved to stackoverflow and twitter, and most lately to bluesky, we have managed to shift the dynamic so that the R community is now one of the most welcoming programming languages for new users. I think a big part of this welcomingness is due to the diversity of R users, which has been tremendously boosted thanks to the efforts of groups like [R-ladies](https://rladies.org), [Minorities in R](https://mircommunity.com), and [rainbowR](https://rainbowr.org).
+### Social media and community spaces
+
+The early R community centred around traditional mailing lists, particularly r-help and r-devel. While these lists were invaluable for early R users, they often reflected the academic statistical computing culture of the time – technically rigorous, but often unwelcoming to newcomers. This environment prompted the creation of alternative spaces, including the ggplot2 mailing list in 2008, which explicitly aimed to provide a more supportive environment for users learning data visualisation.
+
+But the real transformation began with the community's migration to more modern platforms. Stack Overflow emerged as a crucial resource for asking and answering coding questions, and despite some toxicity amongst the moderator community, was generally a welcoming environment. Twitter was particularly transformative during 2010-2022. The #rstats hashtag created a space where users could share quick tips, celebrate successes, and build personal connections. The R community on Twitter became known for its supportive and welcoming atmosphere, standing in marked contrast to less friendly environs found in other technical communities. I believe a big part of this is due the diversity of R users, which has been tremendously boosted thanks to the efforts of groups like [R-Ladies](https://rladies.org), [Minorities in R](https://mircommunity.com), and [rainbowR](https://rainbowr.org).
+
+Today, the R community has mostly shifted to new platforms like Mastodon, LinkedIn, and Bluesky. I find Bluesky particularly rewarding; while the platform is still evolving, it has already become a vibrant hub for maintaining the connections that make the R community special.
 
 ### Community contributors
 
-The tidyverse wouldn't be a fraction as good as it is today without the many ways that the community has helped make it better. We make a deliberate effort to encourage contributors to the tidyverse, doing our best to recognise contributions, no matter how big or small. We do a regular in-person attempt to support contributors through the tidyverse developer days ([2019](https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/), [2020](https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/), [2024](https://www.tidyverse.org/blog/2024/04/tdd-2024/)). They're a fun community building activity, designed to help folks to learn how to contribute to the tidyverse. They were disrupted by Covid, but the plan is to run every year after posit::conf.
+The tidyverse wouldn't be a fraction as good as it is today without community contributions. To foster this collaborative spirit, we actively encourage and celebrate contributions of all sizes, from minor bug fixes to major feature enhancements. A key initiative in supporting our community of developers are the Tidyverse Developer Days, which we launched in [2019](https://www.tidyverse.org/blog/2019/04/tidyverse-dev-day-at-user-2019/). These hands-on events provide a welcoming environment where participants learn the ins and outs of contributing to the tidyverse while tackling real issues with a ton of hands on support. While the COVID-19 pandemic paused these gatherings after [2020](https://www.tidyverse.org/blog/2020/02/tidy-dev-days-2020/), we've reinstated them in [2024](https://www.tidyverse.org/blog/2024/04/tdd-2024/) and plan to make them an annual event following each posit::conf.
 
-Most external contributors tend to provide a few small (but meaningful!) contributions. A really limited number of external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the package citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our [tidyverse governance model](https://github.com/tidyverse/tidyups/blob/main/004-governance.md).
+Most external contributors tend to provide a few small (but meaningful!) contributions. A limited number of external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the package citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our [tidyverse governance model](https://github.com/tidyverse/tidyups/blob/main/004-governance.md).
 
-Many package authors are academics, and since the currency of academics is citation, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^17] (instead of having to cite individual packages) and also gives academic credit to tidyverse maintainers who might benefit from it: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited \~16,000 times as of January 2025.
+Many package authors are academics, and since the currency of academics is citations, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^17] and gives academic credit to tidyverse maintainers who might benefit from it. In alphabetical better, the authors are: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited over 16,000 times at time of writing.
 
 [^17]: We include some advice on citing packages in our blog post advertising the paper: <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>.
 
@@ -531,4 +556,8 @@ As the tidyverse becomes more mature, the places where the tidyverse team spends
 
 -   **LLMs for data science**. By now, it's clear that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements, tools that allow you to get help where you need it and automate fiddly annoying tasks. Our work in this domain is still very early, but one initiative is the [ellmer package](https://ellmer.tidyverse.org) which lets you use LLMs from a variety of providers within R.
 
-It's been a lot of fun to look back at the last ~20 years of tidyverse. I still love R, love programming, and I plan to keep doing this for as long as I'm able. Here's to the next 20 years!
+It's been a lot of fun to look back at the last \~20 years of the tidyverse. What started as a collection of personal solutions to data analysis challenges has grown into something far greater than I could have imagined – a vibrant ecosystem that helps millions of people around the world work more effectively with their data. Our amazing community continues to inspire me daily with their creativity, generosity, and enthusiasm.
+
+Looking ahead, I'm more excited than ever about the future of R and the tidyverse. The emergence of new technologies like LLMs offers fresh opportunities to make data science more accessible and more usable. While the core tidyverse packages may be reaching maturity, there are still countless opportunities to reduce friction, improve consistency, and help people solve real-world problems more effectively.
+
+I still love R, love programming, and most importantly, love working with this incredible community. Here's to the next 20 years of making data science more approachable, more powerful, and more fun!
