@@ -205,8 +205,6 @@ I announced the name to the world at my keynote at useR on June 29, 2016. And th
 ::: {#fig-the-tidyverse}
 ![](the-tidyverse.png){fig-alt="A night sky themed diagram showing the data science workflow in R, with main steps connected by arrows: \"Import\" (featuring packages like readr, readxl, haven, xml2) connects to \"Tidy\" (tidyr), which connects to \"Transform\" (featuring dplyr, forcats, hms, lubridate, stringr). The workflow continues to \"Visualise\" (ggplot2) and \"Model\" (tidymodels). The background is dotted with colorful hexagonal shapes. On the right side are two images: a tidyverse.org website screenshot and an \"R for Data Science\" book cover. Additional programming packages purrr and magrittr are listed at the bottom."}
 
-![](the-tidyverse.png){fig-alt="A night sky themed diagram showing the data science workflow in R, with main steps connected by arrows: \"Import\" (featuring packages like readr, readxl, haven, xml2) connects to \"Tidy\" (tidyr), which connects to \"Transform\" (featuring dplyr, forcats, hms, lubridate, stringr). The workflow continues to \"Visualise\" (ggplot2) and \"Model\" (tidymodels). The background is dotted with colorful hexagonal shapes. On the right side are two images: a tidyverse.org website screenshot and an \"R for Data Science\" book cover. Additional programming packages purrr and magrittr are listed at the bottom."}
-
 The packages of the tidyverse, organised using a partial version of my model of the data science workflow. The missing step is communication, which is aided by tools outside the tidyverse with Quarto and Shiny. This image comes from a presentation called the "Joy of Data Science" that I gave in 2020.
 :::
 
