@@ -31,7 +31,7 @@ package_release <- nanoparquet::read_parquet("package_release.parquet")
 
 ## Introduction
 
-Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It started with a gradual accumulation of packages that eventually snowballed into the identification and naming of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse, leading in to the early years of the tidyverse. I'll then discuss the defining features of tidyverse, along with the contributions that I'm most proud off. The tidyverse is a colloborative project so I'll discuss the tidyverse team at Posit and the important role played by the broader community. I'll finish off with some thoughts about the current maturity of the tidyverse and where we might be heading next.
+Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It started with a gradual accumulation of packages that eventually snowballed into the identification and naming of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse, leading in to the early years of the tidyverse. I'll then discuss the defining features of tidyverse, along with the contributions that I'm most proud of. The tidyverse is a collaborative project so I'll discuss the tidyverse team at Posit and the important role played by the broader community. I'll finish off with some thoughts about the current maturity of the tidyverse and where we might be heading next.
 
 This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages, as summarised by @fig-tidyverse-timeline. That means this write-up is necessarily abbreviated and when coupled with my fallible memory, that means I've almost certainly forgotton some important details. If you spot any important omissions, please [let me know](https://github.com/hadley/25-tidyverse-history/issues) so I can fix it!
 
@@ -57,7 +57,7 @@ package_release |>
 
 ## Before the tidyverse
 
-While the tidyverse was named in 2016, most of the packages that make it up were created earlier, as summarised by @fig-first-releases. In this section, I'll explores how the tidyverse came to be, a journey that's inextricably tied to to the course of my career. I'll begin the story with a couple of formative experiences growing up then continue on to my PhD where I created reshape and ggplot. Next we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and accessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
+While the tidyverse was named in 2016, most of the packages that make it up were created earlier, as summarised by @fig-first-releases. In this section, I'll explore how the tidyverse came to be, a journey that's inextricably tied to to the course of my career. I'll begin the story with a couple of formative experiences growing up then continue on to my PhD where I created reshape and ggplot. Next we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and accessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
 
 ```{r}
 #| label: fig-first-releases
@@ -125,7 +125,7 @@ After graduating from ISU, I got a job at Rice University. Here my most formativ
 
 Throughout this time, the popularity of ggplot2 continued to rise, and I manage to carve out time to work on it, despite it not being considered research and thus not valued by my department. But my interactions with the community kept me motivated and continued to reinforce my belief that open source software development was valuable because it empowered others to do better data analysis. During this time I started work with Garrett Grolemund, as my PhD student, and Winston Chang, as a contractor. Most importantly for the the tidyverse, Garrett developed lubridate [@lubridate] and Winston worked on ggplot2, implementing new geoms like `geom_dotplot()` and `geom_violin()`, important infrastructure like the theme system and the underlying OOP system. I'm lucky to still count Garret and Winston as my colleagues at Posit.
 
-During my time at Rice I had very little success with grants. I had a hard time packaging my work in a way that the people reviewing statistics grants at the NSF could make sense of, despite my absolute conviction that this work with important. I was fortunate to get a couple of small grants from BD and Google to work on plyr, reshape, and ggplot2, but these were nowhere near the amount of money I was expected to bring in. A paragraph from a final report to BD highlights my thinking at the time:
+During my time at Rice I had very little success with grants. I had a hard time packaging my work in a way that the people reviewing statistics grants at the NSF could make sense of, despite my absolute conviction that this work was important. I was fortunate to get a couple of small grants from BD and Google to work on plyr, reshape, and ggplot2, but these were nowhere near the amount of money I was expected to bring in. A paragraph from a final report to BD highlights my thinking at the time:
 
 > The generous support of BD has allowed me to implement many performance improvements to plyr, reshape and ggplot2, and begin work on the next generation of interactive graphics. Without such support, it is difficult for me to spend time on these projects as they do not directly contribute to my research portfolio. Your support not only gives me the financial backing to pursue these important optimisations, but also sends a strong signal to the statistics community that this work is important.
 
@@ -168,7 +168,7 @@ babynames |>
 
 The design of dplyr was centered around verbs like `filter()`, `mutate()`, and `summarise()`, with names that evoked their desired purpose. Each verb did one thing well, and was designed to compose with other verbs in order to solve complex problems. While use dplyr does require learning some big new ideas, I found that students could learn them much more easily than functional programming.
 
-The early years of dplyr benefited tremendously from the work of Romain François (initially as an RStudio contractor and then later as an employee). Thanks to his C++ expertise, dplyr also ended up being much faster than plyr, ensuring that there was an immediate payoff to learning it[^8]. One of the particularly nice features of dplyr is that you can use the same syntax with different backends. For example, you can use dbplyr (2017) to with work SQL database where instead of running R code, the package generates SQL code that is run in the database.
+The early years of dplyr benefited tremendously from the work of Romain François (initially as an RStudio contractor and then later as an employee). Thanks to his C++ expertise, dplyr also ended up being much faster than plyr, ensuring that there was an immediate payoff to learning it[^8]. One of the particularly nice features of dplyr is that you can use the same syntax with different backends. For example, you can use dbplyr (2017) to work with SQL databases where, instead of running R code, the package generates SQL code that is run in the database.
 
 [^8]: It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships, particularly thanks to help and advice from Tareef Kawaf in 2019. I'm now proud to say that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).
 
@@ -286,13 +286,13 @@ Three ways of representing the same data. On the right, we have a flat data fram
 
 Tidy data provides a theoretical framework to productively organise your data. But you also need a practical data structure where this data can live. R provides the data frame for this task, but I found that the data frame suffered from a number of individually small issues that I felt added needless friction. To resolve these issues, I created the tibble, an extension of the data frame with a number of small changes:
 
--   Data frames can flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even cancel this display, making it easy to lock yourself out of your console when working with bigger datasets. tibbles only print a small number of rows and only the columns that fit on one screen. You can always explicitly request more data, but the defaults keep your analysis workflow is nimble.
+-   Data frames can flood your console with output when working with datasets containing many rows or many columns. In older versions of R, you couldn't even cancel this display, making it easy to lock yourself out of your console when working with bigger datasets. tibbles only print a small number of rows and only the columns that fit on one screen. You can always explicitly request more data, but the defaults keep your analysis workflow nimble.
 
 -   When teaching, I found that students didn't have a good sense of the type of variable stored in each column, and even I sometimes found myself confused about whether a column was a date, a string, or factor. To avoid this problem, tibbles show (abbreviated) variable types underneath the column names.
 
 -   In the unfortunate case of `data.frame(x = c(NA, "<NA>"))`, there's no way to distinguish the two values from the printed output. Tibbles use a side-channel, colour, to ensure that there's no way to confuse a missing value with a string that has the same printed representation.
 
--   Base data frames technically support nested data structures, like columns that are themselves data frames or columns that are lists of data frames. But they are printed poorly, making them hard to use. Tibbles strive to represent these more complex data types in an readable way, making them more usable where needed.
+-   Base data frames technically support nested data structures, like columns that are themselves data frames or columns that are lists of data frames. But they are printed poorly, making them hard to use. Tibbles strive to represent these more complex data types in a readable way, making them more usable where needed.
 
 tibbles also resolve a couple of subsetting gotchas that make it easy to make silent errors when writing package code. For example, if `df` is a data.frame, then:
 
@@ -324,7 +324,7 @@ As an interesting historical anecdote, there would have been no need for ggplot2
 
 ### Tidy evaluation {#sec-tidy-eval}
 
-One of the most challenging features of the tidyverse is tidy evaluation. It's hard to briefly define tidy evaluation, but fortunately it's straightforward to motivate with an example. Imagine you the following repeated code, and following the "rule of three", you want to extract out the repetition into a function:
+One of the most challenging features of the tidyverse is tidy evaluation. It's hard to briefly define tidy evaluation, but fortunately it's straightforward to motivate with an example. Imagine the following repeated code, and that following the "rule of three", you want to extract out the repetition into a function:
 
 ```{r}
 #| eval: false
@@ -419,7 +419,7 @@ We had also missed a few of common problems that were surprisingly hard to solve
 
 ### Hex logos
 
-You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan Milton Bache and I co-discovered hex stickers around the same time in 2014[^15] through <https://hexb.in>. I personally found the it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
+You can't talk about the history of the tidyverse without also talking about hex logos. While the early history of hex logos is now murky, from what I can tell, it appears that Stefan Milton Bache and I co-discovered hex stickers around the same time in 2014[^15] through <https://hexb.in>. I personally found it super appealing to have a shape that can tile the back of a laptop, along with a spec that ensures everyone's stickers are the same size and the same orientation (point down!).
 
 [^15]: Stefan and I were clearly thinking many of the same thoughts in 2014!
 
@@ -486,7 +486,7 @@ But it doesn't matter how useful your code is if no one knows about it. So marke
 
 -   Our package release checklist (created by `usethis::use_release_isse()`) ensures that we maximise the chances of successful CRAN submission by following a standard process. Our process grows as we discover new problems, and shrinks as we figure out how to automate manual steps away.
 
--   We strive to keep our code formatting as consistent as possible so we wrote up our choices in the [tidyverse style guide](https://style.tidyverse.org). This is probably the most commonly style guide in the R community.
+-   We strive to keep our code formatting as consistent as possible so we wrote up our choices in the [tidyverse style guide](https://style.tidyverse.org). This is probably the most commonly used style guide in the R community.
 
 -   We spend a lot of time reviewing code (both internally and externally) so we wrote up [code review guidelines](https://code-review.tidyverse.org) to keep our own work consistent, and to help new contributors know what to expect. This work was lead by Davis Vaughan.
 
@@ -550,7 +550,7 @@ As the tidyverse becomes more mature, the places where the tidyverse team spends
 
 -   **Positron**. [Positron](https://github.com/posit-dev/positron) is a new IDE for data science, produced by the same team that created RStudio, and the tidyverse team has been deeply involved in Positron's tooling for R. This is exciting because it gives us new skills, allowing us to create coding interfaces where that makes the most sense, and to create graphical user interface where that is a better fit.
 
--   **R in production**. If you're working in industry, most analyses aren't a one-off completed by writing a report. Instead, you will typically produce a living artefact that's run repeatedly over months or years. This is the challenge of putting your code in production, which currently feels harder than it should be, due to a large number of paper cuts. These include tasks like getting database authentication working when your code is deployed on a server that distract from your data science tasks. In conjunction with other teams at Posit, I'm convinced we can make many of these problems go way.
+-   **R in production**. If you're working in industry, most analyses aren't completed by writing a one-off report. Instead, you will typically produce a living artefact that's run repeatedly over months or years. This is the challenge of putting your code in production, which currently feels harder than it should be, due to a large number of paper cuts. These include tasks like getting database authentication working when your code is deployed on a server that distracts from your data science tasks. In conjunction with other teams at Posit, I'm convinced we can make many of these problems go away.
 
 -   **LLMs for data science**. By now, it's clear that LLMs are going to have a transformative impact on how we do data science. We see them as invaluable assistants for the data scientist, not replacements, tools that allow you to get help where you need it and automate fiddly annoying tasks. Our work in this domain is still very early, but one initiative is the [ellmer package](https://ellmer.tidyverse.org) which lets you use LLMs from a variety of providers within R.
 
