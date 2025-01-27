@@ -1,5 +1,5 @@
 ---
-title: A brief history of the tidyverse
+title: A personal history of the tidyverse
 author: Hadley Wickham
 date: today
 bibliography: references.bib
@@ -31,14 +31,15 @@ package_release <- nanoparquet::read_parquet("package_release.parquet")
 
 ## Introduction
 
-Unlike our universe, the [tidyverse](https://www.tidyverse.org/) did not start with a big bang. It started with a gradual accumulation of packages that eventually snowballed into the identification and naming of the tidyverse. In this paper, I'll explore the process of its creation, starting from the influences that lead to the first packages of the proto-tidyverse, leading in to the early years of the tidyverse. I'll then discuss the defining features of tidyverse, along with the contributions that I'm most proud of. The tidyverse is a collaborative project so I'll discuss the tidyverse team at Posit and the important role played by the broader community. I'll finish off with some thoughts about the current maturity of the tidyverse and where we might be heading next.
+Unlike our universe, the [tidyverse](https://www.tidyverse.org/) didn't start with a big bang, but rather emerged through a gradual accumulation of packages that eventually coalesced into something greater than the sum of its parts. In this paper, I'll trace this evolution from my perspective, beginning with the early influences that sparked the first proto-tidyverse packages and following their development into a cohesive ecosystem. I'll explore the defining features that make the tidyverse unique, highlight the contributions that I'm most proud of, and examine how it grew from an individual project into a collaborative effort supported by both a team at Posit and a vibrant community. Finally, I'll reflect on where the tidyverse stands today and share my vision for its future.
 
-This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages, as summarised by @fig-tidyverse-timeline. That means this write-up is necessarily abbreviated and when coupled with my fallible memory, that means I've almost certainly forgotton some important details. If you spot any important omissions, please [let me know](https://github.com/hadley/25-tidyverse-history/issues) so I can fix it!
+This article summarises almost 20 years of package development encompassing over 500 releases of 26 packages. That means this write-up is necessarily abbreviated and when coupled with my fallible memory, that means I've almost certainly forgotten some important details. If you spot any important omissions, please [let me know](https://github.com/hadley/25-tidyverse-history/issues) so I can fix it!
 
 ```{r}
 #| label: fig-tidyverse-timeline
 #| fig-cap: >
 #|   A timeline of tidyverse (and adjacent) package releases.
+#| eval: false
 package_release |>
   filter(type %in% c("core", "tidyverse")) |>
   mutate(release = if_else(release == "first", "major", release)) |>
@@ -57,7 +58,7 @@ package_release |>
 
 ## Before the tidyverse
 
-While the tidyverse was named in 2016, most of the packages that make it up were created earlier, as summarised by @fig-first-releases. In this section, I'll explore how the tidyverse came to be, a journey that's inextricably tied to to the course of my career. I'll begin the story with a couple of formative experiences growing up then continue on to my PhD where I created reshape and ggplot. Next we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and accessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
+While the tidyverse was named in 2016, most of the packages that made it up were created earlier, as summarised by @fig-first-releases. In this section, I'll explore how the tidyverse came to be, a journey that's inextricably tied to to the course of my career. I'll begin the story with a couple of formative experiences growing up then continue on to my PhD where I created reshape and ggplot. Next we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and accessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
 
 ```{r}
 #| label: fig-first-releases
@@ -170,7 +171,7 @@ The design of dplyr was centered around verbs like `filter()`, `mutate()`, and `
 
 The early years of dplyr benefited tremendously from the work of Romain François (initially as an RStudio contractor and then later as an employee). Thanks to his C++ expertise, dplyr also ended up being much faster than plyr, ensuring that there was an immediate payoff to learning it[^8]. One of the particularly nice features of dplyr is that you can use the same syntax with different backends. For example, you can use dbplyr (2017) to work with SQL databases where, instead of running R code, the package generates SQL code that is run in the database.
 
-[^8]: It was unfortunate that I wasn't aware of data.table at this time, or I would have had much higher expectations for performance. I also inadvertently damaged my relationship with that commmunity by failing to understand what drove them and why dplyr was seen as such a threat. Fortunately in the years since I have worked to repair those relationships, particularly thanks to help and advice from Tareef Kawaf in 2019. I'm now proud to say that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).
+[^8]: Unfortunately I didn't spend enough time getting to know data.table at this time. I failed to understand how immensely fast it was and why its syntax was appealing to so many people, which damaged my relationship with its community. Fortunately in the years since I have worked to repair those relationships, particularly thanks to help and advice from Tareef Kawaf in 2019. I'm proud to say that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, recieved a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).
 
 <!-- My work on dplyr also lead to the development of the purrr package (2015). It's hard for me to describe exactly what purrr is, except that it provides a bunch of useful and consistent tools for functional programming. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays. recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr. -->
 
@@ -377,7 +378,7 @@ grouped_mean <- function(df, group_var, summary_var) {
 
   df |>
     group_by_(group_var) |>
-    summarise_(mean = lazyeval::interp(~ mean(summary_var), summary_var))
+    summarise_(mean = lazyeval::interp(~mean(summary_var), summary_var))
 }
 ```
 
