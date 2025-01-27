@@ -200,7 +200,7 @@ As the collection of packages I had developed grew, the community needed some na
 
 [^11]: In June 2016, Winston Chang and I brainstormed a bunch of ideas in slack: shipshape, trim, spruce, dapper, natty, joy-sparking, spiffy, choice, debonair, suave, virile, civil, gallant, pulchritudinous, graceful, well-tempered, deft, fastidious, slick, crack, mellow, mannerly, unctuous, tolerable, glib, fluent, affable, agreeable, stout, dashing, snazzy, boffo, raffish, rakish, swashbuckling, nifty, phat, dandy, sleek.
 
-Overall, I'm still very happy with the name, but there's one feature that I don't like: it implies that everything outside the tidyverse is the messyverse. I don't believe this is true: the tidyverse is just one way to get the job done and I don't think it's wrong to use other tools (indeed, it's usually not possible to do an analyis using only the tidyverse).
+Overall, I'm still very happy with the name, but there's one feature that I don't like: it implies that everything outside the tidyverse is the messyverse. I don't believe this is true: the tidyverse is just one way to get the job done and I don't think it's wrong to use other tools (indeed, it's usually not possible to do an analysis using only the tidyverse).
 
 I announced the name at my keynote at useR on June 29, 2016. And then a few months later in September, I released the [tidyverse package](https://posit.co/blog/tidyverse-1-0-0/). This package had two main goals:
 
