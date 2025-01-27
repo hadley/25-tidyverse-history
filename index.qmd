@@ -97,7 +97,7 @@ package_release |>
 
 ### Growing up
 
-Growing up, I was very lucky to have access to computers from a very early age, thanks to my dad[^1], and this led to an general interest in computers and programming. My dad's work involved databases, so I was lucky to have deep conversations about relational database design and Codd's third normal form much in earlier in life than usual. That led to a lot of playing around in Microsoft Access, a desktop DBMS, and to an eventual part-time job developing databases. This work was invaluable when I later came to wrestle with the data needed to fit statistical models.
+Growing up, I was very lucky to have access to computers from a very early age, thanks to my dad[^1], and this led to an general interest in computers and programming. My dad's work involved databases, so I was lucky to have deep conversations about relational database design and Codd's third normal form much earlier in life than usual. That led to a lot of playing around in Microsoft Access, a desktop DBMS, and to an eventual part-time job developing databases. This work was invaluable when I later came to wrestle with the data needed to fit statistical models.
 
 [^1]: You can read more about him and how he shaped my life at <https://tidydesign.substack.com/p/my-dad-brian-wickham>.
 
