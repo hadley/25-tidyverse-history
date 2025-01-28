@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
     <meta name="author" content="Hadley Wickham">
-    <meta name="dcterms.date" content="2025-01-27">
+    <meta name="dcterms.date" content="2025-01-28">
 
     <title>A personal history of the tidyverse</title>
     <style>
@@ -184,10 +184,10 @@
      
       <meta name="citation_title" content="A personal history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2025-01-27">
-<meta name="citation_cover_date" content="2025-01-27">
+<meta name="citation_publication_date" content="2025-01-28">
+<meta name="citation_cover_date" content="2025-01-28">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-27">
+<meta name="citation_online_date" content="2025-01-28">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Tidy data;,citation_abstract=A huge amount of effort is spent cleaning data to get it ready for analysis, but there has been little research on how to make data cleaning as easy and effective as possible. This paper tackles a small, but important, component of data cleaning: data tidying. Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. This framework makes it easy to tidy messy datasets because only a small set of tools are needed to deal with a wide range of un-tidy datasets. This structure also makes it easier to develop tidy tools for data analysis, tools that both input and output tidy datasets. The advantages of a consistent data structure and matching tools are demonstrated with a case study free from mundane data manipulation chores.;,citation_author=Hadley Wickham;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_fulltext_html_url=https://www.jstatsoft.org/index.php/jss/article/view/v059i10;,citation_issue=10;,citation_doi=10.18637/jss.v059.i10;,citation_volume=59;,citation_journal_title=Journal of Statistical Software;">
 <meta name="citation_reference" content="citation_title=Welcome to the tidyverse;,citation_author=Hadley Wickham;,citation_author=Mara Averick;,citation_author=Jennifer Bryan;,citation_author=Winston Chang;,citation_author=Lucy D’Agostino McGowan;,citation_author=Romain François;,citation_author=Garrett Grolemund;,citation_author=Alex Hayes;,citation_author=Lionel Henry;,citation_author=Jim Hester;,citation_author=Max Kuhn;,citation_author=Thomas Lin Pedersen;,citation_author=Evan Miller;,citation_author=Stephan Milton Bache;,citation_author=Kirill Müller;,citation_author=Jeroen Ooms;,citation_author=David Robinson;,citation_author=Dana Paige Seidel;,citation_author=Vitalie Spinu;,citation_author=Kohske Takahashi;,citation_author=Davis Vaughan;,citation_author=Claus Wilke;,citation_author=Kara Woo;,citation_author=Hiroaki Yutani;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://doi.org/10.21105/joss.01686;,citation_issue=43;,citation_doi=10.21105/joss.01686;,citation_volume=4;,citation_journal_title=Journal of Open Source Software;,citation_publisher=The Open Journal;">
@@ -229,7 +229,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 27, 2025</p>
+              <p class="date">January 28, 2025</p>
             </div>
           </div>
           
@@ -448,7 +448,7 @@ Figure&nbsp;1: Initial releases of tidyverse packages and important precursors. 
 <section id="naming-the-tidyverse" class="level3">
 <h3 class="anchored" data-anchor-id="naming-the-tidyverse">Naming the tidyverse</h3>
 <p>As the collection of packages I had developed grew, the community needed some name to refer to them in aggregate. Many people started calling these packages the “Hadleyverse”<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>, a name that I found tremendously unappealing. Thus I started brainstorming an “official” name that I liked, with candidates including the sleekverse, the dapperverse, and the deftverse<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>. In hindsight, the tidyverse seems obvious, and I wonder why I had to spend so much time and effort coming up with a name.</p>
-<p>Overall, I’m still very happy with the name, but there’s one feature that I don’t like: it implies that everything outside the tidyverse is the messyverse. I don’t believe this is true: the tidyverse is just one way to get the job done and I don’t think it’s wrong to use other tools (indeed, it’s usually not possible to do an analyis using only the tidyverse).</p>
+<p>Overall, I’m still very happy with the name, but there’s one feature that I don’t like: it implies that everything outside the tidyverse is the messyverse. I don’t believe this is true: the tidyverse is just one way to get the job done and I don’t think it’s wrong to use other tools (indeed, it’s usually not possible to do an analysis using only the tidyverse).</p>
 <p>I announced the name at my keynote at useR on June 29, 2016. And then a few months later in September, I released the <a href="https://posit.co/blog/tidyverse-1-0-0/">tidyverse package</a>. This package had two main goals:</p>
 <ul>
 <li><p>To make it easy to install all packages in the tidyverse with a single line of code, <code>install.packages("tidyverse")</code>. This made it easy to get a “batteries included” data science environment and was especially useful when teaching.</p></li>
@@ -515,7 +515,7 @@ Figure&nbsp;2: The packages of the tidyverse, organised using a partial version 
 </ul>
 <p>This definition seems to work for people from diverse academic backgrounds, even without a precise definition of variable and observation. Given their simplicity, it seems hard to understand why it took me so long to figure them out. It’s also a strange gap in the statistics literature: this is one of the very few papers that actually describe how you should structure your data in order to do statistics.</p>
 <!--# TODO: When I learned visualisation with base R, I struggled with the variety of data structures that different plotting functions could use. For example, `plot()` can either take vectors of data (e.g. `plot(x, y)`) or a formula and a data frame (e.g. `plot(y ~ x, data = df)`). But if you want to plot multiple series at once you need to use `matplot()`, `matpoints()`, or `matlines()`, all of which take a matrix. -->
-<p>The definition of tidy data was tightly paired with <a href="https://tidyr.tidyverse.org">tidyr</a><a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>, a package that helps tidy your data. This package initially provided the <code>gather()</code> and <code>spread()</code> functions, but many people (including me!) had a hard time remembering which was which and how their arguments worked. Additionally, their design wasn’t quite flexible enough to handle all the problems which we later discovered in practice. In <a href="https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/">tidyr 1.0.0</a> (2019), we resolved many of these problems by introducing the new<code>pivot_longer()</code> and <code>pivot_wider()</code> functions. These new names were informed by (casual) user research, where I asked my twitter followers to describe two data transformation operations. You can learn more about this research at <a href="https://github.com/hadley/table-shapes" class="uri">https://github.com/hadley/table-shapes</a>.</p>
+<p>The definition of tidy data was tightly paired with <a href="https://tidyr.tidyverse.org">tidyr</a><a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>, a package that helps tidy your data. This package initially provided the <code>gather()</code> and <code>spread()</code> functions, but many people (including me!) had a hard time remembering which was which and how their arguments worked. Additionally, their design wasn’t quite flexible enough to handle all the problems which we later discovered in practice. In <a href="https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/">tidyr 1.0.0</a> (2019), we resolved many of these problems by introducing the new <code>pivot_longer()</code> and <code>pivot_wider()</code> functions. These new names were informed by (casual) user research, where I asked my twitter followers to describe two data transformation operations. You can learn more about this research at <a href="https://github.com/hadley/table-shapes" class="uri">https://github.com/hadley/table-shapes</a>.</p>
 <p>tidyr 1.0.0 also expanded the scope of the package to encompass “rectangling”, a new term for converting hierarchical data into tidy rectangles. At the time, this was becoming increasingly important as more data was coming from JSON web APIs, which tended to produce deeply nested data structures. You can learn more about the problem and the solutions that tidyr provides in <a href="https://tidyr.tidyverse.org/articles/rectangle.html">tidyr’s rectangling vignette</a>.</p>
 <!--
 This work also stimulated my thinking around the more complex data structures that nested data frames inside of other data frames. \@fig-nest-pack-chop illustrates my thinking at the time, connecting three different ways of representing the same data. My enthusiasm for these data structures has waxed and waned over the years, but they're certainly theoretical structures and I really appreciate the beauty of an approach that unifies the ways of working with them.
