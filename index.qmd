@@ -1,6 +1,21 @@
 ---
 title: A personal history of the tidyverse
 author: Hadley Wickham
+abstract: >
+  In this article, I trace the evolution of the tidyverse, a cohesive ecosystem
+  of R packages for data science. Beginning with early packages I created 
+  during my PhD at Iowa State University, I explain how they coalesced 
+  into a unified collection with consistent principles. I detail key 
+  innovations including tidy data, tibbles, the pipe operator, tidy evaluation, 
+  and the role of hex stickers in community building. I describe the transition 
+  from my individual efforts to a collaborative enterprise supported by a team 
+  at Posit and a vibrant global community. I highlight the importance of human-centered design, consistency, composability, and inclusivity as our 
+  guiding principles. I discuss how our recent priorities have shifted from
+  innovation to maintenance as the ecosystem has matured. Looking to the 
+  future, I discuss our current areas of focus including Positron (a new data 
+  science IDE), R in production environments, and integrating large language 
+  models into data science workflows. 
+
 date: today
 bibliography: references.bib
 code-links: repo
