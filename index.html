@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hadley Wickham">
-<meta name="dcterms.date" content="2025-01-28">
+<meta name="dcterms.date" content="2025-04-15">
 
 <title>A personal history of the tidyverse</title>
 <style>
@@ -85,10 +85,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2ecafa609d29e6b5df2c2179b389d5c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4c3f21f622398162bebe0d2c2d806a7a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -96,10 +96,10 @@ div.csl-indent {
 
 <meta name="citation_title" content="A personal history of the tidyverse">
 <meta name="citation_author" content="Hadley Wickham">
-<meta name="citation_publication_date" content="2025-01-28">
-<meta name="citation_cover_date" content="2025-01-28">
+<meta name="citation_publication_date" content="2025-04-15">
+<meta name="citation_cover_date" content="2025-04-15">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-28">
+<meta name="citation_online_date" content="2025-04-15">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Tidy data;,citation_abstract=A huge amount of effort is spent cleaning data to get it ready for analysis, but there has been little research on how to make data cleaning as easy and effective as possible. This paper tackles a small, but important, component of data cleaning: data tidying. Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. This framework makes it easy to tidy messy datasets because only a small set of tools are needed to deal with a wide range of un-tidy datasets. This structure also makes it easier to develop tidy tools for data analysis, tools that both input and output tidy datasets. The advantages of a consistent data structure and matching tools are demonstrated with a case study free from mundane data manipulation chores.;,citation_author=Hadley Wickham;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_fulltext_html_url=https://www.jstatsoft.org/index.php/jss/article/view/v059i10;,citation_issue=10;,citation_doi=10.18637/jss.v059.i10;,citation_volume=59;,citation_journal_title=Journal of Statistical Software;">
 <meta name="citation_reference" content="citation_title=Welcome to the tidyverse;,citation_author=Hadley Wickham;,citation_author=Mara Averick;,citation_author=Jennifer Bryan;,citation_author=Winston Chang;,citation_author=Lucy D’Agostino McGowan;,citation_author=Romain François;,citation_author=Garrett Grolemund;,citation_author=Alex Hayes;,citation_author=Lionel Henry;,citation_author=Jim Hester;,citation_author=Max Kuhn;,citation_author=Thomas Lin Pedersen;,citation_author=Evan Miller;,citation_author=Stephan Milton Bache;,citation_author=Kirill Müller;,citation_author=Jeroen Ooms;,citation_author=David Robinson;,citation_author=Dana Paige Seidel;,citation_author=Vitalie Spinu;,citation_author=Kohske Takahashi;,citation_author=Davis Vaughan;,citation_author=Claus Wilke;,citation_author=Kara Woo;,citation_author=Hiroaki Yutani;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://doi.org/10.21105/joss.01686;,citation_issue=43;,citation_doi=10.21105/joss.01686;,citation_volume=4;,citation_journal_title=Journal of Open Source Software;,citation_publisher=The Open Journal;">
@@ -134,7 +134,7 @@ div.csl-indent {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 28, 2025</p>
+              <p class="date">April 15, 2025</p>
             </div>
           </div>
           
@@ -411,7 +411,7 @@ Three ways of representing the same data. On the right, we have a flat data fram
 <p>No matter how complex and polished the individual operations are, it is often the quality of the glue that most directly determines the power of the system.</p>
 <p>— Hal Abelson</p>
 </blockquote>
-<p>The pipe quickly became one of the defining features of tidyverse code. It allows you to rewrite function composition (e.g.&nbsp;<code>f(g(x)))</code>) as a linear sequence of transformations (e.g.&nbsp;<code>x |&gt; f() |&gt; g()</code>), which tends to make common data analysis programming patterns much easier to read.</p>
+<p>The pipe quickly became one of the defining features of tidyverse code. It allows you to rewrite function composition (e.g.&nbsp;<code>f(g(x)))</code>) as a linear sequence of transformations (e.g.&nbsp;<code>x |&gt; g() |&gt; f()</code>), which tends to make common data analysis programming patterns much easier to read.</p>
 <p>I first implemented the pipe in dplyr in Oct 2013 and called it <code>%.%</code>. When <a href="https://rstudioblog.wordpress.com/2014/01/17/introducing-dplyr/">I announced dplyr</a> in January 2014, I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. It used <code>%&gt;%</code> instead of <code>%.%</code>, which is easier to type (since you can hold down the shift button the whole time<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>), and had more comprehensive features. So I quickly pivoted to use magrittr and deprecated <code>%.%</code>. I was initially cautious about this new syntax, but users picked up on it quickly, and I found it easy to teach. You can learn more about the early history of the pipe in Adolfo Álvarez’s excellent blog post “<a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/">Plumbers, chains, and famous painters: The (updated) history of the pipe operator in R</a>”.</p>
 <p>Today, the pipe is available in base R thanks to a collaborative effort. In 2016, Lionel Henry <a href="https://lionelhenry.github.io/2016/02/15/ideas-for-an-updated-r-syntax/index.html">proposed new syntax</a> and wrote a patch for R, which Jim Hester presented to the R Core Team at the Directions in Statistical Computing Conference in 2017. This presentation was received positively, but it took some time for R Core to fully align on the utility of the pipe. Three years later, Luke Tierney added the base pipe to R 4.1 (2020), following up with placeholder syntax in R 4.2, and support for <code>$</code>, <code>[</code> and <code>[[</code> in R 4.3. Because R can modify the parser, the base pipe has better syntax, <code>|&gt;</code>, including a more visible placeholder, <code>_</code>. With the maturity of the base pipe, the tidyverse is gradually moving away from <code>%&gt;%</code> towards <code>|&gt;</code>, a process that will take several years to complete.</p>
 <p>As an interesting historical anecdote, there would have been no need for ggplot2 had I discovered the pipe earlier, as ggplot was based on function composition. I correctly identified that function composition was an unappealing user interface, but if I had discovered the pipe at that time, ggplot could have used it, rather than needing to switch to <code>+</code> in ggplot2. You can <a href="https://github.com/hadley/ggplot1">try out ggplot</a> if you want, or <a href="https://forum.posit.co/t/why-cant-ggplot2-use/4372">learn why ggplot2 can’t switch to the pipe</a>.</p>

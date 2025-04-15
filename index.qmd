@@ -326,7 +326,7 @@ tibbles were a much more contentious data structure than I had anticipated. They
 >
 > --- Hal Abelson
 
-The pipe quickly became one of the defining features of tidyverse code. It allows you to rewrite function composition (e.g. `f(g(x)))`) as a linear sequence of transformations (e.g. `x |> f() |> g()`), which tends to make common data analysis programming patterns much easier to read.
+The pipe quickly became one of the defining features of tidyverse code. It allows you to rewrite function composition (e.g. `f(g(x)))`) as a linear sequence of transformations (e.g. `x |> g() |> f()`), which tends to make common data analysis programming patterns much easier to read.
 
 I first implemented the pipe in dplyr in Oct 2013 and called it `%.%`. When [I announced dplyr](https://rstudioblog.wordpress.com/2014/01/17/introducing-dplyr/) in January 2014, I learned that Stefan Milton Bache had been thinking along similar lines and had created the magrittr package. It used `%>%` instead of `%.%`, which is easier to type (since you can hold down the shift button the whole time[^16]), and had more comprehensive features. So I quickly pivoted to use magrittr and deprecated `%.%`. I was initially cautious about this new syntax, but users picked up on it quickly, and I found it easy to teach. You can learn more about the early history of the pipe in Adolfo Álvarez's excellent blog post "[Plumbers, chains, and famous painters: The (updated) history of the pipe operator in R](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/)".
 
