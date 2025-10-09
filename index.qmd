@@ -73,7 +73,7 @@ package_release |>
 
 ## Before the tidyverse
 
-While the tidyverse was named in 2016, most of the packages that made it up were created earlier, as summarised by @fig-first-releases. In this section, I'll explore how the tidyverse came to be, a journey that's inextricably tied to to the course of my career. I'll begin the story with a couple of formative experiences growing up, then continue to my PhD where I created reshape and ggplot. Next we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and accessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
+While the tidyverse was named in 2016, most of the packages that made it up were created earlier, as summarised by @fig-first-releases. In this section, I'll explore how the tidyverse came to be, a journey that's inextricably tied to the course of my career. I'll begin the story with a couple of formative experiences growing up, then continue to my PhD where I created reshape and ggplot. Next we'll move onto my professional career, first at Rice University where teaching forced my ideas to become more concrete and accessible, and then to RStudio (now Posit) where I was given the freedom and resources to dive deep in package development.
 
 ```{r}
 #| label: fig-first-releases
@@ -128,15 +128,15 @@ The final formative experience prior to my PhD was my undergraduate statistics d
 
 My undergraduate left me with a desire to learn more about statistics, and since my dad had done his PhD at Cornell University, it seemed quite reasonable to look to the US to do my PhD. This led me to Iowa State University (ISU) and my major advisers Dianne Cook and Heike Hofmann.
 
-At ISU, I was lucky enough to get a consulting assistantship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work lead me to face two challenges that remain with me today:
+At ISU, I was lucky enough to get a consulting assistantship with the Agricultural Experiment Station, where I helped PhD students in other departments do their analyses. This work led me to face two challenges that remain with me today:
 
--   The hardest part of collaborative data analysis is not finding the correct statistical model, but getting the data into that a form that you can actually work with. This challenge led to the creation of the [reshape package](http://had.co.nz/reshape/) which made it easier to work with a variety of input datasets by first converting to a "molten" form which you could then "cast" into the desired form[^3].
+-   The hardest part of collaborative data analysis is not finding the correct statistical model, but getting the data into a form that you can actually work with. This challenge led to the creation of the [reshape package](http://had.co.nz/reshape/) which made it easier to work with a variety of input datasets by first converting to a "molten" form which you could then "cast" into the desired form[^3].
 
--   I often found it hard to translate the plots that I pictured in my head into code using either base or lattice [@lattice] graphics. At the same time I was reading the The Grammar of Graphics [@grammar-of-graphics] and found its theory of visualisation to be very compelling. But the only implementation available at the time was very expensive, so I decided I'd have a go at creating my own in R. That led to ggplot and later ggplot2. I was very lucky to meet Lee Wilkinson who was tremendously supportive on my work[^4].
+-   I often found it hard to translate the plots that I pictured in my head into code using either base or lattice [@lattice] graphics. At the same time I was reading The Grammar of Graphics [@grammar-of-graphics] and found its theory of visualisation to be very compelling. But the only implementation available at the time was very expensive, so I decided I'd have a go at creating my own in R. That led to ggplot and later ggplot2. I was very lucky to meet Lee Wilkinson who was tremendously supportive of my work[^4].
 
 [^3]: Compared to today's equivalent, tidyr, reshape includes a lot of tools for working with high-dimensional arrays. I was initially interested in arrays because they are rather elegant and can be much more memory efficient than data frames. But they only work well for highly crossed experimental designs and I found them very hard to explain to others. My work with arrays largely fell by the wayside once I decided that it was better to standardise on data frames.
 
-[^4]: Lee also made a throwaway comment about reshaping that led to a vastly more performant implementation that become the heart of reshape2.
+[^4]: Lee also made a throwaway comment about reshaping that led to a vastly more performant implementation that became the heart of reshape2.
 
 This work wouldn't have been possible without Di and Heike, who let me work on what **I** thought was most important[^5], regardless of whether or not it fit the mold of a traditional statistics PhD. They taught me pretty much everything I know about exploratory data analysis, gave me thoughtful feedback on the user interfaces of my R packages, and generally provided an incredibly rich intellectual environment with group meetings, invited speakers, and conference travel. They also provided air-cover for me when I let my disdain for the utility of theoretical statistics shine a little too clearly, making it harder than necessary to complete the more traditional components of my PhD. My work at ISU culminated in my thesis, "[Practical tools for exploring data and models](http://had.co.nz/thesis/practical-tools-hadley-wickham.pdf)", a write-up of the collection of R packages I had begun to amass and the ideas that underpinned them.
 
@@ -148,7 +148,7 @@ After graduating from ISU, I got a job at Rice University. Here my most formativ
 
 [^6]: If I taught this today, I'd call it an Introduction to Data *Science*.
 
-Throughout this time, the popularity of ggplot2 continued to rise, and I manage to carve out time to work on it, despite it not being considered research and thus not valued by my department. But my interactions with the community kept me motivated and continued to reinforce my belief that open source software development was valuable because it empowered others to do better data analysis. During this time I started work with Garrett Grolemund, as my PhD student, and Winston Chang[^wc], as a contractor. Most importantly for the tidyverse, Garrett developed lubridate [@lubridate] and Winston worked on ggplot2, implementing new geoms like `geom_dotplot()` and `geom_violin()`, as well as important infrastructure like the theme and the underlying objected orient programming systems. I'm lucky to still have Garret and Winston as my colleagues at Posit.
+Throughout this time, the popularity of ggplot2 continued to rise, and I managed to carve out time to work on it, despite it not being considered research and thus not valued by my department. But my interactions with the community kept me motivated and continued to reinforce my belief that open source software development was valuable because it empowered others to do better data analysis. During this time I started work with Garrett Grolemund, as my PhD student, and Winston Chang[^wc], as a contractor. Most importantly for the tidyverse, Garrett developed lubridate [@lubridate] and Winston worked on ggplot2, implementing new geoms like `geom_dotplot()` and `geom_violin()`, as well as important infrastructure like the theme and the underlying object-oriented programming systems. I'm lucky to still have Garrett and Winston as my colleagues at Posit.
 
 [^wc]: I had met Winston "through the internet", through his work that eventually became @r-graphics-cookbook.
 
@@ -178,7 +178,7 @@ ranked <- plyr::ddply(babynames, c("year", "sex"), function(df) {
 head(ranked, 10)
 ```
 
-This code is unappealing for new users because it requires that understand functions and the basics of functional programming. This means that if you're teaching R, you can't teach it until later in the semester, even though the underlying task is straightforward and is something you want to be able to do early in your data analysis journey.
+This code is unappealing for new users because it requires that they understand functions and the basics of functional programming. This means that if you're teaching R, you can't teach it until later in the semester, even though the underlying task is straightforward and is something you want to be able to do early in your data analysis journey.
 
 The creation of dplyr allowed you to instead write code like this:
 
@@ -199,7 +199,7 @@ The early years of dplyr benefited tremendously from the work of Romain Françoi
 
 [^8]: Unfortunately, I didn't spend enough time getting to know data.table at this time. I failed to understand how immensely fast it was and why its syntax was appealing to so many people, which damaged my relationship with its community. Fortunately in the years since I have worked to repair those relationships, particularly thanks to help and advice from Tareef Kawaf in 2019. I'm proud to say that [dtplyr](https://dtplyr.tidyverse.org), the dplyr backend that uses data.table, received a [data.table seal of approval](https://rdatatable-community.github.io/The-Raft/posts/2024-08-01-seal_of_approval-dtplyr/index.html).
 
-[^9]: dbplyr is one of my favourite R packages because of it requires both a deep understanding of R and SQL, and an pragmatic approach to generating translations for many different databases.
+[^9]: dbplyr is one of my favourite R packages because it requires both a deep understanding of R and SQL, and a pragmatic approach to generating translations for many different databases.
 
 <!-- My work on dplyr also led to the development of the purrr package (2015). It's hard for me to describe exactly what purrr is, except that it provides a bunch of useful and consistent tools for functional programming. purrr was an update to plyr. plyr supported four main data structures: lists, data frames, and arrays. recognising that the data frame side of plyr was handled by dplyr, and arrays to not be that useful, extract out the list handling code into purrr. -->
 
@@ -259,7 +259,7 @@ The final bullet was particularly motivated by this quote:
 > Programs must be written for people to read, and only incidentally for machines to execute.\
 > — Hal Abelson
 
-I think that's a particularly important principle for data science code, because it's very important to be able to read, understand, and the critique the code used to perform an analysis. Ideally, you're not just solving a problem with code, you're also documenting how you solved it so that you (and others) can understand the path that you've taken.
+I think that's a particularly important principle for data science code, because it's very important to be able to read, understand, and critique the code used to perform an analysis. Ideally, you're not just solving a problem with code, you're also documenting how you solved it so that you (and others) can understand the path that you've taken.
 
 Since that time I've continued the definition of the tidyverse and you can see my latest iteration in [Tidy design principles](https://design.tidyverse.org/unifying.html). At the time of writing, the four principles of the tidyverse were:
 
@@ -273,7 +273,7 @@ Since that time I've continued the definition of the tidyverse and you can see m
 
 ### Learning
 
-Once I had identified the tidyverse, it become natural to ask "how do you learn it?" The answer to this question became the book [R for Data Science](https://r4ds.hadley.nz) [@r4ds-1; @r4ds-2]. I wrote a book because I believe that books are one of the best ways to spread big ideas; the linear format allows you to lead the reader step-by-step and you have plenty of space to go in to the details. Equally important to me was that the book should be available to all, regardless of their ability to pay. That's why all the books I write have a dual production model: a free HTML version that I produce and a paid physical version produced by a commercial publisher.
+Once I had identified the tidyverse, it became natural to ask "how do you learn it?" The answer to this question became the book [R for Data Science](https://r4ds.hadley.nz) [@r4ds-1; @r4ds-2]. I wrote a book because I believe that books are one of the best ways to spread big ideas; the linear format allows you to lead the reader step-by-step and you have plenty of space to go in to the details. Equally important to me was that the book should be available to all, regardless of their ability to pay. That's why all the books I write have a dual production model: a free HTML version that I produce and a paid physical version produced by a commercial publisher.
 
 R for Data Science proved to be extremely popular. It sold very well, but more importantly to me, a ton of people used the website[^13]. One of my favourite things about the book is how many languages it has been translated into including Russian, Polish, Japanese, Chinese (traditional) and Chinese (simplified). I'm particularly fond of the community translations ([Spanish](http://es.r4ds.hadley.nz/), [Italian](https://it.r4ds.hadley.nz/), [Turkish](https://tr.r4ds.hadley.nz/), and [Portuguese](https://pt.r4ds.hadley.nz/)) because they were translated by volunteers and made freely available to the world.
 
@@ -285,9 +285,9 @@ So far I've traced the chronological development of the tidyverse, but I also wa
 
 ### Tidy data
 
-I've always had a very strong sense that there's a "right" way to organise your data, a way that would make the rest of your analysis much easier. And when looking at a dataset I could usually identify what form would be the most productive. But I had a time explaining what I was doing to others, and experienced numerous failures when trying to teach my approach to students. Eventually I figured out the three principles of tidy data[^14] and elucidated them in @tidy-data:
+I've always had a very strong sense that there's a "right" way to organise your data, a way that would make the rest of your analysis much easier. And when looking at a dataset I could usually identify what form would be the most productive. But I had a hard time explaining what I was doing to others, and experienced numerous failures when trying to teach my approach to students. Eventually I figured out the three principles of tidy data[^14] and elucidated them in @tidy-data:
 
-[^14]: This is certainly not the only data stucture you might ever want to use, but it's extremely useful to have a organising structure that you can rely on for the majority of your work. It's a great default, even if you might need other forms for specialised purposes.
+[^14]: This is certainly not the only data structure you might ever want to use, but it's extremely useful to have an organising structure that you can rely on for the majority of your work. It's a great default, even if you might need other forms for specialised purposes.
 
 -   Each variable goes in a column.
 -   Each observation goes in a row.
@@ -331,7 +331,7 @@ tibbles also resolve a couple of subsetting gotchas that make it easy to make si
 
 -   `df[, cols]` can return either a vector or a data frame, depending on the contents of `col`.
 
--   `df$x` uses partial matching, so that if column `x`doesn't exist but column `xyz` does, it will silently return `df$xyz`.
+-   `df$x` uses partial matching, so that if column `x` doesn't exist but column `xyz` does, it will silently return `df$xyz`.
 
 If `df` is a tibble then neither of these problems occur because `df[]` always returns another tibble and `df$x` never performs partial matching. This is why I have jokingly described tibbles as lazy and surly versions of data frames.
 
@@ -357,7 +357,7 @@ As an interesting historical anecdote, there would have been no need for ggplot2
 
 ### Tidy evaluation {#sec-tidy-eval}
 
-One of the most challenging features of the tidyverse is tidy evaluation. Before diving into the technical details, it's worth understanding why tidy evaluation exists in the first place. Consider the dplyr code `df |> mutate(z = x + y)`. This is so concise because variable names (`x`, `y`, and `z`) are understood to exist inside of `df`; without it you hae to repeatedly write `df`, e.g. `df$z <- df$x + df$y`. This pattern of working within a data context was inspired by base R functions like `subset()`, `transform()`, and `with()`.
+One of the most challenging features of the tidyverse is tidy evaluation. Before diving into the technical details, it's worth understanding why tidy evaluation exists in the first place. Consider the dplyr code `df |> mutate(z = x + y)`. This is so concise because variable names (`x`, `y`, and `z`) are understood to exist inside of `df`; without it you have to repeatedly write `df`, e.g. `df$z <- df$x + df$y`. This pattern of working within a data context was inspired by base R functions like `subset()`, `transform()`, and `with()`.
 
 While tidy evaluation makes interactive data analysis delightful, it introduces challenges when you want to write functions that use these tools. Imagine you've written the following repeated code, and following the "rule of three", you want to extract out the repetition into a function:
 
@@ -490,9 +490,9 @@ posit::conf() (and rstudio::conf() before) features a hex wall that's a popular 
 
 ## The tidyverse at Posit
 
-The naming of the tidyverse coincided with the start of my team at RStudio (now Posit), and the overarching journey from a project that was primarily developed by me to one with many full-time contributors. This wouldn't have been possible without Posit, which has funded this work as part of its public benefit corporation mission. I feel tremendously lucky to work at an organisation who's mission so closely aligns with my own.
+The naming of the tidyverse coincided with the start of my team at RStudio (now Posit), and the overarching journey from a project that was primarily developed by me to one with many full-time contributors. This wouldn't have been possible without Posit, which has funded this work as part of its public benefit corporation mission. I feel tremendously lucky to work at an organisation whose mission so closely aligns with my own.
 
-The tidyverse team currently includes Lionel Henry, Jenny Bryan, Gábor Csárdi, Mine Çetinkaya-Rundel, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand, as well as the tidymodels team, described below. Jim Hester, Mara Averick, Romain Francois, Tracy Teal, and Andy Teucher have moved on from their full-time roles at Posit but many of remain active in the community and they're all still valued members of the broader "team tidyverse".
+The tidyverse team currently includes Lionel Henry, Jenny Bryan, Gábor Csárdi, Mine Çetinkaya-Rundel, Thomas Lin Pedersen, Davis Vaughan, George Stagg, and Teun Van den Brand, as well as the tidymodels team, described below. Jim Hester, Mara Averick, Romain Francois, Tracy Teal, and Andy Teucher have moved on from their full-time roles at Posit but many remain active in the community and they're all still valued members of the broader "team tidyverse".
 
 ```{=html}
 <!--
@@ -555,7 +555,7 @@ The tidyverse wouldn't be a fraction as good as it is today without community co
 
 Most external contributors tend to provide a few small (but meaningful!) contributions. A limited number of external contributors end up contributing much time and effort over the course of many years. We recognise these contributors by making them package authors. This formally includes them in package metadata (so they are explicitly acknowledged on CRAN, on the package website, and in the package citation) and gives them write access to the GitHub repository. You can learn more about the rights and responsibilities of authors (and other roles) in our [tidyverse governance model](https://github.com/tidyverse/tidyups/blob/main/004-governance.md).
 
-Many package authors are academics, and since the currency of academics is citations, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^21] and gives academic credit to tidyverse maintainers who might benefit from it. In alphabetical better, the authors are: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited over 16,000 times at time of writing.
+Many package authors are academics, and since the currency of academics is citations, in 2019 we made the effort to write @tidyverse-welcome. This makes it easy to cite the tidyverse as a whole[^21] and gives academic credit to tidyverse maintainers who might benefit from it. In alphabetical order, the authors are: Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, Alex Hayes, Lionel Henry, Jim Hester, Max Kuhn, Thomas Pedersen, Evan Miller, Stephan Bache, Kirill Müller, Jeroen Ooms, David Robinson, Dana Seidel, Vitalie Spinu, Kohske Takahashi, Davis Vaughan, Claus Wilke, Kara Woo, and Hiroaki Yutani. This paper has been cited over 16,000 times at time of writing.
 
 [^21]: We include some advice on citing packages in our blog post advertising the paper: <https://www.tidyverse.org/blog/2019/11/tidyverse-1-3-0/>.
 
