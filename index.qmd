@@ -457,7 +457,7 @@ I'm pretty sure the first hex logo was magrittr's[^19], designed by Stefan in De
 [^19]: <https://github.com/max-mapper/hexbin/commits/gh-pages/hexagons/magrittr.png>
 
 ::: {#fig-early-logos}
-![](ggplot2-logos.png){fig-alt="Two hexagonal logos for ggplot2, a data visualization package. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text 'ggplot2' at the top, with the first using bold typography and the second using a lighter weight code font."}
+![](ggplot2-logos.png){fig-alt="Two hexagonal logos for ggplot2. Each hexagon contains a line graph with black dots connected by lines and bar chart elements. The first version uses multiple bright colors (turquoise, coral, green, and pink) for the bars, while the second version uses different shades of blue. Both logos have a light gray gridline background and the text 'ggplot2' at the top, with the first using bold typography and the second using a lighter weight code font."}
 
 Two early versions of the ggplot2 hex logo. I can't find any record of who created the first version (left), but I presume it was me given the incorrect orientation of the hex. The second version (right) was created in concert with Garrett Grolemund.
 :::
